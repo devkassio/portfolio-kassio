@@ -28,6 +28,8 @@ async function fetchRepos() {
     const repos = await res.json()
     const grid = document.getElementById('projetos-grid')
 
+    grid.innerHTML = '';
+
     repos.forEach(repo => {
         const imgSrc = `assets/${repo.name}.png`
 
@@ -52,7 +54,10 @@ async function fetchRepos() {
     });
 }
 
-fetchRepos()
+document.addEventListener('DOMContentLoaded', () => {
+  type();
+  fetchRepos();
+});
 
 const typingElement = document.getElementById('typing');
 const phrases = [
