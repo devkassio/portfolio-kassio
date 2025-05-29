@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Kássio Barros</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="shortcut icon" href="assets/logo-dragon.svg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/lib/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container header-flex">
+            <div class="logo-area">
+                <img src="assets/logo-dragon.svg" alt="">
+
+            </div>
+            <h1 class="site-name">Kássio Barros</h1>
+            <div class="menu" id="menu">
+                <nav>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#projetos">Projetos</a></li>
+                        <li><a href="#habilidades">Habilidades</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+                <a href="assets/cv-kassio.pdf" class="btn-cv" download>Download CV</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="section home-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-image">
+                        <img src="assets/minha-foto.jpg" alt="Ilustração desenvolvedor">
+                    </div>
+                    <h2><span id="typing"></span><span class="cursor">|</span></h2>
+                    <p class="subtitulo">Desenvolvedor Front-end | Apaixonado por criar interfaces modernas e
+                        funcionais.</p>
+                    <a href="#projetos" class="btn-cta">Ver Projetos</a>
+                </div>
+            </div>
+            <div id="particles-js"></div>
+
+        </section>
+
+        <section id="sobre" class="section">
+            <div class="container sobre-flex">
+                <div class="sobre-img">
+                    <img src="assets/foto-kassio.jpg" alt="Foto de Kássio Barros">
+                </div>
+                <div class="sobre-texto">
+                    <h2> <span>Sobre</span> Mim</h2>
+                    <p>
+                        Estou em transição de carreira para a programação, movido pela paixão por tecnologia.
+                        Busco me tornar um programador de sucesso, crescer em equipe e contribuir com dedicação
+                        e humildade. Meu foco é aprendizado constante e evolução profissional.
+                    </p>
+                    <div class="linha-do-tempo">
+                        <div class="evento">
+                            <span class="icone">💼</span>
+                            <div>
+                                <h4>Transição de Carreira</h4>
+                                <p>Deixei minha área anterior para seguir minha paixão por programação.</p>
+                            </div>
+                        </div>
+                        <div class="evento">
+                            <span class="icone">👨‍💻</span>
+                            <div>
+                                <h4>Estudos Intensivos</h4>
+                                <p>HTML, CSS, JavaScript, Git e muito mais no meu dia a dia. Pela Instituicão <span
+                                        class="dev">Dev</span><span class="club">Club</span></p>
+                            </div>
+                        </div>
+                        <div class="evento">
+                            <span class="icone">🚀</span>
+                            <div>
+                                <h4>Projetos Práticos</h4>
+                                <p>Construindo meu portfólio e aplicando tudo que aprendo com paixão.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="particles-sobre"></div>
+        </section>
+
+        <section id="projetos" class="section">
+            <div class="container projeto">
+                <h2>Projetos</h2>
+                <p>Ainda não tenho projetos hospedados online, mas você pode conferir todos os que desenvolvi nos meus
+                    repositórios no GitHub.</p>
+            </div>
+            <div class="projetos-grid" id="projetos-grid">
+
+            </div>
+        </section>
+
+        <section id="habilidades" class="section">
+            <div id="particles-habilidades"></div>
+            <div class="container">
+                <h2>Habilidades</h2>
+                <div class="skills-grid">
+
+                    <div class="skill html">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </div>
+
+                    <div class="skill css">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </div>
+
+                    <div class="skill js">
+                        <i class="fab fa-js-square"></i>
+                        <span>JavaScript</span>
+                    </div>
+
+                    <div class="skill git">
+                        <i class="fab fa-git-alt"></i>
+                        <span>Git & GitHub</span>
+                    </div>
+
+                    <div class="skill responsive">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Responsividade</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="section">
+            <div id="particles-contato"></div>
+            <div class="container">
+                <h2>Contato</h2>
+                <ul class="contato-list">
+                    <li>
+                        <a href="https://linkedin.com/in/kassioxis" class="linkedin" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/16992715614" class="whatsapp" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/santosxis" class="github" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-glow">
+            <p>© 2025 Kássio Barros. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
