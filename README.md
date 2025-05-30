@@ -2,6 +2,8 @@
 
 Bem-vindo ao meu portfólio pessoal! Aqui você encontrará uma seleção dos meus projetos, habilidades e informações para entrar em contato comigo.
 
+link do meu portfólio: https://santosxis.github.io/portfolio-kassio/
+
 ## Sobre mim
 
 Sou desenvolvedor front-end focado em criar experiências web modernas, responsivas e funcionais. Tenho interesse em HTML5, CSS3, JavaScript e outras tecnologias relacionadas.
