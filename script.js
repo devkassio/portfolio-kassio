@@ -87,7 +87,7 @@ function type() {
       } else {
         typingText1 = false;
         charIndex = 0;
-        setTimeout(type, 2000); // Delay entre text1 e text2
+        setTimeout(type, 5000); // Delay entre text1 e text2
       }
     } else {
       if (charIndex < current.text2.length) {
@@ -102,7 +102,7 @@ function type() {
           isDeleting = true;
           charIndex = current.text2.length;
           deleteText();
-        }, 5000); // Delay antes de apagar
+        }, 10000); // Delay antes de apagar
       }
     }
   }
@@ -133,7 +133,7 @@ function deleteText1(length) {
     charIndex = 0;
     typingText1 = true;
     isDeleting = false;
-    setTimeout(type, 3000); // Pequeno delay antes de recomeçar
+    setTimeout(type, 4000); // Pequeno delay antes de recomeçar
   }
 }
 
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // delay de 2s antes de disparar a animação de typing
   setTimeout(() => {
     type();
-  }, 5000);
+  }, 10000);
 
   // carregamento de repositórios
   fetchRepos();
