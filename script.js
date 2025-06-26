@@ -23,7 +23,7 @@ sections.forEach(section => {
 })
 
 async function fetchRepos() {
-  const username = 'santosxis'
+  const username = 'devkassio'
   const res = await fetch(`https://api.github.com/users/${username}/repos`)
   const repos = await res.json()
   const grid = document.getElementById('projetos-grid')
