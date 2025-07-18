@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio de Kássio Barros</title>
+    <meta name="description"
+        content="Portfólio de Kássio Barros, desenvolvedor Full Stack em transição de carreira, apaixonado por criar interfaces modernas e funcionais. Confira projetos, habilidades e contatos.">
+    <meta name="keywords"
+        content="desenvolvedor Full Stack, portfólio, Kássio Barros, HTML, CSS, JavaScript, GitHub, programação, Node.js, n8n">
+    <meta name="author" content="Kássio Barros">
+    <meta property="og:title" content="Portfólio de Kássio Barros">
+    <meta property="og:description"
+        content="Desenvolvedor Full Stack | Apaixonado por criar interfaces modernas e funcionais.">
+    <meta property="og:image" content="assets/minha-foto.jpg">
+    <meta property="og:url" content="kassiobarros.com.br">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfólio de Kássio Barros">
+    <meta name="twitter:description"
+        content="Desenvolvedor Full Stack | Apaixonado por criar interfaces modernas e funcionais.">
+    <meta name="twitter:image" content="assets/minha-foto.jpg">
+    <title>Portfólio de Kássio Barros - Desenvolvedor Full Stack</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="shortcut icon" href="assets/logo-dragon.svg" type="image/x-icon">
-   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/dist/vanilla-tilt.min.js"></script>
+    <link rel="canonical" href="https://kassiobarros.com.br">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/lib/vanilla-tilt.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+    <link rel="preload" href="assets/logo-dragon.svg" as="image">
+    <link rel="preload" href="assets/minha-foto.jpg" as="image">
 </head>
 
 <body>
     <header>
         <div class="container header-flex">
             <div class="logo-area">
-                <img src="assets/logo-dragon.svg" alt="">
-
+                <img src="assets/logo-dragon.svg" alt="Logo Dragon" loading="lazy">
             </div>
             <h1 class="site-name">Kássio Barros</h1>
             <div class="menu" id="menu">
@@ -25,10 +47,12 @@
                         <li><a href="#sobre">Sobre</a></li>
                         <li><a href="#projetos">Projetos</a></li>
                         <li><a href="#habilidades">Habilidades</a></li>
+                        <li><a href="#certificacoes">Certificações</a></li>
                         <li><a href="#contato">Contato</a></li>
+                        <li><a href="assets/Kássio Barros - Programador Full Stack Júnior.pdf"
+                                class="btn-cv animated-cv" download><i class="fas fa-download"></i> CV</a></li>
                     </ul>
                 </nav>
-                <a href="assets/Kássio 1.2.pdf" class="btn-cv" download>Download CV</a>
             </div>
         </div>
     </header>
@@ -38,22 +62,21 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-image">
-                        <img src="assets/minha-foto.jpg" alt="Ilustração desenvolvedor">
+                        <img src="assets/minha-foto.jpg" alt="Ilustração desenvolvedor" loading="lazy">
                     </div>
                     <h2><span id="typing"></span><span class="cursor">|</span></h2>
-                    <p class="subtitulo">Desenvolvedor Front-end | Apaixonado por criar interfaces modernas e
+                    <p class="subtitulo">Desenvolvedor Full Stack | Apaixonado por criar interfaces modernas e
                         funcionais.</p>
                     <a href="#projetos" class="btn-cta">Ver Projetos</a>
                 </div>
             </div>
             <div id="particles-js"></div>
-
         </section>
 
         <section id="sobre" class="section">
             <div class="container sobre-flex">
                 <div class="sobre-img">
-                    <img src="assets/foto-kassio.jpg" alt="Foto de Kássio Barros">
+                    <img src="assets/foto-kassio.jpg" alt="Foto de Kássio Barros" loading="lazy">
                 </div>
                 <div class="sobre-texto">
                     <h2> <span>Sobre</span> Mim</h2>
@@ -74,8 +97,8 @@
                             <span class="icone">👨‍💻</span>
                             <div>
                                 <h4>Estudos Intensivos</h4>
-                                <p>HTML, CSS, JavaScript, Git e muito mais no meu dia a dia. Pela Instituicão <span
-                                        class="dev">Dev</span><span class="club">Club</span></p>
+                                <p>HTML, CSS, JavaScript, Git, Node.js, n8n e muito mais no meu dia a dia. Pela
+                                    Instituicão <span class="dev">Dev</span><span class="club">Club</span></p>
                             </div>
                         </div>
                         <div class="evento">
@@ -97,9 +120,35 @@
                 <p>Ainda não tenho projetos hospedados online, mas você pode conferir todos os que desenvolvi nos meus
                     repositórios no GitHub.</p>
             </div>
-            <div class="projetos-grid" visible id="projetos-grid" >
-
+            <div class="projetos-grid" id="featured-projects">
+                <!-- COMENTÁRIO: Aqui, insira manualmente os projetos mais relevantes que deseja destacar inicialmente. Cada um como um <div class="card">. Exemplo abaixo. Limite a 3-4 para performance inicial. -->
+                <div class="card">
+                    <img src="assets/FP-SELLECTION.png" alt="Projeto Destaque FP-SELLECTION" loading="lazy">
+                    <div class="card-content">
+                        <h3>Projeto FP Carros</h3>
+                        <p>Este é um projeto de uma Troca dinâmica utilizando CSS e JS, projeto desenvolvido com HTML,
+                            CSS e JavaScript.
+                            A proposta é apresentar um produto de forma moderna e com interatividade na troca de cores,
+                            backgrounds e imagens.</p>
+                        <a href="https://github.com/devkassio/FP-SELLECTION" target="_blank">Ver no GitHub</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="assets/barbearia.png" alt="Projeto Barbearia RP 2" loading="lazy">
+                    <div class="card-content">
+                        <h3>Projeto Barbearia RP</h3>
+                        <p> Com design futurista, animações imersivas e navegação fluida, o projeto traduz o poder da
+                            barbearia em cada detalhe. Agendamentos online, serviços exclusivos e uma identidade que une
+                            tradição e tecnologia. Um verdadeiro espetáculo digital para quem busca presença, atitude e
+                            estilo.</p>
+                        <a href="https://kassiobarros.com.br" target="_blank">Veja online</a>
+                    </div>
+                </div>
+                <!-- Adicione mais cards relevantes aqui, se desejar. -->
             </div>
+            <button id="load-more-projects" class="btn-cta">Ver Mais</button>
+            <button id="load-less-projects" class="btn-cta" style="display: none;">Ver Menos</button>
+            <div class="projetos-grid" id="all-projects" style="display: none;"></div>
         </section>
 
         <section id="habilidades" class="section">
@@ -107,40 +156,83 @@
             <div class="container">
                 <h2>Habilidades</h2>
                 <div class="skills-grid">
-
                     <div class="skill html">
                         <i class="fab fa-html5"></i>
                         <span>HTML5</span>
                     </div>
-
                     <div class="skill css">
                         <i class="fab fa-css3-alt"></i>
                         <span>CSS3</span>
                     </div>
-
                     <div class="skill js">
                         <i class="fab fa-js-square"></i>
                         <span>JavaScript</span>
                     </div>
-
                     <div class="skill git">
                         <i class="fab fa-git-alt"></i>
                         <span>Git & GitHub</span>
                     </div>
-
                     <div class="skill responsive">
                         <i class="fas fa-mobile-alt"></i>
                         <span>Responsividade</span>
                     </div>
-
+                    <div class="skill nodejs"> <!-- Adicionado Node.js -->
+                        <i class="fab fa-node-js"></i>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="skill n8n"> <!-- Adicionado n8n, usando ícone genérico de automação (fa-robot) -->
+                        <i class="fas fa-robot"></i>
+                        <span>n8n</span>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Seção de Certificações - Adaptada para 3 imagens agora, escalável para 4 -->
+        <section id="certificacoes" class="section">
+            <div class="container">
+                <h2>Certificações</h2>
+                <div class="certificates-grid">
+                    <div class="certificate-card" onclick="openLightbox(0)">
+                        <img src="assets/certificado-html-css.jpg" alt="Certificado HTML e CSS - DevClub 2025"
+                            loading="lazy">
+                        <p>Certificado em HTML e CSS pelo Curso Full Stack do DevClub - 2025</p>
+                    </div>
+                    <div class="certificate-card" onclick="openLightbox(1)">
+                        <img src="assets/certificado-javascript.jpg" alt="Certificado JavaScript - DevClub 2025"
+                            loading="lazy">
+                        <p>Certificado em JavaScript pelo Curso Full Stack do DevClub - 2025</p>
+                    </div>
+                    <div class="certificate-card nike-centered" onclick="openLightbox(2)">
+                        <img src="assets/certificado-nike.jpg" alt="Certificado Nike - DevClub 2025" loading="lazy">
+                        <p>Certificado Nike por evento promovido pelo DevClub no YouTube - 2025</p>
+                    </div>
+                    <!-- COMENTÁRIO: Para adicionar o 4º certificado, insira aqui um novo <div class="certificate-card" onclick="openLightbox(3)">, adicione a imagem ao array no JS e ajuste o grid-template-areas no CSS se necessário. -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox">
+            <span class="close" onclick="closeLightbox()">×</span>
+            <img class="lightbox-content" id="lightbox-img">
+            <a class="prev" onclick="changeImage(-1)">❮</a>
+            <a class="next" onclick="changeImage(1)">❯</a>
+        </div>
+
         <section id="contato" class="section">
             <div id="particles-contato"></div>
-            <div class="container">
+            <div class="container contato-container">
                 <h2>Contato</h2>
+                <form id="contact-form">
+                    <label for="name">Seu Nome</label>
+                    <input type="text" id="name" placeholder="Seu Nome" required>
+                    <label for="email">Seu Email</label>
+                    <input type="email" id="email" placeholder="Seu Email" required>
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" placeholder="Mensagem" required></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
                 <ul class="contato-list">
                     <li>
                         <a href="https://linkedin.com/in/kassiobarros" class="linkedin" target="_blank"
@@ -166,9 +258,10 @@
     <footer>
         <div class="container footer-glow">
             <p>© 2025 Kássio Barros. Todos os direitos reservados.</p>
+            <!-- Removido os links sociais para simplificar, mantendo apenas o copyright centralizado e profissional -->
         </div>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
