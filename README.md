@@ -2,7 +2,7 @@
 
 Bem-vindo ao meu portfólio pessoal! Aqui você encontrará uma seleção dos meus projetos, habilidades e informações para entrar em contato comigo.
 
-link do meu portfólio: https://santosxis.github.io/portfolio-kassio/
+link do meu portfólio: https://devkassio.github.io/portfolio-kassio/
 
 ## Sobre mim
 
@@ -21,14 +21,14 @@ Aqui estão alguns dos projetos que destaquei no meu portfólio:
 - HTML5, CSS3, JavaScript
 - Frameworks/libraries (React nível iniciante)
 - Controle de versão com Git e GitHub
-- Ferramentas de design (Figma, Photoshop, Canva, etc)
+
 
 ## Contato
 
 Fique à vontade para me contatar por:
 
-- [LinkedIn]  https://linkedin.com/in/kassioxis 
-- [GitHub]  https://github.com/santosxis
+- [LinkedIn]  https://linkedin.com/in/kassiobarros 
+- [GitHub]  https://github.com/devkassio
 - E-mail: kassioxis@icloud.com
 
 ---
