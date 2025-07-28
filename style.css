@@ -725,6 +725,8 @@ footer {
     display: block;
     width: 80%;
     max-width: 700px;
+    position: relative;
+    top: 50px;
 }
 
 .close {
@@ -1053,6 +1055,9 @@ footer {
 
     .lightbox-content {
         width: 90%;
+        position: relative;
+        top: 200px;
+        align-items: center;
     }
 }
 
@@ -1089,6 +1094,13 @@ footer {
     .skill span {
         font-size: 14px;
     }
+
+    #certificacoes .container h2 {
+        font-size: 2.0rem;
+        align-items: center;
+        text-align: center;
+    }
+
 
     .certificate-card {
         max-width: 100%;
