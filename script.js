@@ -111,6 +111,16 @@ document.addEventListener('DOMContentLoaded', () => {
       successMessage.style.display = 'none';
     }, 3000); // Hide after 3 seconds
   });
+
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    if (document.body.classList.contains('light-mode')) {
+      themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+  });
 });
 
 const typingElement = document.getElementById('typing');
