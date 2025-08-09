@@ -763,10 +763,10 @@ nav ul li.social-links a {
 
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2,1fr);
   grid-template-areas:
     "html-css javascript"
-    "nike nike";
+    "nike nodejs";
   gap: 20px;
   justify-items: center;
   margin-top: 30px;
