@@ -12,11 +12,13 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #F8F7F6;
     color: #333;
     scroll-behavior: smooth;
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+    padding-top: 80px;
 }
 
 .container {
@@ -26,11 +28,14 @@ body {
 }
 
 header {
-    background-color: #ffffff;
+    background-color: rgba(248, 247, 246, 0.8); /* Branco com opacidade 80% */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 10;
+    backdrop-filter: blur(10px);
 }
 
 header .container {
@@ -38,7 +43,7 @@ header .container {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 1rem 0;
+    padding: 1rem 20px; /* Adicionado padding para mobile */
 }
 
 .header-flex {
@@ -49,34 +54,113 @@ header .container {
     padding: 1rem 2rem;
 }
 
+.logo-area {
+    display: flex;
+    justify-content: flex-start;
+}
+
 .logo-area img {
     width: 50px;
 }
 
-.site-name {
-    font-family: "Montserrat", cursive;
-    flex-grow: 1;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
+.menu-toggle {
+    display: block;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #333;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle span:nth-child(1) {
+    top: 0;
+}
+
+.menu-toggle span:nth-child(2) {
+    top: 9px;
+}
+
+.menu-toggle span:nth-child(3) {
+    top: 18px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    top: 9px;
+    transform: rotate(135deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    top: 9px;
+    transform: rotate(-135deg);
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    height: 100vh;
+    width: 300px;
+    background: #F8F7F6;
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu.active {
+    right: 0;
+}
+
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
 }
 
 nav ul {
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
     list-style: none;
     margin: 0;
+    text-align: center;
 }
 
 nav ul li a {
     text-decoration: none;
     font-weight: 600;
-    color: #111;
+    color: #333;
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #007bff;
+    color: #00d4ff;
+}
+
+nav ul li.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li.social-links a {
+    font-size: 1.5rem;
 }
 
 .btn-cv {
@@ -86,9 +170,7 @@ nav ul li a:hover {
     border-radius: 30px;
     font-weight: bold;
     text-decoration: none;
-    margin-left: 50px;
     transition: background 0.3s ease, transform 0.2s ease;
-    /* COMENTÁRIO: Ajuste a posição do botão CV aqui. Por exemplo, altere margin-left para mudar o espaçamento à esquerda, ou adicione align-self: center; para centralizar verticalmente se necessário. */
 }
 
 .btn-cv:hover {
@@ -96,8 +178,20 @@ nav ul li a:hover {
     transform: translateY(-2px);
 }
 
-.menu-toggle {
-    display: none;
+.linkedin, .whatsapp, .github {
+    color: #333;
+}
+
+.linkedin:hover {
+    color: #0077b5;
+}
+
+.whatsapp:hover {
+    color: #25D366;
+}
+
+.github:hover {
+    color: #000000;
 }
 
 #home.section {
@@ -118,8 +212,8 @@ nav ul li a:hover {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: white;
+    background: #F8F7F6;
+    color: #333;
     position: relative;
     overflow: hidden;
 }
@@ -146,19 +240,16 @@ nav ul li a:hover {
 }
 
 @keyframes float {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0);
     }
-
     50% {
         transform: translateY(-12px);
     }
 }
 
 .texto1 {
-    color: #ffffff;
+    color: #333;
 }
 
 .texto2 {
@@ -171,7 +262,6 @@ nav ul li a:hover {
     margin-bottom: 1rem;
     animation: fadeDown 1s ease forwards;
     color: red;
-    /*MUDA A COR DO MEU NOME*/
 }
 
 .hero-content .cursor {
@@ -186,12 +276,9 @@ nav ul li a:hover {
 }
 
 @keyframes blink {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: 1;
     }
-
     50% {
         opacity: 0;
     }
@@ -199,7 +286,7 @@ nav ul li a:hover {
 
 .hero-content .subtitulo {
     font-size: 1.3rem;
-    color: #ccc;
+    color: #666;
     margin-bottom: 2rem;
     animation: fadeUp 1.5s ease forwards;
 }
@@ -227,7 +314,6 @@ nav ul li a:hover {
         opacity: 0;
         transform: translateY(-30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -239,7 +325,6 @@ nav ul li a:hover {
         opacity: 0;
         transform: translateY(30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -250,19 +335,9 @@ nav ul li a:hover {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
-}
-
-#particles-js {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    top: 0;
-    left: 0;
 }
 
 .home-hero .container,
@@ -271,21 +346,11 @@ nav ul li a:hover {
     z-index: 1;
 }
 
-#particles-sobre {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-}
-
 #sobre {
     position: relative;
     z-index: 1;
     min-height: 100vh;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: #F8F7F6;
     padding: 80px 20px;
     overflow: hidden;
     display: flex;
@@ -299,12 +364,12 @@ nav ul li a:hover {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    color: white;
+    color: #333;
     animation: fadeInUp 1s ease forwards;
 }
 
 #sobre .container h2 {
-    color: white;
+    color: #333;
     text-transform: uppercase;
 }
 
@@ -317,7 +382,6 @@ nav ul li a:hover {
         opacity: 0;
         transform: translateY(30px);
     }
-
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -350,7 +414,7 @@ nav ul li a:hover {
 
 .sobre-texto {
     max-width: 500px;
-    color: white;
+    color: #333;
     text-align: left;
     animation: fadeInUp 1s ease forwards;
 }
@@ -360,6 +424,7 @@ nav ul li a:hover {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.6s ease, transform 0.6s ease;
+    background-color: #F8F7F6;
 }
 
 .section.visible {
@@ -370,12 +435,11 @@ nav ul li a:hover {
 .section h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #007bff;
+    color: #00d4ff;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeUp 0.8s forwards;
     text-align: center;
-    /* Centraliza todos os h2, incluindo Certificações */
 }
 
 @keyframes fadeUp {
@@ -394,32 +458,6 @@ nav ul li a:hover {
     font-size: 2.5rem;
     color: #00d4ff;
     margin-bottom: 20px;
-}
-
-ul {
-    padding-left: 1.5rem;
-}
-
-.contato-list li {
-    margin-bottom: 0.5rem;
-}
-
-.contato-list a {
-    color: #333;
-    text-decoration: none;
-}
-
-.contato-list a:hover {
-    color: #007bff;
-}
-
-footer {
-    background-color: #222;
-    color: #fff;
-    text-align: center;
-    padding: 1.5rem 0;
-    font-size: 0.9rem;
-    margin-top: 3rem;
 }
 
 .projetos-grid {
@@ -453,18 +491,20 @@ footer {
 
 .card-content h3 {
     margin-bottom: 0.5rem;
-    color: #007bff;
+    color: #00d4ff;
 }
 
 .card-content p {
     font-size: 0.9rem;
     margin-bottom: 1rem;
+    color: #666;
 }
 
 .card-content a {
     text-decoration: none;
     font-weight: bold;
     position: relative;
+    color: #333;
 }
 
 .card-content a::after {
@@ -474,7 +514,7 @@ footer {
     bottom: -2px;
     width: 0;
     height: 2px;
-    background: #007bff;
+    background: #00d4ff;
     transition: width 0.3s ease;
 }
 
@@ -498,7 +538,7 @@ footer {
     display: flex;
     align-items: flex-start;
     gap: 15px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.05);
     border-left: 3px solid #00d4ff;
     padding: 10px 15px;
     border-radius: 10px;
@@ -530,15 +570,13 @@ footer {
 .evento p {
     margin: 5px 0 0;
     font-size: 15px;
-    color: white;
+    color: #333;
 }
-
-/*HABILIDADES*/
 
 #habilidades {
     min-height: 75vh;
-    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-    color: #00f7ff;
+    background: #F8F7F6;
+    color: #333;
     padding: 80px 20px;
     position: relative;
     overflow: hidden;
@@ -553,18 +591,6 @@ footer {
     text-align: center;
 }
 
-#particles-habilidades {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-#habilidades .container {
-    position: relative;
-    z-index: 1;
-}
-
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -573,11 +599,11 @@ footer {
 }
 
 .skill {
-    background: rgba(255, 255, 255, 0.05);
+    background: #fff;
     padding: 20px;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     animation: fadeInUp 1s ease forwards;
     cursor: pointer;
 }
@@ -621,29 +647,38 @@ footer {
 
 .skill.nodejs i,
 .skill.nodejs span {
-    /* Estilização para Node.js, similar às outras */
     color: #68a063;
 }
 
 .skill.n8n i,
 .skill.n8n span {
-    /* Estilização para n8n, similar às outras */
     color: #ff7e03;
 }
 
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.skill.react i,
+.skill.react span {
+    color: #61dafb;
 }
 
-/*CERTIFICAÇÕES*/
+.skill.typescript i,
+.skill.typescript span {
+    color: #007acc;
+}
+
+.skill.nextjs i,
+.skill.nextjs span {
+    color: #000000;
+}
+
+.skill.postman i,
+.skill.postman span {
+    color: #ff6c37;
+}
+
+.skill.mongodb i,
+.skill.mongodb span {
+    color: #47a248;
+}
 
 #certificacoes .container h2 {
     text-transform: uppercase;
@@ -688,7 +723,7 @@ footer {
 
 .certificate-card p {
     font-size: 1rem;
-    color: #333;
+    color: #666;
 }
 
 .certificate-card:nth-child(1) {
@@ -704,9 +739,6 @@ footer {
     justify-self: center;
 }
 
-/* Para adicionar o 4º certificado, ajuste o grid-template-areas para algo como "html-css javascript" "nike quarto" e adicione .certificate-card:nth-child(4) { grid-area: quarto; } */
-
-/* Lightbox Styles */
 .lightbox {
     display: none;
     position: fixed;
@@ -717,16 +749,13 @@ footer {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.9);
-    padding-top: 60px;
+    align-items: center;
+    justify-content: center;
 }
 
 .lightbox-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    position: relative;
-    top: 50px;
+    max-width: 80%;
+    max-height: 80%;
 }
 
 .close {
@@ -762,6 +791,10 @@ footer {
     user-select: none;
 }
 
+.prev {
+    left: 0;
+}
+
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
@@ -772,15 +805,13 @@ footer {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/*CONTATO*/
-
 #contato {
     min-height: 75vh;
     display: flex;
     align-items: center;
     position: relative;
-    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-    color: #00f7ff;
+    background: #F8F7F6;
+    color: #333;
     overflow: hidden;
     padding: 80px 20px;
 }
@@ -788,16 +819,9 @@ footer {
 #contato .container h2 {
     text-transform: capitalize;
     font-size: 2.5rem;
-    color: #fff;
+    color: #333;
     margin-bottom: 20px;
     text-align: center;
-}
-
-#particles-contato {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
 }
 
 .contato-container {
@@ -808,44 +832,41 @@ footer {
     align-items: center;
     max-width: 600px;
     margin: 0 auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-#contact-form {
+.contact-form-modern {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 30px;
 }
 
-#contact-form label {
-    color: #fff;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-#contact-form input,
-#contact-form textarea {
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #00d4ff;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+.contact-form-modern input,
+.contact-form-modern textarea {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: none;
+    border-bottom: 2px solid #00d4ff;
+    background: transparent;
+    color: #333;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    transition: border-bottom 0.3s ease;
 }
 
-#contact-form input:focus,
-#contact-form textarea:focus {
-    border-color: #0099cc;
+.contact-form-modern input:focus,
+.contact-form-modern textarea:focus {
+    border-bottom: 2px solid #0099cc;
     outline: none;
 }
 
-#contact-form button {
+.contact-form-modern button {
     background: #00d4ff;
     color: white;
     border: none;
-    padding: 12px;
+    padding: 15px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 1rem;
@@ -853,168 +874,80 @@ footer {
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
-#contact-form button:hover {
+.contact-form-modern button:hover {
     background: #0099cc;
     transform: scale(1.05);
 }
 
-.contato-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+.success-message {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #00d4ff;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    animation: fadeInSuccess 0.5s ease forwards;
 }
 
-.contato-list li {
-    margin: 0;
-    font-size: 1.2rem;
-}
-
-.contato-list a {
-    color: #cdcdcd;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease, text-shadow 0.3s;
-}
-
-.contato-list a:hover {
-    transform: scale(1.05);
-}
-
-.contato-list i {
-    margin-right: 10px;
-    font-size: 1.5rem;
-}
-
-/* Cores específicas */
-.contato-list a.linkedin {
-    color: #0077b5;
-}
-
-.contato-list a.linkedin:hover {
-    text-shadow: 0 0 10px #0077b5;
-}
-
-.contato-list a.whatsapp {
-    color: #25D366;
-}
-
-.contato-list a.whatsapp:hover {
-    text-shadow: 0 0 10px #25D366;
-}
-
-.contato-list a.github {
-    color: #ffffff;
-}
-
-.contato-list a.github:hover {
-    text-shadow: 0 0 10px #ffffff;
+@keyframes fadeInSuccess {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 footer {
-    margin-top: -1rem;
-    background: #000;
-    color: #00f7ff;
-    padding: 2rem 1rem;
+    background-color: #F8F7F6;
+    color: #333;
     text-align: center;
-    box-shadow: 0 0 15px #00f7ff88;
-    border-top: 1px solid #00f7ff33;
+    padding: 1.5rem 0;
+    font-size: 0.9rem;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.footer-glow {
-    padding: 1rem;
-    text-align: center;
-    color: white;
-    background-color: #000;
-    box-shadow: 0 0 20px #ffffff55;
-    border-top: 1px solid #ffffff55;
-    border-radius: 12px;
+.footer-glow p {
+    margin: 0;
 }
 
-/* Media Queries para Responsividade */
+/* Media Queries */
 
 @media (max-width: 878px) {
-    main {
-        padding-top: 120px;
-    }
-
-    header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background-color: #fff;
-        z-index: 1000;
-        align-items: center;
-    }
-
-    header .container.header-flex {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
     header .container {
-        align-items: center;
+        padding: 1rem 20px; /* Espaçamento para mobile */
     }
-
-    .site-name {
-        font-size: 1.5rem;
+    #home.section {
+        padding-bottom: 120px;
     }
-
-    .btn-cv {
-        margin-left: 0;
-        /* Corrige posição em mobile, removendo margin-left */
-        margin-top: 10px;
-        /* Adiciona espaço acima para melhor layout */
-    }
-
     .sobre-flex {
         flex-direction: column;
         gap: 2rem;
         text-align: center;
     }
-
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
-
     .hero-content {
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
-
     .hero-image img {
         width: 200px;
         height: auto;
     }
-
     .projetos-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
         padding: 1rem 0;
         min-height: 200px;
     }
-
-    .contato-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .footer-glow {
-        text-align: center;
-    }
-
-    nav ul {
-        display: none;
-    }
-
     .certificates-grid {
         grid-template-columns: 1fr;
         grid-template-areas:
@@ -1022,7 +955,6 @@ footer {
             "javascript"
             "nike";
     }
-
     .certificate-card.nike-centered {
         justify-self: center;
     }
@@ -1032,76 +964,54 @@ footer {
     .hero-content h2 {
         font-size: 2.5rem;
     }
-
     .subtitulo {
         font-size: 1.1rem;
     }
-
     .skills-grid {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
-
     .linha-do-tempo {
         gap: 15px;
     }
-
     #contact-form {
         max-width: 100%;
     }
-
-    .contato-list {
-        gap: 15px;
-    }
-
     .lightbox-content {
         width: 90%;
-        position: relative;
-        top: 200px;
-        align-items: center;
+    }
+    nav ul li.social-links {
+        flex-direction: row;
+        gap: 15px;
     }
 }
 
 @media (max-width: 440px) {
     header .container {
-        padding: 0rem;
+        padding: 1rem 15px; /* Mais espaçamento para small mobile */
     }
-
     .projetos-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
         padding: 1rem 0;
         min-height: 200px;
     }
-
     .sobre-texto h2,
     .sobre-p {
         text-align: center;
     }
-
     .hero-content h2 {
         font-size: 2rem;
     }
-
     .btn-cta {
         padding: 10px 20px;
         font-size: 0.9rem;
     }
-
     .skill i {
         font-size: 25px;
     }
-
     .skill span {
         font-size: 14px;
     }
-
-    #certificacoes .container h2 {
-        font-size: 2.0rem;
-        align-items: center;
-        text-align: center;
-    }
-
-
     .certificate-card {
         max-width: 100%;
     }

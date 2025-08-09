@@ -28,9 +28,10 @@
     <link rel="shortcut icon" href="assets/logo-dragon.svg" type="image/x-icon">
     <link rel="canonical" href="https://kassiobarros.com.br">
     <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/lib/vanilla-tilt.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
     <link rel="preload" href="assets/logo-dragon.svg" as="image">
     <link rel="preload" href="assets/minha-foto.jpg" as="image">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
 </head>
 
 <body>
@@ -39,8 +40,13 @@
             <div class="logo-area">
                 <img src="assets/logo-dragon.svg" alt="Logo Dragon" loading="lazy">
             </div>
-            <h1 class="site-name">Kássio Barros</h1>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div class="menu" id="menu">
+                <div class="close-menu" id="close-menu">&times;</div>
                 <nav>
                     <ul>
                         <li><a href="#home">Início</a></li>
@@ -51,6 +57,20 @@
                         <li><a href="#contato">Contato</a></li>
                         <li><a href="assets/Kássio Barros - Programador Full Stack Júnior.pdf"
                                 class="btn-cv animated-cv" download><i class="fas fa-download"></i> CV</a></li>
+                        <li class="social-links">
+                            <a href="https://linkedin.com/in/kassiobarros" class="linkedin" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://wa.me/16992715614" class="whatsapp" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="https://github.com/devkassio" class="github" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -70,7 +90,6 @@
                     <a href="#projetos" class="btn-cta">Ver Projetos</a>
                 </div>
             </div>
-            <div id="particles-js"></div>
         </section>
 
         <section id="sobre" class="section">
@@ -98,7 +117,7 @@
                             <div>
                                 <h4>Estudos Intensivos</h4>
                                 <p>HTML, CSS, JavaScript, Git, Node.js, n8n e muito mais no meu dia a dia. Pela
-                                    Instituicão <span class="dev">Dev</span><span class="club">Club</span></p>
+                                    Instituição <span class="dev">Dev</span><span class="club">Club</span></p>
                             </div>
                         </div>
                         <div class="evento">
@@ -111,7 +130,6 @@
                     </div>
                 </div>
             </div>
-            <div id="particles-sobre"></div>
         </section>
 
         <section id="projetos" class="section">
@@ -121,7 +139,6 @@
                     repositórios no GitHub.</p>
             </div>
             <div class="projetos-grid" id="featured-projects">
-                <!-- COMENTÁRIO: Aqui, insira manualmente os projetos mais relevantes que deseja destacar inicialmente. Cada um como um <div class="card">. Exemplo abaixo. Limite a 3-4 para performance inicial. -->
                 <div class="card">
                     <img src="assets/FP-SELLECTION.png" alt="Projeto Destaque FP-SELLECTION" loading="lazy">
                     <div class="card-content">
@@ -144,7 +161,6 @@
                         <a href="https://github.com/devkassio/Barbearia" target="_blank">Ver no GitHub</a>
                     </div>
                 </div>
-                <!-- Adicione mais cards relevantes aqui, se desejar. -->
             </div>
             <button id="load-more-projects" class="btn-cta">Ver Mais</button>
             <button id="load-less-projects" class="btn-cta" style="display: none;">Ver Menos</button>
@@ -152,7 +168,6 @@
         </section>
 
         <section id="habilidades" class="section">
-            <div id="particles-habilidades"></div>
             <div class="container">
                 <h2>Habilidades</h2>
                 <div class="skills-grid">
@@ -176,19 +191,38 @@
                         <i class="fas fa-mobile-alt"></i>
                         <span>Responsividade</span>
                     </div>
-                    <div class="skill nodejs"> <!-- Adicionado Node.js -->
+                    <div class="skill nodejs">
                         <i class="fab fa-node-js"></i>
                         <span>Node.js</span>
                     </div>
-                    <div class="skill n8n"> <!-- Adicionado n8n, usando ícone genérico de automação (fa-robot) -->
+                    <div class="skill n8n">
                         <i class="fas fa-robot"></i>
                         <span>n8n</span>
+                    </div>
+                    <div class="skill react">
+                        <i class="fab fa-react"></i>
+                        <span>React</span>
+                    </div>
+                    <div class="skill typescript">
+                        <i class="devicon-typescript-plain colored"></i>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="skill nextjs">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Next.js</span>
+                    </div>
+                    <div class="skill postman">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Postman</span>
+                    </div>
+                    <div class="skill mongodb">
+                        <i class="fas fa-database"></i>
+                        <span>MongoDB</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção de Certificações - Adaptada para 3 imagens agora, escalável para 4 -->
         <section id="certificacoes" class="section">
             <div class="container">
                 <h2>Certificações</h2>
@@ -207,12 +241,10 @@
                         <img src="assets/certificado-nike.jpg" alt="Certificado Nike - DevClub 2025" loading="lazy">
                         <p>Certificado Nike por evento promovido pelo DevClub no YouTube - 2025</p>
                     </div>
-                    <!-- COMENTÁRIO: Para adicionar o 4º certificado, insira aqui um novo <div class="certificate-card" onclick="openLightbox(3)">, adicione a imagem ao array no JS e ajuste o grid-template-areas no CSS se necessário. -->
                 </div>
             </div>
         </section>
 
-        <!-- Lightbox Modal -->
         <div id="lightbox" class="lightbox">
             <span class="close" onclick="closeLightbox()">×</span>
             <img class="lightbox-content" id="lightbox-img">
@@ -221,36 +253,15 @@
         </div>
 
         <section id="contato" class="section">
-            <div id="particles-contato"></div>
             <div class="container contato-container">
                 <h2>Contato</h2>
-                <form id="contact-form">
-                    <label for="name">Seu Nome</label>
-                    <input type="text" id="name" placeholder="Seu Nome" required>
-                    <label for="email">Seu Email</label>
-                    <input type="email" id="email" placeholder="Seu Email" required>
-                    <label for="message">Mensagem</label>
-                    <textarea id="message" placeholder="Mensagem" required></textarea>
+                <form id="contact-form" class="contact-form-modern">
+                    <input type="text" id="name" name="name" placeholder="Seu Nome" required>
+                    <input type="email" id="email" name="email" placeholder="Seu Email" required>
+                    <textarea id="message" name="message" placeholder="Mensagem" required></textarea>
                     <button type="submit">Enviar</button>
                 </form>
-                <ul class="contato-list">
-                    <li>
-                        <a href="https://linkedin.com/in/kassiobarros" class="linkedin" target="_blank"
-                            rel="noopener noreferrer">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://wa.me/16992715614" class="whatsapp" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/devkassio" class="github" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                    </li>
-                </ul>
+                <div id="success-message" class="success-message">Contato enviado com sucesso!</div>
             </div>
         </section>
     </main>
@@ -258,11 +269,9 @@
     <footer>
         <div class="container footer-glow">
             <p>© 2025 Kássio Barros. Todos os direitos reservados.</p>
-            <!-- Removido os links sociais para simplificar, mantendo apenas o copyright centralizado e profissional -->
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 

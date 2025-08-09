@@ -87,11 +87,29 @@ document.addEventListener('DOMContentLoaded', () => {
     allProjects.innerHTML = ''; // Limpa os projetos carregados para performance
   });
 
-  // Envio de formulário (placeholder, configure com Formspree ou similar)
+  // Menu toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+  const closeMenu = document.getElementById('close-menu');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    menu.classList.toggle('active');
+  });
+  closeMenu.addEventListener('click', () => {
+    menuToggle.classList.remove('active');
+    menu.classList.remove('active');
+  });
+
+  // Form submission
   const form = document.getElementById('contact-form');
-  form.addEventListener('submit', e => {
+  const successMessage = document.getElementById('success-message');
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Mensagem enviada!'); // Substitua por fetch real
+    successMessage.style.display = 'block';
+    form.reset();
+    setTimeout(() => {
+      successMessage.style.display = 'none';
+    }, 3000); // Hide after 3 seconds
   });
 });
 
@@ -120,7 +138,7 @@ function type() {
     } else {
       typingText1 = false;
       charIndex = 0;
-      setTimeout(type, 200); // Delay entre text1 e text2, corrigido para não loop infinito
+      setTimeout(type, 200);
     }
   } else {
     if (charIndex < current.text2.length) {
@@ -131,50 +149,10 @@ function type() {
       charIndex++;
       setTimeout(type, 80);
     } else {
-      // Para aqui, sem deletar ou loop, corrigindo bug
+      // Stop
     }
   }
 }
-
-particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 60 },
-    "size": { "value": 3 },
-    "color": { "value": "#00d4ff" },
-    "line_linked": {
-      "enable": true,
-      "color": "#00d4ff"
-    },
-    "move": {
-      "enable": true,
-      "speed": 1
-    }
-  }
-});
-
-particlesJS("particles-sobre", {
-  particles: {
-    number: { value: 40, density: { enable: true, value_area: 800 } },
-    color: { value: "#00d4ff" },
-    shape: { type: "circle" },
-    opacity: { value: 0.5 },
-    size: { value: 3 },
-    line_linked: { enable: true, distance: 150, color: "#00d4ff", opacity: 0.4, width: 1 },
-    move: { enable: true, speed: 2 }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: { enable: true, mode: "repulse" },
-      onclick: { enable: true, mode: "push" }
-    },
-    modes: {
-      repulse: { distance: 100 },
-      push: { particles_nb: 4 }
-    }
-  },
-  retina_detect: true
-});
 
 const skillsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -195,38 +173,6 @@ const skillsObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.skill').forEach(skill => skillsObserver.observe(skill));
 
-particlesJS("particles-habilidades", {
-  particles: {
-    number: { value: 60 },
-    color: { value: "#00f7ff" },
-    shape: { type: "circle" },
-    opacity: { value: 0.3 },
-    size: { value: 3 },
-    move: { enable: true, speed: 2 }
-  },
-  interactivity: {
-    events: { onhover: { enable: true, mode: "repulse" } },
-    modes: { repulse: { distance: 100 } }
-  },
-  retina_detect: true
-});
-
-particlesJS("particles-contato", {
-  particles: {
-    number: { value: 60 },
-    color: { value: "#00f7ff" },
-    shape: { type: "circle" },
-    opacity: { value: 0.3 },
-    size: { value: 3 },
-    move: { enable: true, speed: 2 }
-  },
-  interactivity: {
-    events: { onhover: { enable: true, mode: "repulse" } },
-    modes: { repulse: { distance: 100 } }
-  },
-  retina_detect: true
-});
-
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
@@ -246,6 +192,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         history.pushState("", document.title, window.location.pathname + window.location.search);
       }, 600);
     }
+
+    // Close menu
+    document.getElementById('menu-toggle').classList.remove('active');
+    document.getElementById('menu').classList.remove('active');
   });
 });
 
@@ -255,13 +205,12 @@ const images = [
   'assets/certificado-html-css.jpg',
   'assets/certificado-javascript.jpg',
   'assets/certificado-nike.jpg'
-  // Adicione mais URLs aqui para certificados adicionais
 ];
 
 function openLightbox(index) {
   currentIndex = index;
   document.getElementById('lightbox-img').src = images[currentIndex];
-  document.getElementById('lightbox').style.display = 'block';
+  document.getElementById('lightbox').style.display = 'flex';
 }
 
 function closeLightbox() {
