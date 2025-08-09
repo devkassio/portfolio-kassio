@@ -12,9 +12,9 @@ Sou desenvolvedor front-end focado em criar experiências web modernas, responsi
 
 Aqui estão alguns dos projetos que destaquei no meu portfólio:
 
-- Projeto 1: https://github.com/santosxis/FP-SELLECTION
-- Projeto 2: https://github.com/santosxis/StarbucksCoffeeOne
-- Projeto 3: https://github.com/santosxis/DevStore
+- Projeto 1: https://github.com/devkassio/FP-SELLECTION
+- Projeto 2: https://github.com/devkassio/StarbucksCoffeeOne
+- Projeto 3: https://github.com/devkassio/DevStore
 
 ## Habilidades
 
