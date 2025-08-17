@@ -214,8 +214,9 @@ let currentIndex = 0;
 const images = [
   'assets/certificado-html-css.jpg',
   'assets/certificado-javascript.jpg',
-  'assets/certificado-nike.jpg',
-  'assets/Certificado- nodeJS.png'
+  'assets/Certificado- nodeJS.png',
+  'assets/Certificado-JsAvançado.png',
+  'assets/certificado-nike.jpg'
 ];
 
 function openLightbox(index) {

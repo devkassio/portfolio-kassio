@@ -384,7 +384,7 @@ nav ul li.social-links a {
   padding: 12px 30px;
   font-size: 1rem;
   color: #fff;
-  background: #00d4ff;
+  background: #0099cc;
   border: none;
   border-radius: 8px;
   text-decoration: none;
@@ -393,7 +393,7 @@ nav ul li.social-links a {
 }
 
 .btn-cta:hover {
-  background: #0099cc;
+  filter: brightness(1.2);
   transform: scale(1.05);
 }
 
@@ -763,10 +763,10 @@ nav ul li.social-links a {
 
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(4,1fr);
   grid-template-areas:
-    "html-css javascript"
-    "nike nodejs";
+    "html-css javascript nodejs jsavançado"
+    "nike nike nike nike";
   gap: 20px;
   justify-items: center;
   margin-top: 30px;
