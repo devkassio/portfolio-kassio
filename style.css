@@ -2,8 +2,13 @@
 
 :root {
   --bg-main: #000;
+  --bg-gradient-home: linear-gradient(135deg, #000, #1a1a1a);
+  --bg-gradient-sobre: linear-gradient(135deg, #000, #2c3e50);
+  --bg-gradient-projetos: linear-gradient(135deg, #000, #2e2e2e);
+  --bg-gradient-habilidades: linear-gradient(135deg, #000, #34495e);
+  --bg-gradient-certificacoes: linear-gradient(135deg, #000, #2e2e2e);
+  --bg-gradient-contato: linear-gradient(135deg, #000, #1a1a1a);
   --text-main: #fff;
-  --text-secondary: #aaa;
   --text-secondary: #aaa;
   --text-sub: #aaa;
   --card-bg: #1a1a1a;
@@ -44,6 +49,12 @@
 
 .light-mode {
   --bg-main: #f8f7f6;
+  --bg-gradient-home: linear-gradient(135deg, #f8f7f6, #e0e0e0);
+  --bg-gradient-sobre: linear-gradient(135deg, #f8f7f6, #d0d8e0);
+  --bg-gradient-projetos: linear-gradient(135deg, #f8f7f6, #e0e0e0);
+  --bg-gradient-habilidades: linear-gradient(135deg, #f8f7f6, #d0d8e0);
+  --bg-gradient-certificacoes: linear-gradient(135deg, #f8f7f6, #e0e0e0);
+  --bg-gradient-contato: linear-gradient(135deg, #f8f7f6, #e0e0e0);
   --text-main: #333;
   --text-secondary: #666;
   --text-sub: #666;
@@ -95,7 +106,7 @@ html {
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-main);
+  background: var(--bg-main);
   color: var(--text-main);
   scroll-behavior: smooth;
   line-height: 1.6;
@@ -111,7 +122,7 @@ body {
 }
 
 header {
-  background-color: var(--header-bg); /* Branco com opacidade 80% */
+  background-color: var(--header-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: fixed;
   top: 0;
@@ -126,7 +137,7 @@ header .container {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 1rem 20px; /* Adicionado padding para mobile */
+  padding: 1rem 20px;
 }
 
 .header-flex {
@@ -290,6 +301,7 @@ nav ul li.social-links a {
   padding-bottom: 40px;
   text-align: center;
   position: relative;
+  background: var(--bg-gradient-home);
 }
 
 .home-hero {
@@ -298,7 +310,7 @@ nav ul li.social-links a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--bg-main);
+  background: var(--bg-gradient-home);
   color: var(--hero-text-color);
   position: relative;
   overflow: hidden;
@@ -438,7 +450,7 @@ nav ul li.social-links a {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  background-color: var(--bg-main);
+  background: var(--bg-gradient-sobre);
   padding: 80px 20px;
   overflow: hidden;
   display: flex;
@@ -507,13 +519,9 @@ nav ul li.social-links a {
   text-decoration: none;
 }
 
-.sobre-texto a:hover {
-  text-decoration: underline;
-}
-
 .sobre-img {
   position: absolute;
-  top: 180px;
+  top: 150px;
   right: 0;
 }
 
@@ -543,7 +551,7 @@ nav ul li.social-links a {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.6s ease, transform 0.6s ease;
-  background-color: var(--bg-main);
+  background: var(--bg-gradient-home);
 }
 
 .section.visible {
@@ -646,9 +654,13 @@ nav ul li.social-links a {
   opacity: 1;
 }
 
+#projetos {
+  background: var(--bg-gradient-projetos);
+}
+
 #habilidades {
   min-height: 75vh;
-  background: var(--bg-main);
+  background: var(--bg-gradient-habilidades);
   color: var(--text-main);
   padding: 80px 20px;
   position: relative;
@@ -753,6 +765,10 @@ nav ul li.social-links a {
   color: #47a248;
 }
 
+#certificacoes {
+  background: var(--bg-gradient-certificacoes);
+}
+
 #certificacoes .container h2 {
   text-transform: uppercase;
   font-size: 2.5rem;
@@ -763,10 +779,8 @@ nav ul li.social-links a {
 
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
-  grid-template-areas:
-    "html-css javascript nodejs jsavançado"
-    "nike nike nike nike";
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "html-css javascript nodejs jsavançado nike";
   gap: 20px;
   justify-items: center;
   margin-top: 30px;
@@ -805,11 +819,6 @@ nav ul li.social-links a {
 
 .certificate-card:nth-child(2) {
   grid-area: javascript;
-}
-
-.certificate-card.nike-centered {
-  grid-area: nike;
-  justify-self: center;
 }
 
 .lightbox {
@@ -883,7 +892,7 @@ nav ul li.social-links a {
   display: flex;
   align-items: center;
   position: relative;
-  background: var(--contato-bg);
+  background: var(--bg-gradient-contato);
   color: var(--text-main);
   overflow: hidden;
   padding: 80px 20px;
@@ -1009,7 +1018,7 @@ footer {
 
 @media (max-width: 878px) {
   header .container {
-    padding: 1rem 20px; /* Espaçamento para mobile */
+    padding: 1rem 20px;
   }
   #home.section {
     padding-bottom: 120px;
@@ -1095,7 +1104,7 @@ footer {
 
 @media (max-width: 440px) {
   header .container {
-    padding: 1rem 15px; /* Mais espaçamento para small mobile */
+    padding: 1rem 15px;
   }
 
   .close-menu {
