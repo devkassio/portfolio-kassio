@@ -1068,6 +1068,17 @@ footer {
     padding: 1rem 0;
     min-height: 200px;
   }
+
+  #certificacoes .container h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  #certificacoes .container h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
   .certificates-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -1099,6 +1110,10 @@ footer {
   nav ul li.social-links {
     flex-direction: row;
     gap: 15px;
+  }
+  #sobre .container h2 {
+    font-size: 2rem;
+    text-align: center;
   }
 }
 
@@ -1136,5 +1151,27 @@ footer {
   }
   .certificate-card {
     max-width: 100%;
+  }
+  .contato-container {
+    padding: 20px;
+  }
+  #certificacoes .container h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  #habilidades .container h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .container.projeto h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  #sobre .container h2 {
+    font-size: 1.3rem;
+    text-align: center;
   }
 }
