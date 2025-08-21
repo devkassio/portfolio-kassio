@@ -779,8 +779,9 @@ nav ul li.social-links a {
 
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-areas: "html-css javascript nodejs jsavançado nike";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "html-css javascript nodejs"
+   "jsavançado cssavançado nike";
   gap: 20px;
   justify-items: center;
   margin-top: 30px;

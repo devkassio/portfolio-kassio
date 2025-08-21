@@ -216,6 +216,7 @@ const images = [
   'assets/certificado-javascript.jpg',
   'assets/Certificado- nodeJS.png',
   'assets/Certificado-JsAvançado.png',
+  'assets/Certificado-CssAvançado.png',
   'assets/certificado-nike.jpg'
 ];
 
