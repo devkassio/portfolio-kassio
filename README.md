@@ -1,14 +1,20 @@
-# 🚀 Portfolio Extraordinário - Kássio Barros# 💻 Portfólio
+# 🚀 Portfolio - Kássio Barros
 
-<div align="center">Bem-vindo ao meu portfólio! 🚀
+<div align="center">
+
+Bem-vindo ao meu portfólio! 🚀
 
 Sou **Kássio Barros**, desenvolvedor **Full Stack Júnior**, apaixonado por tecnologia, código limpo e por transformar ideias em aplicações reais e funcionais.
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-Live-00d4ff?style=for-the-badge&logo=vercel&logoColor=white)](https://devkassio.github.io/portfolio-kassio/)Aqui você encontra meus principais projetos, habilidades e formas de contato.
+Aqui você encontra meus principais projetos, habilidades e formas de contato.
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live-00d4ff?style=for-the-badge&logo=vercel&logoColor=white)](https://devkassio.github.io/portfolio-kassio/)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/kassiobarros)
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/devkassio)🔗 **Acesse meu portfólio online:** [devkassio.github.io/portfolio-kassio](https://devkassio.github.io/portfolio-kassio/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/devkassio)
+
+🔗 **Acesse meu portfólio online:** [devkassio.github.io/portfolio-kassio](https://devkassio.github.io/portfolio-kassio/)
 
 📦 **GitHub:** [github.com/devkassio](https://github.com/devkassio)
 
@@ -24,53 +30,69 @@ Sou **Kássio Barros**, desenvolvedor **Full Stack Júnior**, apaixonado por tec
 
 Sou um desenvolvedor em constante evolução, com experiência prática na criação de **aplicações web completas**, do **front-end** ao **back-end**.
 
-Este é o meu **portfólio pessoal extraordinário**, desenvolvido do zero com tecnologias modernas e design futurístico. Uma experiência imersiva que demonstra minhas habilidades como **Desenvolvedor Full Stack** através de animações avançadas, efeitos visuais impressionantes e funcionalidades interativas.Domino as principais tecnologias da stack JavaScript moderna e estou sempre buscando aperfeiçoar minha lógica, arquitetura de código e performance.
+Este é o meu **portfólio pessoal extraordinário**, desenvolvido do zero com tecnologias modernas e design futurístico. Uma experiência imersiva que demonstra minhas habilidades como **Desenvolvedor Full Stack** através de animações avançadas, efeitos visuais impressionantes e funcionalidades interativas.
 
-### 🌟 Características Principais💡 Tenho como foco o desenvolvimento de soluções escaláveis e bem estruturadas, aplicando boas práticas e mantendo um aprendizado contínuo.
+Domino as principais tecnologias da stack JavaScript moderna e estou sempre buscando aperfeiçoar minha lógica, arquitetura de código e performance.
 
-- ✨ **Design Futurístico** com efeitos de glassmorphism e animações fluidas---
+💡 Tenho como foco o desenvolvimento de soluções escaláveis e bem estruturadas, aplicando boas práticas e mantendo um aprendizado contínuo.
+
+### 🌟 Características Principais
+
+- ✨ **Design Futurístico** com efeitos de glassmorphism e animações fluidas
 
 - 🎨 **Interface Responsiva** adaptável a todos os dispositivos
 
-- 🔥 **Animações Avançadas** com CSS keyframes e JavaScript## 🚀 Tecnologias e Habilidades
+- 🔥 **Animações Avançadas** com CSS keyframes e JavaScript
+
+## 🚀 Tecnologias e Habilidades
 
 - 📱 **PWA Ready** - Pronto para instalação como aplicativo
 
-- 🌙 **Efeitos Visuais** com partículas, gradientes e backdrop filters**Linguagens & Frameworks:**
+- 🌙 **Efeitos Visuais** com partículas, gradientes e backdrop filters
 
-- 📊 **Integração GitHub API** para exibição dinâmica de projetosHTML5 • CSS3 • JavaScript (ES6+) • TypeScript • Node.js • Express.js • React
+**Linguagens & Frameworks:**
+
+- 📊 **Integração GitHub API** para exibição dinâmica de projetos
+
+HTML5 • CSS3 • JavaScript (ES6+) • TypeScript • Node.js • Express.js • React
 
 - 📧 **Sistema de Contato** funcional com EmailJS
 
-- 🔍 **Lightbox Interativo** para certificações**Banco de Dados:**
+- 🔍 **Lightbox Interativo** para certificações
 
-- 🎛️ **Filtros Dinâmicos** para projetos e certificaçõesPostgreSQL • MySQL • Prisma ORM
+**Banco de Dados:**
 
-## 🛠️ Tecnologias Utilizadas**APIs & Integrações:**
+- 🎛️ **Filtros Dinâmicos** para projetos e certificações
 
-RESTful APIs • JSON • Postman • HTTPie
+PostgreSQL • MySQL • Prisma ORM
 
-<div align="center">
+## <div align="center">
 
-**Automação & No-Code:**
-
-### Frontendn8n
+### Frontend
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)**Controle de Versão:**
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)Git • GitHub
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-### Ferramentas & APIs**Soft Skills:**
+**Controle de Versão:**
 
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)Transparência • Proatividade • Comunicação Clara • Foco em Resultados • Aprendizado Contínuo
+Git • GitHub
+
+### Ferramentas & APIs
+
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 
-![EmailJS](https://img.shields.io/badge/EmailJS-0098D4?style=for-the-badge&logo=minutemailer&logoColor=white)---
+![EmailJS](https://img.shields.io/badge/EmailJS-0098D4?style=for-the-badge&logo=minutemailer&logoColor=white)
 
 ![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
+
+**Soft Skills:**
+
+Transparência • Proatividade • Comunicação Clara • Foco em Resultados • Aprendizado Contínuo
 
 ## 🧩 Projetos em Destaque
 
@@ -78,65 +100,72 @@ RESTful APIs • JSON • Postman • HTTPie
 
 ### 🍔 [DevBurger](https://github.com/devkassio/DevBurger)
 
-## 🎨 Seções do PortfolioAplicação Full Stack que simula um sistema de pedidos de lanchonete, com front-end em React (Vite) e back-end em Node.js/Express.
+Aplicação Full Stack que simula um sistema de pedidos de lanchonete, com front-end em React (Vite) e back-end em Node.js/Express.
 
 Inclui integração com banco de dados e interface responsiva.
 
-### 🏠 **Hero Section**
+### 🛍️ [DevStore](https://github.com/devkassio/DevStore)
 
-- Apresentação pessoal com efeitos de typing animado### 🛍️ [DevStore](https://github.com/devkassio/DevStore)
+Loja virtual desenvolvida com HTML, CSS e JavaScript, focada em UI/UX e responsividade.
 
-- Estatísticas dinâmicas com contadoresLoja virtual desenvolvida com HTML, CSS e JavaScript, focada em UI/UX e responsividade.
-
-- Botões de ação com efeitos hover avançados
-
-- Indicador de scroll interativo### ☕ [Starbucks Coffee One](https://github.com/devkassio/StarbucksCoffeeOne)
+### ☕ [Starbucks Coffee One](https://github.com/devkassio/StarbucksCoffeeOne)
 
 Landing page inspirada na marca Starbucks, desenvolvida com design moderno e efeitos visuais em CSS.
 
+### 🎯 [FP Selection](https://github.com/devkassio/FP-SELLECTION)
+
+Projeto web de seleção interativa com JavaScript puro, explorando manipulação do DOM e lógica de interação.
+
+---
+
+## 🎨 Seções do Portfolio
+
+### 🏠 **Hero Section**
+
+- Apresentação pessoal com efeitos de typing animado
+- Estatísticas dinâmicas com contadores
+- Botões de ação com efeitos hover avançados
+- Indicador de scroll interativo
+
 ### 👨‍💻 **Sobre Mim**
 
-- Layout em cards com efeitos glassmorphism### 🎯 [FP Selection](https://github.com/devkassio/FP-SELLECTION)
-
-- Informações sobre transição de carreiraProjeto web de seleção interativa com JavaScript puro, explorando manipulação do DOM e lógica de interação.
-
+- Layout em cards com efeitos glassmorphism
+- Informações sobre transição de carreira
 - Links para redes sociais
+- Imagem de perfil com animações
 
-- Imagem de perfil com animações---
-
-### 🚀 **Projetos**## 🎓 Formação
+### 🚀 **Projetos**
 
 - Sistema de filtros por categoria (Frontend, Full Stack, Design)
-
-- Cards interativos com overlay de ações📘 **Curso Full Stack Pro – DevClub** _(conclusão prevista: abril de 2026)_
-
-- Integração com GitHub API para projetos dinâmicosFormação prática em desenvolvimento web com **HTML, CSS, JavaScript, TypeScript, React, Node.js, Express** e **bancos de dados relacionais**.
-
+- Cards interativos com overlay de ações
+- Integração com GitHub API para projetos dinâmicos
 - Badges coloridos por tecnologia
+- Links diretos para demo e código
 
-- Links diretos para demo e código---
+## 🎓 Formação
 
-### 💡 **Habilidades**## 📬 Contato
+📘 **Curso Full Stack Pro – DevClub** _(conclusão prevista: abril de 2026)_
+
+Formação prática em desenvolvimento web com **HTML, CSS, JavaScript, TypeScript, React, Node.js, Express** e **bancos de dados relacionais**.
+
+---
+
+### 💡 **Habilidades**
 
 - Grid responsivo de tecnologias
 
-- Ícones com cores autênticas das tecnologias📧 **E-mail:** [kassioxis@icloud.com](mailto:kassioxis@icloud.com)
+- Ícones com cores autênticas das tecnologias
 
-- Efeitos hover personalizados💼 **LinkedIn:** [linkedin.com/in/kassiobarros](https://linkedin.com/in/kassiobarros)
+- Efeitos hover personalizados
 
-- 12+ tecnologias dominadas💻 **GitHub:** [github.com/devkassio](https://github.com/devkassio)
-
-🌐 **Portfólio:** [devkassio.github.io/portfolio-kassio](https://devkassio.github.io/portfolio-kassio/)
+- 12+ tecnologias dominadas
 
 ### 🏆 **Certificações**
 
-- Lightbox interativo para visualização---
-
+- Lightbox interativo para visualização
 - Sistema de filtros (Frontend, Backend, Eventos)
-
-- 6+ certificados do DevClub⭐ _“Transformar curiosidade em código, e código em impacto real.”_
-
-- Navegação entre imagens— **Kássio Barros**
+- 6+ certificados do DevClub
+- Navegação entre imagens
 
 ### 📧 **Contato**
 
@@ -145,7 +174,19 @@ Landing page inspirada na marca Starbucks, desenvolvida com design moderno e efe
 - Múltiplas formas de contato
 - Design futurístico
 
-## 🚀 Como Executar
+## � Contato
+
+📧 **E-mail:** [kassioxis@icloud.com](mailto:kassioxis@icloud.com)
+
+💼 **LinkedIn:** [linkedin.com/in/kassiobarros](https://linkedin.com/in/kassiobarros)
+
+💻 **GitHub:** [github.com/devkassio](https://github.com/devkassio)
+
+🌐 **Portfólio:** [devkassio.github.io/portfolio-kassio](https://devkassio.github.io/portfolio-kassio/)
+
+---
+
+## �🚀 Como Executar
 
 1. **Clone o repositório**
 
@@ -270,14 +311,11 @@ Contribuições são sempre bem-vindas! Se você tem sugestões de melhorias:
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-## 📞 Contato
+---
 
-**Kássio Barros** - Desenvolvedor Full Stack em transição de carreira
+⭐ _"Transformar curiosidade em código, e código em impacto real."_
 
-[![Email](https://img.shields.io/badge/Email-kassioxis@icloud.com-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:kassioxis@icloud.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-kassiobarros-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/kassiobarros)
-[![Portfolio](https://img.shields.io/badge/Portfolio-devkassio.github.io-green?style=for-the-badge&logo=vercel&logoColor=white)](https://devkassio.github.io/portfolio-kassio/)
-[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/16992715614)
+— **Kássio Barros**
 
 ## 📄 Licença
 
