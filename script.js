@@ -24,7 +24,9 @@ sections.forEach(section => {
 
 async function fetchRepos() {
   const username = 'devkassio';
-  const res = await fetch(`https://api.github.com/users/${username}/repos?type=all&sort=updated`);
+  const res = await fetch(
+    `https://api.github.com/users/${username}/repos?type=all&sort=updated`
+  );
   const repos = await res.json();
   const grid = document.getElementById('all-projects');
 
@@ -35,9 +37,15 @@ async function fetchRepos() {
 
     // Determinar categoria baseada no nome/descrição
     let category = 'frontend';
-    if (repo.description?.toLowerCase().includes('backend') || repo.description?.toLowerCase().includes('api')) {
+    if (
+      repo.description?.toLowerCase().includes('backend') ||
+      repo.description?.toLowerCase().includes('api')
+    ) {
       category = 'fullstack';
-    } else if (repo.description?.toLowerCase().includes('design') || repo.description?.toLowerCase().includes('ui')) {
+    } else if (
+      repo.description?.toLowerCase().includes('design') ||
+      repo.description?.toLowerCase().includes('ui')
+    ) {
       category = 'design';
     }
 
@@ -57,28 +65,59 @@ async function fetchRepos() {
       <div class="proj-glow-bg"></div>
       <div class="proj-header">
         <div class="proj-badge ${tech}">
-          <i class="fab fa-${tech === 'js' ? 'js-square' : tech === 'html' ? 'html5' : tech === 'css' ? 'css3-alt' : tech === 'ts' ? 'js-square' : 'code'}"></i>
+          <i class="fab fa-${
+            tech === 'js'
+              ? 'js-square'
+              : tech === 'html'
+              ? 'html5'
+              : tech === 'css'
+              ? 'css3-alt'
+              : tech === 'ts'
+              ? 'js-square'
+              : 'code'
+          }"></i>
         </div>
-        <div class="proj-level">${category === 'fullstack' ? 'Full Stack' : category === 'design' ? 'Design' : 'Frontend'}</div>
+        <div class="proj-level">${
+          category === 'fullstack'
+            ? 'Full Stack'
+            : category === 'design'
+            ? 'Design'
+            : 'Frontend'
+        }</div>
       </div>
       <div class="proj-image-container">
-        <img src="assets/${repo.name === 'portfolio-kassio' ? 'portfolio-kassio.jpg' : repo.name + '.png'}" alt="${repo.name}" loading="lazy" onerror="this.src='assets/default-project.jpg'">
+        <img src="assets/${
+          repo.name === 'portfolio-kassio'
+            ? 'portfolio-kassio.jpg'
+            : repo.name + '.png'
+        }" alt="${
+      repo.name
+    }" loading="lazy" onerror="this.src='assets/default-project.jpg'">
         <div class="proj-overlay">
           <div class="proj-actions">
             <a href="${repo.html_url}" target="_blank" class="proj-btn github">
               <i class="fab fa-github"></i>
               <span>GitHub</span>
             </a>
-            ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="proj-btn demo">
+            ${
+              repo.homepage
+                ? `<a href="${repo.homepage}" target="_blank" class="proj-btn demo">
               <i class="fas fa-external-link-alt"></i>
               <span>Demo</span>
-            </a>` : ''}
+            </a>`
+                : ''
+            }
           </div>
         </div>
       </div>
       <div class="proj-content">
-        <h3>${repo.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
-        <p>${repo.description || 'Projeto desenvolvido com foco em qualidade e boas práticas de desenvolvimento.'}</p>
+        <h3>${repo.name
+          .replace(/-/g, ' ')
+          .replace(/\b\w/g, l => l.toUpperCase())}</h3>
+        <p>${
+          repo.description ||
+          'Projeto desenvolvido com foco em qualidade e boas práticas de desenvolvimento.'
+        }</p>
         <div class="proj-details">
           <span class="proj-status">
             <i class="fas fa-check-circle"></i>
@@ -92,7 +131,10 @@ async function fetchRepos() {
         <div class="proj-tech-stack">
           <span class="tech-tag ${tech}">${repo.language || 'JavaScript'}</span>
           <span class="tech-tag responsive">Responsive</span>
-          ${repo.topics.slice(0, 2).map(topic => `<span class="tech-tag">${topic}</span>`).join('')}
+          ${repo.topics
+            .slice(0, 2)
+            .map(topic => `<span class="tech-tag">${topic}</span>`)
+            .join('')}
         </div>
       </div>
     `;
@@ -121,7 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initTypingEffect();
 
     // Inicializa cards featured com tilt
-    const featuredCards = document.querySelectorAll('#featured-projects .project-card-extraordinary');
+    const featuredCards = document.querySelectorAll(
+      '#featured-projects .project-card-extraordinary'
+    );
     featuredCards.forEach(card => observer.observe(card));
 
     // Inicializar efeitos de projetos
@@ -169,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize EmailJS with your credentials (new API)
     (function () {
       emailjs.init({
-        publicKey: "IcSov-EgznR__YE5f",
+        publicKey: 'IcSov-EgznR__YE5f',
       });
     })();
 
@@ -177,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
     const successMessage = document.getElementById('success-message');
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
 
       // Get form data
@@ -204,11 +248,15 @@ document.addEventListener('DOMContentLoaded', () => {
           subject: `Nova mensagem do portfólio - ${name}`,
           name: name,
           email: email,
-          message: message
+          message: message,
         };
 
         // Send real email using your EmailJS configuration
-        await emailjs.send('service_jbsyv7l', 'template_ahonab8', templateParams);
+        await emailjs.send(
+          'service_jbsyv7l',
+          'template_ahonab8',
+          templateParams
+        );
 
         // Show success message
         successMessage.style.display = 'block';
@@ -225,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Success log
         console.log('Email enviado com sucesso para kassioxis@icloud.com');
-
       } catch (error) {
         console.error('Erro ao enviar email:', error);
 
@@ -269,7 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       lastScrollY = currentScrollY;
     });
-
   }, 100); // Pequeno delay para garantir renderização
 });
 
@@ -319,16 +365,19 @@ function initTypingEffect() {
 function initStatsCounter() {
   const statNumbers = document.querySelectorAll('.stat-number');
 
-  const observerStats = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const target = entry.target;
-        const finalNumber = parseInt(target.getAttribute('data-count'));
-        animateCounter(target, finalNumber);
-        observerStats.unobserve(target);
-      }
-    });
-  }, { threshold: 0.5 });
+  const observerStats = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const finalNumber = parseInt(target.getAttribute('data-count'));
+          animateCounter(target, finalNumber);
+          observerStats.unobserve(target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
   statNumbers.forEach(stat => observerStats.observe(stat));
 }
@@ -363,11 +412,15 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
       window.scrollTo({
         top: targetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
 
       setTimeout(() => {
-        history.pushState("", document.title, window.location.pathname + window.location.search);
+        history.pushState(
+          '',
+          document.title,
+          window.location.pathname + window.location.search
+        );
       }, 600);
     }
   });
@@ -376,12 +429,13 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // Lightbox JS
 let currentIndex = 0;
 const images = [
-  'assets/certificado-html-css.jpg',      // 0 - HTML & CSS
-  'assets/certificado-javascript.jpg',    // 1 - JavaScript
-  'assets/Certificado- nodeJS.png',       // 2 - Node.js
-  'assets/Certificado-JsAvançado.png',    // 3 - JavaScript Avançado
-  'assets/Certificado-CssAvançado .png',  // 4 - CSS Avançado (note o espaço no nome)
-  'assets/certificado-nike.jpg'           // 5 - Nike Event
+  'assets/certificado-html-css.jpg', // 0 - HTML & CSS
+  'assets/certificado-javascript.jpg', // 1 - JavaScript
+  'assets/Certificado- nodeJS.png', // 2 - Node.js
+  'assets/Certificado-JsAvançado.png', // 3 - JavaScript Avançado
+  'assets/Certificado-CssAvançado .png', // 4 - CSS Avançado (note o espaço no nome)
+  'assets/certificado-nike.jpg', // 5 - Nike Event
+  'assets/Certificado - React.png', // 6 - React
 ];
 
 function openLightbox(index) {
@@ -402,6 +456,11 @@ function changeImage(direction) {
     currentIndex = images.length - 1;
   }
   document.getElementById('lightbox-img').src = images[currentIndex];
+}
+
+// Function to view PDF certificates
+function viewPdfCertificate(pdfPath) {
+  window.open(pdfPath, '_blank');
 }
 
 // Certificate Filters Functionality
@@ -482,14 +541,17 @@ function initCertificateCards() {
   });
 
   // Initialize card entrance animations
-  const observerCerts = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        observerCerts.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
+  const observerCerts = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observerCerts.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
   certificateCards.forEach(card => {
     observerCerts.observe(card);
@@ -542,7 +604,7 @@ rippleStyle.textContent = `
       opacity: 0;
     }
   }
-  
+
   .certificate-card-new.animate-in {
     animation: certCardSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
@@ -609,7 +671,7 @@ function initProjectCards() {
 
   // Add mouse tracking for glow effect
   projectCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
+    card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
@@ -629,7 +691,7 @@ function initProjectCards() {
     });
 
     // Add click animation
-    card.addEventListener('click', (e) => {
+    card.addEventListener('click', e => {
       // Don't trigger if clicking on a link
       if (e.target.tagName !== 'A' && !e.target.closest('a')) {
         // Create ripple effect
@@ -639,14 +701,17 @@ function initProjectCards() {
   });
 
   // Initialize card entrance animations
-  const observerProjects = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        observerProjects.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
+  const observerProjects = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observerProjects.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
   projectCards.forEach(card => {
     observerProjects.observe(card);
@@ -699,11 +764,11 @@ projectRippleStyle.textContent = `
       opacity: 0;
     }
   }
-  
+
   .project-card-extraordinary.animate-in {
     animation: projCardSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
-  
+
   @keyframes projCardSlideIn {
     from {
       opacity: 0;
