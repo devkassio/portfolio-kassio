@@ -1304,7 +1304,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1.3rem;
     width: 100%;
     max-width: 380px;
     background: rgba(0, 212, 255, 0.05);
@@ -1477,7 +1477,7 @@ body {
     max-width: 340px;
     padding: 1.2rem 0.8rem;
     gap: 0.8rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.3rem;
   }
 
   .stat-item {
