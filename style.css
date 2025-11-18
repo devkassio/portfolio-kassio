@@ -1393,7 +1393,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.9rem;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
@@ -1461,7 +1461,7 @@ body {
 
   /* Compact actions */
   .hero-actions {
-    margin-bottom: -2.7rem;
+    margin-bottom: 1.3rem;
     gap: 1rem;
     max-width: 300px;
   }
@@ -1532,7 +1532,7 @@ body {
     bottom: 0.5rem;
     left: 44%;
     transform: translateX(-50%);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1646,7 +1646,7 @@ body {
     bottom: 1.2rem;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
