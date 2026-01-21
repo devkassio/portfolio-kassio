@@ -49,11 +49,11 @@ Portfolio profissional desenvolvido com **React + Vite**, focado em **performanc
 
 <div align="center">
 
-| Frontend | Ferramentas | Qualidade |
-|:--------:|:-----------:|:---------:|
-| ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB) | ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white) | ![Biome](https://img.shields.io/badge/Biome-60A5FA?style=flat&logo=biome&logoColor=white) |
-| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) | ![EmailJS](https://img.shields.io/badge/EmailJS-FC6D26?style=flat&logo=mail.ru&logoColor=white) | ![Lighthouse](https://img.shields.io/badge/Lighthouse-F44B21?style=flat&logo=lighthouse&logoColor=white) |
-| ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat&logo=framer&logoColor=white) | ![Keen Slider](https://img.shields.io/badge/Keen_Slider-000?style=flat) | ![WCAG](https://img.shields.io/badge/WCAG_2.1-005A9C?style=flat) |
+|                                                  Frontend                                                  |                                           Ferramentas                                           |                                                Qualidade                                                 |
+| :--------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
+|         ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)         |     ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)      |        ![Biome](https://img.shields.io/badge/Biome-60A5FA?style=flat&logo=biome&logoColor=white)         |
+|  ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)  | ![EmailJS](https://img.shields.io/badge/EmailJS-FC6D26?style=flat&logo=mail.ru&logoColor=white) | ![Lighthouse](https://img.shields.io/badge/Lighthouse-F44B21?style=flat&logo=lighthouse&logoColor=white) |
+| ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat&logo=framer&logoColor=white) |             ![Keen Slider](https://img.shields.io/badge/Keen_Slider-000?style=flat)             |                     ![WCAG](https://img.shields.io/badge/WCAG_2.1-005A9C?style=flat)                     |
 
 </div>
 
@@ -71,15 +71,15 @@ Portfolio profissional desenvolvido com **React + Vite**, focado em **performanc
 
 ## ✨ Funcionalidades
 
-| Seção | Descrição |
-|-------|-----------|
-| **Hero** | Apresentação impactante com animações suaves e scroll indicator |
-| **Sobre** | Trajetória profissional e valores pessoais |
-| **Stack** | Tech cards interativos com ícones e hover effects |
-| **Experiência** | Timeline profissional com a davinTI |
-| **Projetos** | Carrossel automático com projetos reais |
-| **Certificados** | Galeria de certificações com preview de PDFs |
-| **Contato** | Formulário validado com envio via EmailJS |
+| Seção            | Descrição                                                       |
+| ---------------- | --------------------------------------------------------------- |
+| **Hero**         | Apresentação impactante com animações suaves e scroll indicator |
+| **Sobre**        | Trajetória profissional e valores pessoais                      |
+| **Stack**        | Tech cards interativos com ícones e hover effects               |
+| **Experiência**  | Timeline profissional com a davinTI                             |
+| **Projetos**     | Carrossel automático com projetos reais                         |
+| **Certificados** | Galeria de certificações com preview de PDFs                    |
+| **Contato**      | Formulário validado com envio via EmailJS                       |
 
 **Extras:**
 - 🎨 Design System consistente com CSS custom properties
@@ -168,13 +168,13 @@ Acesse: [http://localhost:5173](http://localhost:5173)
 
 ## 📜 Scripts
 
-| Comando | Descrição |
-|---------|-----------|
-| `npm run dev` | Servidor de desenvolvimento com HMR |
-| `npm run build` | Build otimizado para produção |
-| `npm run preview` | Preview do build de produção |
-| `npm run lint` | Verificação de código com Biome |
-| `npm run format` | Formatação automática com Biome |
+| Comando           | Descrição                           |
+| ----------------- | ----------------------------------- |
+| `npm run dev`     | Servidor de desenvolvimento com HMR |
+| `npm run build`   | Build otimizado para produção       |
+| `npm run preview` | Preview do build de produção        |
+| `npm run lint`    | Verificação de código com Biome     |
+| `npm run format`  | Formatação automática com Biome     |
 
 ---
 
@@ -202,8 +202,6 @@ Este projeto está sob a licença MIT. Veja [LICENSE](LICENSE) para mais detalhe
 ---
 
 <div align="center">
-
-**Desenvolvido com 💙 por [Kássio Barros](https://github.com/devkassio)**
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-000?style=for-the-badge&logo=About.me&logoColor=white)](https://devkassio.github.io/portfolio-kassio/)
 

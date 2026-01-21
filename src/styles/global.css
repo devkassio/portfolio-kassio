@@ -2014,7 +2014,11 @@ button {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(circle at 50% 0%, var(--tech-color, rgba(106, 210, 255, 0.15)), transparent 70%);
+  background: radial-gradient(
+    circle at 50% 0%,
+    var(--tech-color, rgba(106, 210, 255, 0.15)),
+    transparent 70%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -2138,12 +2142,12 @@ button {
   .tech-grid {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
-  
+
   .tech-icon-wrapper {
     width: 56px;
     height: 56px;
   }
-  
+
   .tech-icon {
     font-size: 1.75rem;
   }
@@ -2154,33 +2158,33 @@ button {
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
   }
-  
+
   .tech-card {
     padding: 16px 12px;
   }
-  
+
   .tech-icon-wrapper {
     width: 48px;
     height: 48px;
     border-radius: 12px;
   }
-  
+
   .tech-icon {
     font-size: 1.5rem;
   }
-  
+
   .tech-name {
     font-size: 0.75rem;
   }
-  
+
   .tech-badge {
     display: none;
   }
-  
+
   .methodologies-grid {
     gap: 10px;
   }
-  
+
   .methodology-item {
     padding: 10px 16px;
   }

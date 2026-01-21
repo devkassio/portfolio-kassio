@@ -1,31 +1,31 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { FaJava } from 'react-icons/fa';
 import {
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNextdotjs,
-  SiHtml5,
   SiCss3,
-  SiTailwindcss,
-  SiNodedotjs,
+  SiDocker,
+  SiEslint,
   SiExpress,
-  SiNestjs,
-  SiPrisma,
   SiFastify,
-  SiMongodb,
-  SiPostgresql,
-  SiMysql,
   SiFirebase,
-  SiOracle,
   SiGit,
   SiGithub,
-  SiDocker,
+  SiHtml5,
+  SiJavascript,
+  SiMongodb,
+  SiMysql,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiOracle,
+  SiPostgresql,
+  SiPrisma,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
   SiVercel,
   SiVite,
-  SiEslint,
 } from 'react-icons/si';
-import { FaJava } from 'react-icons/fa';
 import { VscVscode } from 'react-icons/vsc';
 import SectionHeader from './SectionHeader.jsx';
 
@@ -63,10 +63,10 @@ function TechCard({ tech, index, categoryIndex }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-30px' });
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const techData = techIcons[tech.name] || { icon: null, color: '#61DAFB' };
   const IconComponent = techData.icon;
-  
+
   return (
     <motion.div
       ref={ref}
@@ -80,7 +80,7 @@ function TechCard({ tech, index, categoryIndex }) {
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ 
+      whileHover={{
         y: -8,
         scale: 1.05,
       }}
@@ -91,15 +91,15 @@ function TechCard({ tech, index, categoryIndex }) {
       <motion.div
         className="tech-icon-wrapper"
         animate={{
-          boxShadow: isHovered 
+          boxShadow: isHovered
             ? `0 0 30px ${techData.color}40, 0 0 60px ${techData.color}20`
             : '0 8px 32px rgba(0,0,0,0.3)',
         }}
         transition={{ duration: 0.3 }}
       >
         {IconComponent ? (
-          <IconComponent 
-            className="tech-icon" 
+          <IconComponent
+            className="tech-icon"
             style={{ color: isHovered ? techData.color : 'var(--color-text)' }}
           />
         ) : (
