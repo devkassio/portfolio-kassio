@@ -1,0 +1,34 @@
+# Static SPA hosting (Apache)
+# - Keeps deep links working by rewriting to /index.html
+# - Adds safe caching headers for built assets
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Don't rewrite real files/folders
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # SPA fallback
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Avoid caching HTML to guarantee instant updates
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-store, max-age=0"
+  </FilesMatch>
+
+  # Mark hashed build assets as immutable (Vite generates hash in filename)
+  SetEnvIfNoCase Request_URI "\.[0-9a-f]{8,}\.(css|js|mjs|png|jpe?g|svg|webp|gif|ico|woff2?|ttf|otf)$" CACHE_IMMUTABLE
+
+  # Default cache for static assets (covers public assets like PDFs too)
+  <FilesMatch "\.(css|js|mjs|png|jpe?g|svg|webp|gif|ico|pdf|woff2?|ttf|otf)$">
+    Header set Cache-Control "public, max-age=604800"
+    Header set Cache-Control "public, max-age=31536000, immutable" env=CACHE_IMMUTABLE
+  </FilesMatch>
+</IfModule>

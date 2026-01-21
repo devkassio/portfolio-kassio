@@ -180,16 +180,30 @@ Acesse: [http://localhost:5173](http://localhost:5173)
 
 ## 🌍 Deploy
 
-O projeto está configurado para **GitHub Pages** com `base: './'` no Vite.
+O projeto está configurado com `base: './'` no Vite, então funciona bem tanto em **domínio raiz** quanto em **subpastas** (hosting estático).
 
-### Deploy Manual:
+### Deploy na Hostinger (recomendado)
+
+1. Gere o build de produção:
+
+```bash
+npm run build
+```
+
+1. Faça upload do **conteúdo da pasta** `dist/` para a pasta do seu domínio na Hostinger (geralmente `public_html/`).
+
+1. Pronto.
+
+Obs.: este repositório inclui um `public/.htaccess` que é copiado para `dist/` no build. Ele garante que links diretos continuem funcionando (SPA fallback) e aplica cache seguro para assets.
+
+### Deploy Manual
 
 ```bash
 npm run build
 # Upload da pasta dist/ para GitHub Pages
 ```
 
-### Deploy Automático (GitHub Actions):
+### Deploy Automático (GitHub Actions)
 
 O deploy pode ser automatizado criando `.github/workflows/deploy.yml`.
 

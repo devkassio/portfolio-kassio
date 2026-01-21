@@ -24,3 +24,6 @@ npm-debug.log*
 
 # Email setup notes
 EMAIL_SETUP.md
+
+# Local deployment artifacts
+src.zip
