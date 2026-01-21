@@ -330,21 +330,21 @@ export const content = {
     {
       title: 'UX & Design Thinking',
       issuer: 'Fundação Bradesco',
-      year: '2025',
+      year: '2023',
       image: asset('UX-Design-Thinking.pdf'),
       isPdf: true,
     },
     {
       title: 'BPMN + BPMA + SCRUM',
       issuer: 'Fundação Bradesco',
-      year: '2025',
+      year: '2023',
       image: asset('BPMN-BPMA-SCRUM.pdf'),
       isPdf: true,
     },
     {
       title: 'Banco de Dados Oracle e PL/SQL',
       issuer: 'Fundação Bradesco',
-      year: '2025',
+      year: '2021',
       image: asset('Certificado_BD-Oracle e Pl-SQL.pdf'),
       isPdf: true,
     },
@@ -359,7 +359,7 @@ export const content = {
     {
       title: 'Mapeamento de Processos com Bizagi',
       issuer: 'Fundação Bradesco',
-      year: '2025',
+      year: '2019',
       image: asset('MapeamentoDeProcessosComBizagi.pdf'),
       isPdf: true,
     },
