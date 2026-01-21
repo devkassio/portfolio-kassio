@@ -1,10 +1,12 @@
 import emailjs from '@emailjs/browser';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiPhone, FiSend } from 'react-icons/fi';
 import { z } from 'zod';
 import SectionHeader from './SectionHeader.jsx';
+
+const SUCCESS_AUTOHIDE_MS = 5000;
 
 const schema = z.object({
   name: z.string().min(2, 'Informe seu nome completo.'),
@@ -20,6 +22,19 @@ const emailConfig = {
 
 export default function Contact({ contact }) {
   const [status, setStatus] = useState({ type: 'idle', message: '' });
+
+  useEffect(() => {
+    if (status.type !== 'success') return;
+
+    const timeoutId = window.setTimeout(() => {
+      setStatus({ type: 'idle', message: '' });
+    }, SUCCESS_AUTOHIDE_MS);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [status.type]);
+
   const {
     register,
     handleSubmit,
