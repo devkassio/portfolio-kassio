@@ -1,5 +1,5 @@
 import { useKeenSlider } from 'keen-slider/react';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import {
   FiArrowLeft,
   FiArrowRight,
@@ -14,6 +14,32 @@ import { createAutoplay } from '../utils/keenAutoplay.js';
 import SectionHeader from './SectionHeader.jsx';
 
 function CertificateModal({ certificate, onClose }) {
+  const dialogRef = useRef(null);
+  const titleId = useId();
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (typeof dialog.showModal === 'function') {
+      try {
+        if (!dialog.open) dialog.showModal();
+      } catch {
+        // Ignora (ex: já está aberto)
+      }
+    }
+
+    requestAnimationFrame(() => dialog.focus());
+
+    return () => {
+      try {
+        if (dialog.open) dialog.close();
+      } catch {
+        // noop
+      }
+    };
+  }, []);
+
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -27,19 +53,24 @@ function CertificateModal({ certificate, onClose }) {
     [onClose]
   );
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    onClose();
+  };
+
   // Para PDFs, abre em nova aba
   const openPdfInNewTab = () => {
     window.open(certificate.image, '_blank');
   };
 
   return (
-    <div
+    <dialog
+      ref={dialogRef}
       className="certificate-modal-backdrop"
       onClick={handleBackdropClick}
       onKeyDown={handleKeyDown}
-      role="dialog"
-      aria-modal="true"
-      aria-label={`Visualizar certificado: ${certificate.title}`}
+      onCancel={handleCancel}
+      aria-labelledby={titleId}
       tabIndex={-1}
     >
       <div className="certificate-modal">
@@ -47,7 +78,7 @@ function CertificateModal({ certificate, onClose }) {
           <div className="certificate-modal-title">
             <FiAward aria-hidden="true" />
             <div>
-              <h3>{certificate.title}</h3>
+              <h3 id={titleId}>{certificate.title}</h3>
               <span>
                 {certificate.issuer} · {certificate.year}
               </span>
@@ -122,7 +153,7 @@ function CertificateModal({ certificate, onClose }) {
           )}
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }
 

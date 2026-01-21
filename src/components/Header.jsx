@@ -11,12 +11,12 @@ export default function Header({ nav, contact }) {
     <header className="site-header">
       <div className="container header-inner">
         <a className="logo" href="#inicio" aria-label="Ir para o início">
-          <img 
-            src="assets/favIconK.png" 
-            alt="Logo Kássio Barros" 
-            className="logo-image" 
-            width="44" 
-            height="44" 
+          <img
+            src="assets/favIconK.png"
+            alt="Logo Kássio Barros"
+            className="logo-image"
+            width="44"
+            height="44"
           />
         </a>
 

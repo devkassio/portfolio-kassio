@@ -35,7 +35,7 @@ export default function Hero({ hero, contact }) {
       </div>
 
       <div className="container hero-container">
-        <motion.div 
+        <motion.div
           className="hero-content"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -119,7 +119,7 @@ export default function Hero({ hero, contact }) {
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="hero-visual"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -154,10 +154,10 @@ export default function Hero({ hero, contact }) {
         whileTap={{ scale: 0.95 }}
       >
         <div className="scroll-mouse">
-          <motion.span 
+          <motion.span
             className="scroll-mouse-wheel"
             animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
           />
         </div>
         <span className="scroll-text">Scroll</span>

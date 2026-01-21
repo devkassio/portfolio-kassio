@@ -10,12 +10,12 @@ export default function Footer({ contact }) {
       <div className="container">
         <div className="footer-main">
           <div className="footer-brand">
-            <img 
-              src="assets/favIconK.png" 
-              alt="Logo Kássio Barros" 
-              className="footer-logo-image" 
-              width="48" 
-              height="48" 
+            <img
+              src="assets/favIconK.png"
+              alt="Logo Kássio Barros"
+              className="footer-logo-image"
+              width="48"
+              height="48"
             />
             <div className="footer-brand-info">
               <span className="footer-name">Kássio Barros</span>

@@ -31,7 +31,7 @@ export default function App() {
         <TechStack />
         <Experience experiences={content.experiences} />
         <Skills skills={content.skills} />
-        <ProjectsCarousel projects={content.projects} />
+        <ProjectsCarousel projects={content.projects} githubUrl={content.contact.github} />
         <CertificatesCarousel certificates={content.certificates} />
         <Contact contact={content.contact} />
       </main>

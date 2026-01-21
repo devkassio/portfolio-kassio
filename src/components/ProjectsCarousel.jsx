@@ -3,7 +3,7 @@ import { FiArrowLeft, FiArrowRight, FiExternalLink, FiGithub } from 'react-icons
 import { createAutoplay } from '../utils/keenAutoplay.js';
 import SectionHeader from './SectionHeader.jsx';
 
-export default function ProjectsCarousel({ projects }) {
+export default function ProjectsCarousel({ projects, githubUrl }) {
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       loop: true,
@@ -22,6 +22,10 @@ export default function ProjectsCarousel({ projects }) {
     },
     [createAutoplay(4200)]
   );
+
+  const repositoriesUrl = githubUrl
+    ? `${githubUrl.replace(/\/$/, '')}?tab=repositories`
+    : 'https://github.com/devkassio?tab=repositories';
 
   return (
     <section id="projetos" className="section section--contrast projects-section" data-reveal>
@@ -79,21 +83,33 @@ export default function ProjectsCarousel({ projects }) {
             ))}
           </div>
 
-          <div className="carousel-controls">
-            <button
-              type="button"
-              onClick={() => instanceRef.current?.prev()}
-              aria-label="Projeto anterior"
+          <div className="carousel-controls carousel-controls--split">
+            <div className="carousel-controls-nav">
+              <button
+                type="button"
+                onClick={() => instanceRef.current?.prev()}
+                aria-label="Projeto anterior"
+              >
+                <FiArrowLeft aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => instanceRef.current?.next()}
+                aria-label="Próximo projeto"
+              >
+                <FiArrowRight aria-hidden="true" />
+              </button>
+            </div>
+
+            <a
+              className="btn btn--outline btn--sm carousel-controls-link"
+              href={repositoriesUrl}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <FiArrowLeft aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={() => instanceRef.current?.next()}
-              aria-label="Próximo projeto"
-            >
-              <FiArrowRight aria-hidden="true" />
-            </button>
+              <FiGithub aria-hidden="true" />
+              Repositórios
+            </a>
           </div>
         </section>
       </div>

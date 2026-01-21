@@ -37,8 +37,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background:
-    radial-gradient(circle at 15% 15%, rgba(28, 105, 212, 0.25), transparent 45%),
+  background: radial-gradient(circle at 15% 15%, rgba(28, 105, 212, 0.25), transparent 45%),
     radial-gradient(circle at 85% 10%, rgba(213, 0, 28, 0.18), transparent 40%),
     radial-gradient(circle at 35% 85%, rgba(255, 255, 255, 0.08), transparent 50%),
     linear-gradient(180deg, #0a0c11 0%, #0b1017 55%, #0a0c11 100%);
@@ -52,8 +51,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+  background-image: linear-gradient(120deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(60deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 160px 160px;
   pointer-events: none;
@@ -65,8 +63,7 @@ body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(circle at 10% 90%, rgba(28, 105, 212, 0.2), transparent 40%),
+  background: radial-gradient(circle at 10% 90%, rgba(28, 105, 212, 0.2), transparent 40%),
     radial-gradient(circle at 90% 75%, rgba(255, 255, 255, 0.06), transparent 45%);
   pointer-events: none;
   opacity: 0.5;
@@ -214,11 +211,8 @@ button {
   border-radius: 999px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base),
-    background var(--transition-base),
-    color var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background
+    var(--transition-base), color var(--transition-base);
 }
 
 .btn--primary {
@@ -423,10 +417,8 @@ button {
   border: 1px solid var(--color-border);
   color: var(--color-muted);
   background: rgba(12, 15, 20, 0.6);
-  transition:
-    transform var(--transition-base),
-    border var(--transition-base),
-    color var(--transition-base);
+  transition: transform var(--transition-base), border var(--transition-base), color
+    var(--transition-base);
 }
 
 .header-social a:hover {
@@ -499,8 +491,7 @@ button {
 .hero-grid {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 80px 80px;
   opacity: 0.5;
@@ -693,9 +684,7 @@ button {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 40px 80px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   max-width: 380px;
   margin: 0 auto;
 }
@@ -847,102 +836,6 @@ button {
 }
 
 /* =============================================
-   SERVICES SECTION
-   ============================================= */
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-}
-
-.service-card {
-  padding: 32px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  transition: all var(--transition-base);
-  position: relative;
-  overflow: hidden;
-}
-
-.service-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(28, 105, 212, 0.1), transparent);
-  opacity: 0;
-  transition: opacity var(--transition-base);
-}
-
-.service-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(106, 210, 255, 0.3);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-}
-
-.service-card:hover::before {
-  opacity: 1;
-}
-
-.service-icon-wrapper {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-light));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.service-icon {
-  font-size: 1.8rem;
-  color: white;
-}
-
-.service-title {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  position: relative;
-  z-index: 1;
-}
-
-.service-description {
-  color: var(--color-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 1;
-}
-
-.service-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  position: relative;
-  z-index: 1;
-}
-
-.service-features li {
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  font-size: 0.75rem;
-  color: var(--accent-silver);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* =============================================
    TECH STACK SECTION
    ============================================= */
 
@@ -1038,115 +931,6 @@ button {
     padding: 24px;
     gap: 16px;
   }
-}
-
-/* =============================================
-   CTA SECTION
-   ============================================= */
-
-.cta-section {
-  position: relative;
-  padding: 120px 0;
-  overflow: hidden;
-}
-
-.cta-background {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.cta-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-}
-
-.cta-glow--1 {
-  width: 600px;
-  height: 600px;
-  background: rgba(28, 105, 212, 0.3);
-  top: -200px;
-  left: -100px;
-}
-
-.cta-glow--2 {
-  width: 500px;
-  height: 500px;
-  background: rgba(106, 210, 255, 0.2);
-  bottom: -200px;
-  right: -100px;
-}
-
-.cta-content {
-  position: relative;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.cta-eyebrow {
-  display: inline-block;
-  padding: 8px 20px;
-  background: rgba(106, 210, 255, 0.1);
-  border: 1px solid rgba(106, 210, 255, 0.3);
-  border-radius: 999px;
-  font-size: 0.85rem;
-  color: var(--accent-light);
-  margin-bottom: 24px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-}
-
-.cta-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-light));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.cta-description {
-  font-size: 1.1rem;
-  color: var(--color-muted);
-  line-height: 1.7;
-  margin-bottom: 32px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.cta-actions {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-
-.cta-features {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-
-.cta-feature {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-muted);
-  font-size: 0.9rem;
-}
-
-.cta-feature-icon {
-  font-size: 1.2rem;
 }
 
 /* =============================================
@@ -1342,20 +1126,6 @@ button {
 }
 
 /* =============================================
-   SERVICES RESPONSIVE
-   ============================================= */
-
-@media (max-width: 768px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .service-card {
-    padding: 24px;
-  }
-}
-
-/* =============================================
    TECH STACK RESPONSIVE
    ============================================= */
 
@@ -1388,30 +1158,6 @@ button {
 @media (max-width: 480px) {
   .tech-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* =============================================
-   CTA RESPONSIVE
-   ============================================= */
-
-@media (max-width: 768px) {
-  .cta-section {
-    padding: 80px 0;
-  }
-
-  .cta-actions {
-    flex-direction: column;
-  }
-
-  .cta-actions .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .cta-features {
-    flex-direction: column;
-    gap: 16px;
   }
 }
 
@@ -2205,9 +1951,7 @@ button {
   grid-template-rows: auto 1fr;
   min-height: 100%;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .project-media,
@@ -2394,6 +2138,13 @@ button {
 
 /* Certificate Modal */
 .certificate-modal-backdrop {
+  border: none;
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.9);
@@ -2402,8 +2153,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   animation: fadeIn 0.2s ease-out;
+}
+
+.certificate-modal-backdrop::backdrop {
+  background: transparent;
 }
 
 @keyframes fadeIn {
@@ -2625,6 +2379,22 @@ button {
   gap: 12px;
 }
 
+.carousel-controls--split {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.carousel-controls-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.carousel-controls-link {
+  margin-left: auto;
+}
+
 @media (hover: hover) {
   .project-card:hover,
   .certificate-card:hover {
@@ -2643,10 +2413,8 @@ button {
   justify-content: center;
   color: var(--color-muted);
   background: rgba(12, 15, 20, 0.7);
-  transition:
-    transform var(--transition-base),
-    border var(--transition-base),
-    color var(--transition-base);
+  transition: transform var(--transition-base), border var(--transition-base), color
+    var(--transition-base);
 }
 
 .carousel-controls button:hover {
@@ -2764,9 +2532,7 @@ button {
   background: rgba(8, 10, 14, 0.8);
   color: var(--color-text);
   font-size: 0.95rem;
-  transition:
-    border-color var(--transition-base),
-    box-shadow var(--transition-base);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .contact-form input::placeholder,
@@ -3094,9 +2860,7 @@ button {
   gap: 20px;
   position: relative;
   overflow: hidden;
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .experience-card::before {
@@ -3368,11 +3132,6 @@ button {
   gap: 8px;
 }
 
-.skill-item--highlight .skill-name {
-  color: var(--accent-light);
-  font-weight: 600;
-}
-
 .skill-info {
   display: flex;
   justify-content: space-between;
@@ -3383,6 +3142,11 @@ button {
   font-size: 0.92rem;
   color: var(--color-text);
   font-weight: 500;
+}
+
+.skill-item--highlight .skill-name {
+  color: var(--accent-light);
+  font-weight: 600;
 }
 
 .skill-level {
@@ -3409,10 +3173,8 @@ button {
   background: linear-gradient(90deg, #1c69d4, #00d4ff, #6ad2ff);
   border-radius: 999px;
   position: relative;
-  box-shadow:
-    0 0 20px rgba(0, 212, 255, 0.5),
-    0 0 40px rgba(106, 210, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(106, 210, 255, 0.3), inset 0 1px 0
+    rgba(255, 255, 255, 0.3);
 }
 
 .skill-progress::after {
@@ -3532,9 +3294,7 @@ button {
 [data-reveal] {
   opacity: 1;
   transform: translateY(0);
-  transition:
-    opacity var(--transition-base),
-    transform var(--transition-base);
+  transition: opacity var(--transition-base), transform var(--transition-base);
   transition-delay: var(--reveal-delay, 0s);
 }
 
@@ -3642,15 +3402,19 @@ button {
   .carousel-controls {
     justify-content: center;
   }
+
+  .carousel-controls--split {
+    justify-content: space-between;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
 }
