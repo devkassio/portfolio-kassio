@@ -37,8 +37,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background:
-    radial-gradient(circle at 15% 15%, rgba(28, 105, 212, 0.25), transparent 45%),
+  background: radial-gradient(circle at 15% 15%, rgba(28, 105, 212, 0.25), transparent 45%),
     radial-gradient(circle at 85% 10%, rgba(213, 0, 28, 0.18), transparent 40%),
     radial-gradient(circle at 35% 85%, rgba(255, 255, 255, 0.08), transparent 50%),
     linear-gradient(180deg, #0a0c11 0%, #0b1017 55%, #0a0c11 100%);
@@ -52,8 +51,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+  background-image: linear-gradient(120deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(60deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 160px 160px;
   pointer-events: none;
@@ -65,8 +63,7 @@ body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(circle at 10% 90%, rgba(28, 105, 212, 0.2), transparent 40%),
+  background: radial-gradient(circle at 10% 90%, rgba(28, 105, 212, 0.2), transparent 40%),
     radial-gradient(circle at 90% 75%, rgba(255, 255, 255, 0.06), transparent 45%);
   pointer-events: none;
   opacity: 0.5;
@@ -214,11 +211,8 @@ button {
   border-radius: 999px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base),
-    background var(--transition-base),
-    color var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background
+    var(--transition-base), color var(--transition-base);
 }
 
 .btn--primary {
@@ -423,10 +417,8 @@ button {
   border: 1px solid var(--color-border);
   color: var(--color-muted);
   background: rgba(12, 15, 20, 0.6);
-  transition:
-    transform var(--transition-base),
-    border var(--transition-base),
-    color var(--transition-base);
+  transition: transform var(--transition-base), border var(--transition-base), color
+    var(--transition-base);
 }
 
 .header-social a:hover {
@@ -499,8 +491,7 @@ button {
 .hero-grid {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 80px 80px;
   opacity: 0.5;
@@ -631,6 +622,12 @@ button {
   font-size: 1rem;
 }
 
+.btn--sm {
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  gap: 8px;
+}
+
 .btn--outline {
   border: 2px solid var(--color-border);
   color: var(--color-text);
@@ -693,9 +690,7 @@ button {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 40px 80px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   max-width: 380px;
   margin: 0 auto;
 }
@@ -1962,9 +1957,7 @@ button {
   grid-template-rows: auto 1fr;
   min-height: 100%;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .project-media,
@@ -2426,10 +2419,8 @@ button {
   justify-content: center;
   color: var(--color-muted);
   background: rgba(12, 15, 20, 0.7);
-  transition:
-    transform var(--transition-base),
-    border var(--transition-base),
-    color var(--transition-base);
+  transition: transform var(--transition-base), border var(--transition-base), color
+    var(--transition-base);
 }
 
 .carousel-controls button:hover {
@@ -2547,9 +2538,7 @@ button {
   background: rgba(8, 10, 14, 0.8);
   color: var(--color-text);
   font-size: 0.95rem;
-  transition:
-    border-color var(--transition-base),
-    box-shadow var(--transition-base);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .contact-form input::placeholder,
@@ -2877,9 +2866,7 @@ button {
   gap: 20px;
   position: relative;
   overflow: hidden;
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .experience-card::before {
@@ -3192,10 +3179,8 @@ button {
   background: linear-gradient(90deg, #1c69d4, #00d4ff, #6ad2ff);
   border-radius: 999px;
   position: relative;
-  box-shadow:
-    0 0 20px rgba(0, 212, 255, 0.5),
-    0 0 40px rgba(106, 210, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(106, 210, 255, 0.3), inset 0 1px 0
+    rgba(255, 255, 255, 0.3);
 }
 
 .skill-progress::after {
@@ -3315,9 +3300,7 @@ button {
 [data-reveal] {
   opacity: 1;
   transform: translateY(0);
-  transition:
-    opacity var(--transition-base),
-    transform var(--transition-base);
+  transition: opacity var(--transition-base), transform var(--transition-base);
   transition-delay: var(--reveal-delay, 0s);
 }
 
@@ -3393,6 +3376,17 @@ button {
 }
 
 @media (max-width: 700px) {
+  .site-header {
+    background: transparent;
+    border-bottom: none;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .header-inner::after {
+    display: none;
+  }
+
   .hero {
     padding-top: 120px;
   }
@@ -3428,6 +3422,77 @@ button {
 
   .carousel-controls--split {
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 600px) {
+  .certificate-body {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .certificate-title h3 {
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .certificate-modal-backdrop {
+    padding: 12px;
+  }
+
+  .certificate-modal {
+    max-height: 92vh;
+  }
+
+  .certificate-modal-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .certificate-modal-title {
+    align-items: flex-start;
+  }
+
+  .certificate-modal-title h3 {
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .certificate-modal-actions {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .certificate-modal-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .certificate-modal-close {
+    flex: 0 0 auto;
+    align-self: flex-end;
+  }
+
+  .certificate-modal-content {
+    padding: 16px;
+    min-height: 300px;
+  }
+
+  .certificate-pdf-iframe {
+    height: 60vh;
+  }
+}
+
+@media (hover: none) {
+  .certificate-view-btn {
+    opacity: 1;
+    background: rgba(7, 9, 12, 0.65);
   }
 }
 
