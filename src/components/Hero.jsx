@@ -2,10 +2,6 @@ import { motion } from 'framer-motion';
 import { useMemo } from 'react';
 import { FiArrowRight, FiDownload, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { TypeAnimation } from 'react-type-animation';
-import { buildSrcSet } from '../utils/imageSrcset.js';
-
-const HERO_IMAGE_WIDTHS = [320, 640, 960];
-const HERO_IMAGE_SIZES = '(min-width: 1100px) 380px, (min-width: 768px) 360px, 82vw';
 
 export default function Hero({ hero, contact, reduceMotion = false }) {
   const particles = useMemo(() => {
@@ -18,9 +14,6 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
       delay: `${Math.random() * 5}s`,
     }));
   }, [reduceMotion]);
-
-  const heroImageAvif = buildSrcSet(hero.image, HERO_IMAGE_WIDTHS, 'avif');
-  const heroImageWebp = buildSrcSet(hero.image, HERO_IMAGE_WIDTHS, 'webp');
 
   const scrollToNext = () => {
     const nextSection = document.querySelector('#sobre');
@@ -151,19 +144,15 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
           <div className="hero-image-wrapper">
             <div className="hero-image-glow" aria-hidden="true" />
             <div className="hero-image-frame">
-              <picture>
-                <source type="image/avif" srcSet={heroImageAvif} sizes={HERO_IMAGE_SIZES} />
-                <source type="image/webp" srcSet={heroImageWebp} sizes={HERO_IMAGE_SIZES} />
-                <img
-                  src={hero.image}
-                  alt={hero.imageAlt}
-                  width="500"
-                  height="600"
-                  decoding="async"
-                  loading="eager"
-                  fetchPriority="high"
-                />
-              </picture>
+              <img
+                src={hero.image}
+                alt={hero.imageAlt}
+                width="500"
+                height="600"
+                decoding="async"
+                loading="eager"
+                fetchPriority="high"
+              />
             </div>
           </div>
         </motion.div>

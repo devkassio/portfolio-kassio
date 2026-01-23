@@ -1,87 +1,118 @@
+import { FaJava } from 'react-icons/fa';
+import {
+  SiDocker,
+  SiExpress,
+  SiFigma,
+  SiGit,
+  SiJavascript,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPrisma,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+  SiVite,
+} from 'react-icons/si';
+import { VscVscode } from 'react-icons/vsc';
 import SectionHeader from './SectionHeader.jsx';
 
 const technologies = [
   {
     name: 'JavaScript',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+    icon: SiJavascript,
+    iconClass: 'tech-icon--javascript',
     category: 'core',
   },
   {
     name: 'TypeScript',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+    icon: SiTypescript,
+    iconClass: 'tech-icon--typescript',
     category: 'core',
   },
   {
     name: 'React',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    icon: SiReact,
+    iconClass: 'tech-icon--react',
     category: 'core',
   },
   {
     name: 'Next.js',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-plain.svg',
+    icon: SiNextdotjs,
+    iconClass: 'tech-icon--next',
     category: 'core',
-    invert: true,
   },
   {
     name: 'Node.js',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    icon: SiNodedotjs,
+    iconClass: 'tech-icon--node',
     category: 'core',
   },
   {
     name: 'Express',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+    icon: SiExpress,
+    iconClass: 'tech-icon--express',
     category: 'backend',
-    invert: true,
   },
   {
     name: 'MongoDB',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+    icon: SiMongodb,
+    iconClass: 'tech-icon--mongodb',
     category: 'database',
   },
   {
     name: 'PostgreSQL',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    icon: SiPostgresql,
+    iconClass: 'tech-icon--postgres',
     category: 'database',
   },
   {
     name: 'Docker',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    icon: SiDocker,
+    iconClass: 'tech-icon--docker',
     category: 'devops',
   },
   {
     name: 'Git',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    icon: SiGit,
+    iconClass: 'tech-icon--git',
     category: 'devops',
   },
   {
     name: 'Tailwind',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg',
+    icon: SiTailwindcss,
+    iconClass: 'tech-icon--tailwind',
     category: 'styling',
   },
   {
     name: 'Figma',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+    icon: SiFigma,
+    iconClass: 'tech-icon--figma',
     category: 'design',
   },
   {
     name: 'Vite',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg',
+    icon: SiVite,
+    iconClass: 'tech-icon--vite',
     category: 'tools',
   },
   {
     name: 'Prisma',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg',
+    icon: SiPrisma,
+    iconClass: 'tech-icon--prisma',
     category: 'database',
-    invert: true,
   },
   {
     name: 'VS Code',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
+    icon: VscVscode,
+    iconClass: 'tech-icon--vscode',
     category: 'tools',
   },
   {
     name: 'Java',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+    icon: FaJava,
+    iconClass: 'tech-icon--java',
     category: 'backend',
   },
 ];
@@ -98,25 +129,18 @@ export default function TechStack() {
         />
 
         <div className="tech-grid">
-          {technologies.map((tech, index) => (
-            <div
-              key={tech.name}
-              className={`tech-item ${tech.category === 'core' ? 'tech-item--core' : ''}`}
-              data-reveal
-              style={{ '--reveal-delay': `${index * 0.04}s` }}
-            >
-              <img
-                src={tech.icon}
-                alt={tech.name}
-                width="48"
-                height="48"
-                loading="lazy"
-                decoding="async"
-                style={tech.invert ? { filter: 'invert(1)' } : undefined}
-              />
-              <span className="tech-name">{tech.name}</span>
-            </div>
-          ))}
+          {technologies.map((tech) => {
+            const Icon = tech.icon;
+            return (
+              <div
+                key={tech.name}
+                className={`tech-item ${tech.category === 'core' ? 'tech-item--core' : ''}`}
+              >
+                <Icon className={`tech-icon ${tech.iconClass}`} aria-hidden="true" />
+                <span className="tech-name">{tech.name}</span>
+              </div>
+            );
+          })}
         </div>
 
         <div className="tech-stats" data-reveal>

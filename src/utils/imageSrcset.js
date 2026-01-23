@@ -5,3 +5,6 @@ const getBasePath = (src) => {
 
 export const buildSrcSet = (src, widths, format) =>
   widths.map((width) => `${getBasePath(src)}-${width}w.${format} ${width}w`).join(', ');
+
+export const buildResponsiveSrc = (src, width, format) =>
+  `${getBasePath(src)}-${width}w.${format}`;

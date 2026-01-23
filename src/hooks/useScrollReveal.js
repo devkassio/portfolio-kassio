@@ -31,7 +31,7 @@ export default function useScrollReveal(enabled = true) {
           }
         }
       },
-      { threshold: 0.18 }
+      { threshold: 0.1, rootMargin: '180px 0px' }
     );
 
     for (const element of elements) {
@@ -42,5 +42,5 @@ export default function useScrollReveal(enabled = true) {
       document.body.classList.remove('reveal-ready');
       observer.disconnect();
     };
-  }, []);
+  }, [enabled]);
 }

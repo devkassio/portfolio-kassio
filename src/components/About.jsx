@@ -2,10 +2,6 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FiAward, FiCode, FiGithub, FiTarget, FiTrendingUp, FiZap } from 'react-icons/fi';
 import SectionHeader from './SectionHeader.jsx';
-import { buildSrcSet } from '../utils/imageSrcset.js';
-
-const ABOUT_IMAGE_WIDTHS = [320, 640, 960];
-const ABOUT_IMAGE_SIZES = '(min-width: 1100px) 360px, (min-width: 900px) 320px, 82vw';
 
 const highlights = [
   {
@@ -53,14 +49,15 @@ const journey = [
   },
 ];
 
-export default function About({ about, snapshot }) {
+export default function About({ about, snapshot, reduceMotion = false }) {
   const profile = snapshot?.profile ?? {};
   const highlightsRef = useRef(null);
   const journeyRef = useRef(null);
   const isHighlightsInView = useInView(highlightsRef, { once: true, margin: '-100px' });
   const isJourneyInView = useInView(journeyRef, { once: true, margin: '-100px' });
-  const aboutImageAvif = buildSrcSet(about.image, ABOUT_IMAGE_WIDTHS, 'avif');
-  const aboutImageWebp = buildSrcSet(about.image, ABOUT_IMAGE_WIDTHS, 'webp');
+  const shouldAnimate = !reduceMotion;
+  const highlightsVisible = shouldAnimate ? isHighlightsInView : true;
+  const journeyVisible = shouldAnimate ? isJourneyInView : true;
 
   return (
     <section id="sobre" className="section section--surface about-section" data-reveal>
@@ -77,18 +74,15 @@ export default function About({ about, snapshot }) {
             <div className="about-image-wrapper">
               <div className="about-image-glow" aria-hidden="true" />
               <div className="about-image-frame">
-                <picture>
-                  <source type="image/avif" srcSet={aboutImageAvif} sizes={ABOUT_IMAGE_SIZES} />
-                  <source type="image/webp" srcSet={aboutImageWebp} sizes={ABOUT_IMAGE_SIZES} />
-                  <img
-                    src={about.image}
-                    alt={about.imageAlt}
-                    width="400"
-                    height="480"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
+                <img
+                  src={about.image}
+                  alt={about.imageAlt}
+                  width="400"
+                  height="480"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
               </div>
               <div className="about-image-badge">
                 <FiAward aria-hidden="true" />
@@ -137,24 +131,28 @@ export default function About({ about, snapshot }) {
               <motion.div
                 key={item.title}
                 className="highlight-card"
-                initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                animate={isHighlightsInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                initial={shouldAnimate ? { opacity: 0, y: 30, scale: 0.95 } : false}
+                animate={highlightsVisible ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{
-                  duration: 0.5,
-                  delay: index * 0.12,
-                  ease: 'easeOut',
+                  duration: shouldAnimate ? 0.5 : 0,
+                  delay: shouldAnimate ? index * 0.12 : 0,
+                  ease: shouldAnimate ? 'easeOut' : 'linear',
                 }}
-                whileHover={{
-                  y: -10,
-                  scale: 1.02,
-                  boxShadow: '0 20px 50px rgba(28, 105, 212, 0.25)',
-                  transition: { duration: 0.3 },
-                }}
+                whileHover={
+                  shouldAnimate
+                    ? {
+                        y: -10,
+                        scale: 1.02,
+                        boxShadow: '0 20px 50px rgba(28, 105, 212, 0.25)',
+                        transition: { duration: 0.3 },
+                      }
+                    : undefined
+                }
               >
                 <motion.div
                   className="highlight-icon"
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6, type: 'spring' }}
+                  whileHover={shouldAnimate ? { rotate: 360, scale: 1.1 } : undefined}
+                  transition={{ duration: shouldAnimate ? 0.6 : 0, type: 'spring' }}
                 >
                   <Icon aria-hidden="true" />
                 </motion.div>
@@ -168,9 +166,9 @@ export default function About({ about, snapshot }) {
         <div className="about-journey" ref={journeyRef}>
           <motion.h3
             className="journey-title"
-            initial={{ opacity: 0 }}
-            animate={isJourneyInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5 }}
+            initial={shouldAnimate ? { opacity: 0 } : false}
+            animate={journeyVisible ? { opacity: 1 } : {}}
+            transition={{ duration: shouldAnimate ? 0.5 : 0 }}
           >
             Minha Jornada
           </motion.h3>
@@ -179,28 +177,32 @@ export default function About({ about, snapshot }) {
               <motion.div
                 key={item.year}
                 className="journey-item"
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                animate={isJourneyInView ? { opacity: 1, x: 0 } : {}}
+                initial={shouldAnimate ? { opacity: 0, x: index % 2 === 0 ? -30 : 30 } : false}
+                animate={journeyVisible ? { opacity: 1, x: 0 } : {}}
                 transition={{
-                  duration: 0.6,
-                  delay: index * 0.15,
-                  ease: 'easeOut',
+                  duration: shouldAnimate ? 0.6 : 0,
+                  delay: shouldAnimate ? index * 0.15 : 0,
+                  ease: shouldAnimate ? 'easeOut' : 'linear',
                 }}
-                whileHover={{
-                  scale: 1.02,
-                  transition: { duration: 0.2 },
-                }}
+                whileHover={
+                  shouldAnimate
+                    ? {
+                        scale: 1.02,
+                        transition: { duration: 0.2 },
+                      }
+                    : undefined
+                }
               >
                 <div className="journey-marker">
                   <span className="journey-year">{item.year}</span>
                   <motion.div
                     className="journey-dot"
-                    initial={{ scale: 0 }}
-                    animate={isJourneyInView ? { scale: 1 } : {}}
+                    initial={shouldAnimate ? { scale: 0 } : false}
+                    animate={journeyVisible ? { scale: 1 } : {}}
                     transition={{
-                      delay: index * 0.15 + 0.3,
-                      type: 'spring',
-                      stiffness: 300,
+                      delay: shouldAnimate ? index * 0.15 + 0.3 : 0,
+                      type: shouldAnimate ? 'spring' : 'tween',
+                      stiffness: shouldAnimate ? 300 : 0,
                     }}
                   />
                 </div>

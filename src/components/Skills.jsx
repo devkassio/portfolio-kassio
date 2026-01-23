@@ -59,9 +59,11 @@ const techIcons = {
   'VS Code': { icon: VscVscode, color: '#007ACC' },
 };
 
-function TechCard({ tech, index, categoryIndex }) {
+function TechCard({ tech, index, categoryIndex, reduceMotion }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-30px' });
+  const shouldAnimate = !reduceMotion;
+  const isVisible = shouldAnimate ? isInView : true;
   const [isHovered, setIsHovered] = useState(false);
 
   const techData = techIcons[tech.name] || { icon: null, color: '#61DAFB' };
@@ -71,31 +73,39 @@ function TechCard({ tech, index, categoryIndex }) {
     <motion.div
       ref={ref}
       className={`tech-card ${tech.highlight ? 'tech-card--highlight' : ''}`}
-      initial={{ opacity: 0, scale: 0.8, y: 20 }}
-      animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+      initial={shouldAnimate ? { opacity: 0, scale: 0.8, y: 20 } : false}
+      animate={isVisible ? { opacity: 1, scale: 1, y: 0 } : {}}
       transition={{
-        duration: 0.4,
-        delay: categoryIndex * 0.1 + index * 0.05,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        duration: shouldAnimate ? 0.4 : 0,
+        delay: shouldAnimate ? categoryIndex * 0.1 + index * 0.05 : 0,
+        ease: shouldAnimate ? [0.25, 0.46, 0.45, 0.94] : 'linear',
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{
-        y: -8,
-        scale: 1.05,
-      }}
+      onMouseEnter={shouldAnimate ? () => setIsHovered(true) : undefined}
+      onMouseLeave={shouldAnimate ? () => setIsHovered(false) : undefined}
+      whileHover={
+        shouldAnimate
+          ? {
+              y: -8,
+              scale: 1.05,
+            }
+          : undefined
+      }
       style={{
         '--tech-color': techData.color,
       }}
     >
       <motion.div
         className="tech-icon-wrapper"
-        animate={{
-          boxShadow: isHovered
-            ? `0 0 30px ${techData.color}40, 0 0 60px ${techData.color}20`
-            : '0 8px 32px rgba(0,0,0,0.3)',
-        }}
-        transition={{ duration: 0.3 }}
+        animate={
+          shouldAnimate
+            ? {
+                boxShadow: isHovered
+                  ? `0 0 30px ${techData.color}40, 0 0 60px ${techData.color}20`
+                  : '0 8px 32px rgba(0,0,0,0.3)',
+              }
+            : undefined
+        }
+        transition={{ duration: shouldAnimate ? 0.3 : 0 }}
       >
         {IconComponent ? (
           <IconComponent
@@ -114,28 +124,30 @@ function TechCard({ tech, index, categoryIndex }) {
   );
 }
 
-function SkillCategory({ category, categoryIndex }) {
+function SkillCategory({ category, categoryIndex, reduceMotion }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const shouldAnimate = !reduceMotion;
+  const isVisible = shouldAnimate ? isInView : true;
 
   return (
     <motion.div
       ref={ref}
       className="skill-category"
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      initial={shouldAnimate ? { opacity: 0, y: 40 } : false}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.6,
-        delay: categoryIndex * 0.15,
-        ease: 'easeOut',
+        duration: shouldAnimate ? 0.6 : 0,
+        delay: shouldAnimate ? categoryIndex * 0.15 : 0,
+        ease: shouldAnimate ? 'easeOut' : 'linear',
       }}
     >
       <div className="skill-category-header">
         <motion.span
           className="skill-category-icon"
           aria-hidden="true"
-          whileHover={{ scale: 1.2, rotate: 10 }}
-          transition={{ type: 'spring', stiffness: 300 }}
+          whileHover={shouldAnimate ? { scale: 1.2, rotate: 10 } : undefined}
+          transition={{ type: 'spring', stiffness: shouldAnimate ? 300 : 0 }}
         >
           {category.icon}
         </motion.span>
@@ -152,6 +164,7 @@ function SkillCategory({ category, categoryIndex }) {
             tech={typeof item === 'string' ? { name: item } : item}
             index={index}
             categoryIndex={categoryIndex}
+            reduceMotion={reduceMotion}
           />
         ))}
       </div>
@@ -159,33 +172,39 @@ function SkillCategory({ category, categoryIndex }) {
   );
 }
 
-function MethodologyItem({ method, index }) {
+function MethodologyItem({ method, index, reduceMotion }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const shouldAnimate = !reduceMotion;
+  const isVisible = shouldAnimate ? isInView : true;
 
   return (
     <motion.div
       ref={ref}
       className="methodology-item"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+      initial={shouldAnimate ? { opacity: 0, scale: 0.8 } : false}
+      animate={isVisible ? { opacity: 1, scale: 1 } : {}}
       transition={{
-        duration: 0.4,
-        delay: index * 0.1,
-        type: 'spring',
-        stiffness: 200,
+        duration: shouldAnimate ? 0.4 : 0,
+        delay: shouldAnimate ? index * 0.1 : 0,
+        type: shouldAnimate ? 'spring' : 'tween',
+        stiffness: shouldAnimate ? 200 : 0,
       }}
-      whileHover={{
-        scale: 1.08,
-        y: -4,
-        transition: { duration: 0.2 },
-      }}
+      whileHover={
+        shouldAnimate
+          ? {
+              scale: 1.08,
+              y: -4,
+              transition: { duration: 0.2 },
+            }
+          : undefined
+      }
     >
       <motion.span
         className="methodology-icon"
         aria-hidden="true"
-        whileHover={{ rotate: 360 }}
-        transition={{ duration: 0.5 }}
+        whileHover={shouldAnimate ? { rotate: 360 } : undefined}
+        transition={{ duration: shouldAnimate ? 0.5 : 0 }}
       >
         {method.icon}
       </motion.span>
@@ -194,18 +213,20 @@ function MethodologyItem({ method, index }) {
   );
 }
 
-export default function Skills({ skills }) {
+export default function Skills({ skills, reduceMotion = false }) {
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true });
+  const shouldAnimate = !reduceMotion;
+  const isHeaderVisible = shouldAnimate ? isHeaderInView : true;
 
   return (
     <section id="skills" className="section section--surface skills-section">
       <div className="container">
         <motion.div
           ref={headerRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={shouldAnimate ? { opacity: 0, y: 20 } : false}
+          animate={isHeaderVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: shouldAnimate ? 0.6 : 0 }}
         >
           <SectionHeader
             eyebrow="Stack Tecnológica"
@@ -216,7 +237,12 @@ export default function Skills({ skills }) {
 
         <div className="skills-grid">
           {skills.categories.map((category, index) => (
-            <SkillCategory key={category.title} category={category} categoryIndex={index} />
+            <SkillCategory
+              key={category.title}
+              category={category}
+              categoryIndex={index}
+              reduceMotion={reduceMotion}
+            />
           ))}
         </div>
 
@@ -224,16 +250,21 @@ export default function Skills({ skills }) {
           <div className="methodologies-section">
             <motion.h3
               className="methodologies-title"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              initial={shouldAnimate ? { opacity: 0 } : false}
+              whileInView={shouldAnimate ? { opacity: 1 } : undefined}
+              viewport={shouldAnimate ? { once: true } : undefined}
+              transition={{ delay: shouldAnimate ? 0.2 : 0 }}
             >
               Metodologias & Boas Práticas
             </motion.h3>
             <div className="methodologies-grid">
               {skills.methodologies.map((method, index) => (
-                <MethodologyItem key={method.name} method={method} index={index} />
+                <MethodologyItem
+                  key={method.name}
+                  method={method}
+                  index={index}
+                  reduceMotion={reduceMotion}
+                />
               ))}
             </div>
           </div>
