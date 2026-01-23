@@ -21,6 +21,10 @@
   --radius-md: 20px;
   --radius-sm: 12px;
   --transition-base: 0.35s cubic-bezier(0.2, 0.9, 0.2, 1);
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
 }
 
 *,
@@ -45,6 +49,20 @@ body {
   line-height: 1.65;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+html.menu-open,
+html.menu-open body {
+  overflow: hidden;
+  height: 100%;
+}
+
+html.menu-open body {
+  position: fixed;
+  width: 100%;
+  top: calc(-1 * var(--scroll-y, 0px));
+  left: 0;
+  overscroll-behavior: contain;
 }
 
 body::before {
@@ -128,7 +146,7 @@ button {
   padding: 110px 0;
   position: relative;
   z-index: 0;
-  scroll-margin-top: 120px;
+  scroll-margin-top: calc(120px + var(--safe-area-top));
   overflow: clip;
 }
 
@@ -258,6 +276,7 @@ button {
   background: rgba(8, 10, 14, 0.88);
   border-bottom: 1px solid var(--color-border);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  padding-top: var(--safe-area-top);
 }
 
 .header-inner {
@@ -267,6 +286,7 @@ button {
   padding: 18px 0;
   gap: 16px;
   position: relative;
+  z-index: 3;
 }
 
 .header-inner::after {
@@ -439,10 +459,17 @@ button {
 .hero {
   position: relative;
   min-height: 100vh;
-  padding: 140px 0 100px;
+  min-height: 100svh;
+  padding: calc(140px + var(--safe-area-top)) 0 calc(100px + var(--safe-area-bottom));
   display: flex;
   align-items: center;
   overflow: hidden;
+}
+
+@supports (height: 100dvh) {
+  .hero {
+    min-height: 100dvh;
+  }
 }
 
 .hero-background {
@@ -3349,23 +3376,41 @@ button {
 
   .site-nav {
     position: fixed;
-    inset: 72px 16px auto 16px;
+    inset: 0;
     background: rgba(8, 10, 14, 0.98);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 20px;
-    transform: translateY(-120%);
-    transition: transform var(--transition-base);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
+    border: none;
+    border-radius: 0;
+    padding: calc(88px + var(--safe-area-top)) calc(24px + var(--safe-area-right))
+      calc(32px + var(--safe-area-bottom)) calc(24px + var(--safe-area-left));
+    transform: translateY(-4%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--transition-base), transform var(--transition-base), visibility 0s
+      linear 0.2s;
+    box-shadow: none;
+    z-index: 2;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .site-nav ul {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
+  }
+
+  .site-nav a {
+    display: inline-flex;
+    padding: 10px 0;
+    font-size: 1rem;
   }
 
   .site-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
     transform: translateY(0);
+    transition: opacity var(--transition-base), transform var(--transition-base);
   }
 }
 
@@ -3388,7 +3433,7 @@ button {
   }
 
   .hero {
-    padding-top: 120px;
+    padding-top: calc(120px + var(--safe-area-top));
   }
 
   .hero-copy h1 {
