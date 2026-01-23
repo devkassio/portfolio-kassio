@@ -1,5 +1,5 @@
 import { useKeenSlider } from 'keen-slider/react';
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
   FiArrowLeft,
   FiArrowRight,
@@ -157,8 +157,15 @@ function CertificateModal({ certificate, onClose }) {
   );
 }
 
-export default function CertificatesCarousel({ certificates }) {
+export default function CertificatesCarousel({ certificates, reduceMotion = false }) {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+
+  const autoplayPlugin = useMemo(() => {
+    if (reduceMotion) {
+      return null;
+    }
+    return createAutoplay(4600);
+  }, [reduceMotion]);
 
   const [sliderRef, instanceRef] = useKeenSlider(
     {
@@ -176,7 +183,7 @@ export default function CertificatesCarousel({ certificates }) {
         },
       },
     },
-    [createAutoplay(4600)]
+    autoplayPlugin ? [autoplayPlugin] : []
   );
 
   const openCertificate = (certificate) => {

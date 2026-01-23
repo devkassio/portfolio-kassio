@@ -93,11 +93,11 @@ const writeCache = (key, data) => {
   }
 };
 
-export default function useGithubSnapshot({ username, fallback, ttl = DEFAULT_TTL }) {
+export default function useGithubSnapshot({ username, fallback, ttl = DEFAULT_TTL, enabled = true }) {
   const [snapshot, setSnapshot] = useState(fallback);
 
   useEffect(() => {
-    if (!username) {
+    if (!enabled || !username) {
       return undefined;
     }
 
@@ -143,7 +143,7 @@ export default function useGithubSnapshot({ username, fallback, ttl = DEFAULT_TT
     return () => {
       controller.abort();
     };
-  }, [username, fallback, ttl]);
+  }, [username, fallback, ttl, enabled]);
 
   return snapshot;
 }

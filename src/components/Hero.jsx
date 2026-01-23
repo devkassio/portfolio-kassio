@@ -1,8 +1,20 @@
 import { motion } from 'framer-motion';
+import { useMemo } from 'react';
 import { FiArrowRight, FiDownload, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { TypeAnimation } from 'react-type-animation';
 
-export default function Hero({ hero, contact }) {
+export default function Hero({ hero, contact, reduceMotion = false }) {
+  const particles = useMemo(() => {
+    const count = reduceMotion ? 0 : 20;
+    return Array.from({ length: count }, (_, index) => ({
+      id: `particle-${index}`,
+      x: `${Math.random() * 100}%`,
+      y: `${Math.random() * 100}%`,
+      duration: `${15 + Math.random() * 20}s`,
+      delay: `${Math.random() * 5}s`,
+    }));
+  }, [reduceMotion]);
+
   const scrollToNext = () => {
     const nextSection = document.querySelector('#sobre');
     if (nextSection) {
@@ -19,15 +31,15 @@ export default function Hero({ hero, contact }) {
         <div className="hero-grid" />
         <div className="hero-noise" />
         <div className="hero-particles">
-          {Array.from({ length: 20 }).map(() => (
+          {particles.map((particle) => (
             <span
-              key={`particle-pos-${Math.random().toString(36).slice(2, 9)}`}
+              key={particle.id}
               className="particle"
               style={{
-                '--x': `${Math.random() * 100}%`,
-                '--y': `${Math.random() * 100}%`,
-                '--duration': `${15 + Math.random() * 20}s`,
-                '--delay': `${Math.random() * 5}s`,
+                '--x': particle.x,
+                '--y': particle.y,
+                '--duration': particle.duration,
+                '--delay': particle.delay,
               }}
             />
           ))}
@@ -50,24 +62,28 @@ export default function Hero({ hero, contact }) {
             <span className="hero-greeting">Olá, eu sou</span>
             <span className="hero-name">{hero.title}</span>
             <span className="hero-role">
-              <TypeAnimation
-                sequence={[
-                  'Full Stack Developer',
-                  2000,
-                  'React Specialist',
-                  2000,
-                  'Node.js Developer',
-                  2000,
-                  'TypeScript Expert',
-                  2000,
-                  'Problem Solver',
-                  2000,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Number.POSITIVE_INFINITY}
-                cursor={true}
-              />
+              {reduceMotion ? (
+                <span>Full Stack Developer</span>
+              ) : (
+                <TypeAnimation
+                  sequence={[
+                    'Full Stack Developer',
+                    2000,
+                    'React Specialist',
+                    2000,
+                    'Node.js Developer',
+                    2000,
+                    'TypeScript Expert',
+                    2000,
+                    'Problem Solver',
+                    2000,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Number.POSITIVE_INFINITY}
+                  cursor={true}
+                />
+              )}
             </span>
           </h1>
 

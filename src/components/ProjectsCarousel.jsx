@@ -1,9 +1,17 @@
 import { useKeenSlider } from 'keen-slider/react';
+import { useMemo } from 'react';
 import { FiArrowLeft, FiArrowRight, FiExternalLink, FiGithub } from 'react-icons/fi';
 import { createAutoplay } from '../utils/keenAutoplay.js';
 import SectionHeader from './SectionHeader.jsx';
 
-export default function ProjectsCarousel({ projects, githubUrl }) {
+export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = false }) {
+  const autoplayPlugin = useMemo(() => {
+    if (reduceMotion) {
+      return null;
+    }
+    return createAutoplay(4200);
+  }, [reduceMotion]);
+
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       loop: true,
@@ -20,7 +28,7 @@ export default function ProjectsCarousel({ projects, githubUrl }) {
         },
       },
     },
-    [createAutoplay(4200)]
+    autoplayPlugin ? [autoplayPlugin] : []
   );
 
   const repositoriesUrl = githubUrl

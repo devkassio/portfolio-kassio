@@ -148,6 +148,8 @@ button {
   z-index: 0;
   scroll-margin-top: calc(120px + var(--safe-area-top));
   overflow: clip;
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
 }
 
 .section--surface::before,
@@ -3467,6 +3469,45 @@ button {
 
   .carousel-controls--split {
     justify-content: space-between;
+  }
+
+  body::before,
+  body::after {
+    opacity: 0.12;
+  }
+
+  .hero-gradient {
+    animation: none;
+    filter: blur(70px);
+    opacity: 0.35;
+  }
+
+  .hero-noise,
+  .hero-particles {
+    display: none;
+  }
+
+  .hero-grid {
+    opacity: 0.2;
+  }
+
+  .hero-badge,
+  .hero-image-badge {
+    animation: none;
+  }
+
+  .hero-image-glow,
+  .about-image-glow {
+    display: none;
+  }
+
+  .hero-image-frame {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero-image-badge,
+  .about-image-badge {
+    backdrop-filter: none;
   }
 }
 

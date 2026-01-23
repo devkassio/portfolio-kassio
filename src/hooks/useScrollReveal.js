@@ -2,8 +2,12 @@ import { useEffect } from 'react';
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-export default function useScrollReveal() {
+export default function useScrollReveal(enabled = true) {
   useEffect(() => {
+    if (!enabled) {
+      return undefined;
+    }
+
     const elements = document.querySelectorAll('[data-reveal]');
     if (!elements.length) {
       return undefined;
