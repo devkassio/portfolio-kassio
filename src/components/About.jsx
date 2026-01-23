@@ -2,6 +2,10 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FiAward, FiCode, FiGithub, FiTarget, FiTrendingUp, FiZap } from 'react-icons/fi';
 import SectionHeader from './SectionHeader.jsx';
+import { buildSrcSet } from '../utils/imageSrcset.js';
+
+const ABOUT_IMAGE_WIDTHS = [320, 640, 960];
+const ABOUT_IMAGE_SIZES = '(min-width: 1100px) 360px, (min-width: 900px) 320px, 82vw';
 
 const highlights = [
   {
@@ -55,6 +59,8 @@ export default function About({ about, snapshot }) {
   const journeyRef = useRef(null);
   const isHighlightsInView = useInView(highlightsRef, { once: true, margin: '-100px' });
   const isJourneyInView = useInView(journeyRef, { once: true, margin: '-100px' });
+  const aboutImageAvif = buildSrcSet(about.image, ABOUT_IMAGE_WIDTHS, 'avif');
+  const aboutImageWebp = buildSrcSet(about.image, ABOUT_IMAGE_WIDTHS, 'webp');
 
   return (
     <section id="sobre" className="section section--surface about-section" data-reveal>
@@ -71,14 +77,18 @@ export default function About({ about, snapshot }) {
             <div className="about-image-wrapper">
               <div className="about-image-glow" aria-hidden="true" />
               <div className="about-image-frame">
-                <img
-                  src={about.image}
-                  alt={about.imageAlt}
-                  width="400"
-                  height="480"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <picture>
+                  <source type="image/avif" srcSet={aboutImageAvif} sizes={ABOUT_IMAGE_SIZES} />
+                  <source type="image/webp" srcSet={aboutImageWebp} sizes={ABOUT_IMAGE_SIZES} />
+                  <img
+                    src={about.image}
+                    alt={about.imageAlt}
+                    width="400"
+                    height="480"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
               </div>
               <div className="about-image-badge">
                 <FiAward aria-hidden="true" />

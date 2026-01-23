@@ -169,7 +169,7 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
 
   const [sliderRef, instanceRef] = useKeenSlider(
     {
-      loop: true,
+      loop: !reduceMotion,
       slides: {
         perView: 1,
         spacing: 20,

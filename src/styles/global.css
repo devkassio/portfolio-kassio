@@ -1119,8 +1119,16 @@ button {
 
 @media (max-width: 768px) {
   .hero {
-    padding: 120px 0 80px;
+    padding: calc(96px + var(--safe-area-top)) 0 64px;
     min-height: auto;
+  }
+
+  .hero-container {
+    gap: 32px;
+  }
+
+  .hero-image-frame {
+    max-width: min(320px, 82vw);
   }
 
   .hero-name {
@@ -3430,12 +3438,16 @@ button {
     backdrop-filter: none;
   }
 
+  .header-inner {
+    padding: 12px 0;
+  }
+
   .header-inner::after {
     display: none;
   }
 
   .hero {
-    padding-top: calc(120px + var(--safe-area-top));
+    padding: calc(84px + var(--safe-area-top)) 0 56px;
   }
 
   .hero-copy h1 {

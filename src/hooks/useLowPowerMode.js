@@ -15,8 +15,16 @@ const isLowPowerConnection = () => {
   return effectiveType.includes('2g');
 };
 
+const getInitialLowPower = () => {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+  const media = window.matchMedia('(max-width: 700px)');
+  return media.matches || isLowPowerConnection();
+};
+
 export default function useLowPowerMode() {
-  const [isLowPower, setIsLowPower] = useState(false);
+  const [isLowPower, setIsLowPower] = useState(getInitialLowPower);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
