@@ -121,8 +121,7 @@ function LastFmCard({ lastfm }) {
               alt={`Capa do álbum ${track.album}`}
               width="80"
               height="80"
-              loading="lazy"
-              decoding="async"
+              fetchpriority="high"
             />
           ) : (
             <div className="live-music-artwork live-music-artwork--placeholder">

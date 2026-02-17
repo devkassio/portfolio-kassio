@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 import useSmartPolling from './useSmartPolling.js';
 
+/** Chave no localStorage para persistir cache de artwork entre sessões. */
+const ARTWORK_CACHE_KEY = 'live:artwork-cache';
+
 /**
  * Last.fm "Now Playing" / "Recently Played" hook.
  *
@@ -31,10 +34,31 @@ const NOW_PLAYING_TIMEOUT = 6 * 60 * 1000;
 const ARTWORK_FETCH_TIMEOUT = 5_000;
 
 /**
- * Cache de artwork em memória — evita re-fetch a cada ciclo de poll (15s).
- * Persiste enquanto a aba estiver aberta. Chave: "artist::title".
+ * Cache de artwork com persistência em localStorage.
+ * Evita re-fetch a cada poll (15s) E entre sessões/reloads.
+ * Chave: "artist::title" → URL ou null.
  */
 const artworkCache = new Map();
+
+/* Hidratar cache a partir do localStorage */
+try {
+  const stored = localStorage.getItem(ARTWORK_CACHE_KEY);
+  if (stored) {
+    for (const [k, v] of JSON.parse(stored)) artworkCache.set(k, v);
+  }
+} catch {
+  /* ignore */
+}
+
+function persistArtworkCache() {
+  try {
+    /* Limita a 50 entradas mais recentes */
+    const entries = [...artworkCache.entries()].slice(-50);
+    localStorage.setItem(ARTWORK_CACHE_KEY, JSON.stringify(entries));
+  } catch {
+    /* quota exceeded */
+  }
+}
 
 /**
  * Busca uma query no iTunes Search e retorna URL da capa em 600x600.
@@ -83,6 +107,7 @@ async function fetchArtwork(artist, title, album) {
   }
 
   artworkCache.set(cacheKey, url);
+  persistArtworkCache();
   return url;
 }
 
@@ -168,8 +193,25 @@ export default function useLastFm({ apiKey, username, enabled = true }) {
     npRef.current = { key: null, since: 0 };
   }
 
+  /*
+   * Estabilizar referência: só emite novo objeto quando o conteúdo real
+   * muda (título, artista, artwork, isNowPlaying). Evita re-renders
+   * desnecessários a cada ciclo de poll (15s) que causavam flash na <img>.
+   */
+  const stableRef = useRef(null);
+  const prev = stableRef.current;
+  if (
+    !prev ||
+    prev.title !== track?.title ||
+    prev.artist !== track?.artist ||
+    prev.artworkUrl !== track?.artworkUrl ||
+    prev.isNowPlaying !== track?.isNowPlaying
+  ) {
+    stableRef.current = track;
+  }
+
   return {
-    track,
+    track: stableRef.current,
     updatedAt,
     latency,
     error,
