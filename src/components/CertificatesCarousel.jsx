@@ -1,5 +1,5 @@
 import { useKeenSlider } from 'keen-slider/react';
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
   PiArrowLeftBold,
   PiArrowRightBold,
@@ -13,6 +13,10 @@ import {
 import { createAutoplay } from '../utils/keenAutoplay.js';
 import SectionHeader from './SectionHeader.jsx';
 
+const PdfViewer = lazy(() => import('./PdfViewer.jsx'));
+
+/* ── Scroll lock helpers ── */
+
 const lockBodyScroll = () => {
   document.body.style.overflow = 'hidden';
 };
@@ -21,11 +25,16 @@ const unlockBodyScroll = () => {
   document.body.style.overflow = '';
 };
 
+/* ── Certificate Modal ── */
+
 function CertificateModal({ certificate, onClose }) {
   const dialogRef = useRef(null);
+  const previousFocusRef = useRef(null);
   const titleId = useId();
 
   useEffect(() => {
+    previousFocusRef.current = document.activeElement;
+
     const dialog = dialogRef.current;
     if (!dialog) return;
 
@@ -33,7 +42,7 @@ function CertificateModal({ certificate, onClose }) {
       try {
         if (!dialog.open) dialog.showModal();
       } catch {
-        // Ignora (ex: já está aberto)
+        /* already open */
       }
     }
 
@@ -43,20 +52,22 @@ function CertificateModal({ certificate, onClose }) {
       try {
         if (dialog.open) dialog.close();
       } catch {
-        // noop
+        /* noop */
       }
+      previousFocusRef.current?.focus?.();
     };
   }, []);
 
   const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+    if (e.target === e.currentTarget) onClose();
   };
 
   const handleKeyDown = useCallback(
     (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+      }
     },
     [onClose]
   );
@@ -64,11 +75,6 @@ function CertificateModal({ certificate, onClose }) {
   const handleCancel = (e) => {
     e.preventDefault();
     onClose();
-  };
-
-  // Para PDFs, abre em nova aba
-  const openPdfInNewTab = () => {
-    window.open(certificate.image, '_blank');
   };
 
   return (
@@ -81,7 +87,8 @@ function CertificateModal({ certificate, onClose }) {
       aria-labelledby={titleId}
       tabIndex={-1}
     >
-      <div className="certificate-modal">
+      <div className="certificate-modal" role="document">
+        {/* Header */}
         <div className="certificate-modal-header">
           <div className="certificate-modal-title">
             <PiCertificateBold aria-hidden="true" />
@@ -93,69 +100,58 @@ function CertificateModal({ certificate, onClose }) {
             </div>
           </div>
           <div className="certificate-modal-actions">
-            {certificate.isPdf ? (
-              <>
-                <button
-                  type="button"
-                  onClick={openPdfInNewTab}
-                  className="btn btn--primary btn--sm"
-                >
-                  <PiArrowSquareOutBold aria-hidden="true" />
-                  Abrir PDF
-                </button>
-                <a
-                  href={certificate.image}
-                  download
-                  className="btn btn--outline btn--sm"
-                  aria-label="Baixar certificado"
-                >
-                  <PiDownloadSimpleBold aria-hidden="true" />
-                  Baixar
-                </a>
-              </>
-            ) : (
+            {certificate.isPdf && (
               <a
                 href={certificate.image}
-                download
-                className="btn btn--outline btn--sm"
-                aria-label="Baixar certificado"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--ghost btn--sm"
+                aria-label="Abrir PDF em nova aba"
               >
-                <PiDownloadSimpleBold aria-hidden="true" />
-                Baixar
+                <PiArrowSquareOutBold aria-hidden="true" />
+                <span className="btn-label-desktop">Nova aba</span>
               </a>
             )}
+            <a
+              href={certificate.image}
+              download
+              className="btn btn--ghost btn--sm"
+              aria-label={`Baixar certificado ${certificate.title}`}
+            >
+              <PiDownloadSimpleBold aria-hidden="true" />
+              <span className="btn-label-desktop">Baixar</span>
+            </a>
             <button
               type="button"
               onClick={onClose}
               className="certificate-modal-close"
-              aria-label="Fechar modal"
+              aria-label="Fechar visualização"
             >
-              <PiXBold />
+              <PiXBold aria-hidden="true" />
             </button>
           </div>
         </div>
 
+        {/* Content */}
         <div className="certificate-modal-content">
           {certificate.isPdf ? (
-            <object
-              data={certificate.image}
-              type="application/pdf"
-              className="certificate-pdf-iframe"
-              aria-label={`Certificado ${certificate.title}`}
+            <Suspense
+              fallback={
+                <div className="certificate-loading">
+                  <div className="certificate-loading-spinner" />
+                  <span>Carregando visualizador…</span>
+                </div>
+              }
             >
-              <iframe
-                src={`${certificate.image}#toolbar=1&view=FitH`}
-                title={`Certificado ${certificate.title}`}
-                className="certificate-pdf-iframe"
-              />
-            </object>
+              <PdfViewer url={certificate.image} title={certificate.title} />
+            </Suspense>
           ) : (
             <img
               src={certificate.image}
               alt={`Certificado ${certificate.title}`}
               className="certificate-modal-image"
               onError={(e) => {
-                e.target.style.display = 'none';
+                e.currentTarget.style.display = 'none';
               }}
             />
           )}
@@ -165,39 +161,77 @@ function CertificateModal({ certificate, onClose }) {
   );
 }
 
+/* ── Certificate Card ── */
+
+function CertificateCard({ certificate, onView }) {
+  return (
+    <article className="keen-slider__slide">
+      <div className="certificate-card">
+        <div className="certificate-media">
+          {certificate.isPdf ? (
+            <div className="certificate-pdf-preview">
+              <PiFileTextBold className="certificate-pdf-icon" aria-hidden="true" />
+              <span>PDF</span>
+            </div>
+          ) : (
+            <img
+              src={certificate.image}
+              alt={`Certificado ${certificate.title}`}
+              loading="lazy"
+              decoding="async"
+              width="520"
+              height="320"
+            />
+          )}
+          <button
+            type="button"
+            className="certificate-view-btn"
+            onClick={() => onView(certificate)}
+            aria-label={`Visualizar certificado ${certificate.title}`}
+          >
+            <PiEyeBold aria-hidden="true" />
+            <span>Visualizar</span>
+          </button>
+        </div>
+        <div className="certificate-body">
+          <div className="certificate-title">
+            <PiCertificateBold aria-hidden="true" />
+            <h3>{certificate.title}</h3>
+          </div>
+          <p>{certificate.issuer}</p>
+          <span className="certificate-year">{certificate.year}</span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* ── Main Component ── */
+
 export default function CertificatesCarousel({ certificates, reduceMotion = false }) {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
 
   const autoplayPlugin = useMemo(() => {
-    if (reduceMotion) {
-      return null;
-    }
+    if (reduceMotion) return null;
     return createAutoplay(4600);
   }, [reduceMotion]);
 
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       loop: !reduceMotion,
-      slides: {
-        perView: 1,
-        spacing: 20,
-      },
+      slides: { perView: 1, spacing: 20 },
       breakpoints: {
-        '(min-width: 700px)': {
-          slides: { perView: 2, spacing: 24 },
-        },
-        '(min-width: 1100px)': {
-          slides: { perView: 3, spacing: 28 },
-        },
+        '(min-width: 700px)': { slides: { perView: 2, spacing: 24 } },
+        '(min-width: 1100px)': { slides: { perView: 3, spacing: 28 } },
       },
     },
     autoplayPlugin ? [autoplayPlugin] : []
   );
 
-  const openCertificate = (certificate) => {
+  const openCertificate = useCallback((certificate) => {
     setSelectedCertificate(certificate);
     lockBodyScroll();
-  };
+  }, []);
 
   const closeCertificate = useCallback(() => {
     setSelectedCertificate(null);
@@ -229,44 +263,11 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
               aria-label="Certificados"
             >
               {certificates.map((certificate) => (
-                <article className="keen-slider__slide" key={certificate.title}>
-                  <div className="certificate-card">
-                    <div className="certificate-media">
-                      {certificate.isPdf ? (
-                        <div className="certificate-pdf-preview">
-                          <PiFileTextBold className="certificate-pdf-icon" aria-hidden="true" />
-                          <span>PDF</span>
-                        </div>
-                      ) : (
-                        <img
-                          src={certificate.image}
-                          alt={`Certificado ${certificate.title}`}
-                          loading="lazy"
-                          decoding="async"
-                          width="520"
-                          height="320"
-                        />
-                      )}
-                      <button
-                        type="button"
-                        className="certificate-view-btn"
-                        onClick={() => openCertificate(certificate)}
-                        aria-label={`Visualizar certificado ${certificate.title}`}
-                      >
-                        <PiEyeBold aria-hidden="true" />
-                        <span>Visualizar</span>
-                      </button>
-                    </div>
-                    <div className="certificate-body">
-                      <div className="certificate-title">
-                        <PiCertificateBold aria-hidden="true" />
-                        <h3>{certificate.title}</h3>
-                      </div>
-                      <p>{certificate.issuer}</p>
-                      <span className="certificate-year">{certificate.year}</span>
-                    </div>
-                  </div>
-                </article>
+                <CertificateCard
+                  key={certificate.title}
+                  certificate={certificate}
+                  onView={openCertificate}
+                />
               ))}
             </section>
 

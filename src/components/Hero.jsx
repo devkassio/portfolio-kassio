@@ -111,7 +111,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
               className="hero-social-link"
               aria-label="GitHub"
             >
-              <SiGithub />
+              <SiGithub aria-hidden="true" />
             </a>
             <a
               href={contact?.linkedin || 'https://linkedin.com/in/kassiobarros'}
@@ -120,7 +120,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
               className="hero-social-link"
               aria-label="LinkedIn"
             >
-              <SiLinkedin />
+              <SiLinkedin aria-hidden="true" />
             </a>
             {contact?.resume && (
               <a
@@ -129,7 +129,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
                 className="hero-social-link"
                 aria-label="Download CV"
               >
-                <PiDownloadSimpleBold />
+                <PiDownloadSimpleBold aria-hidden="true" />
               </a>
             )}
           </div>

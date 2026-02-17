@@ -54,10 +54,11 @@ function TechCard({ tech, index, categoryIndex, reduceMotion }) {
         {IconComponent ? (
           <IconComponent
             className="tech-icon"
+            aria-hidden="true"
             style={{ color: isHovered ? techData.color : 'var(--color-text)' }}
           />
         ) : (
-          <span className="tech-icon-fallback" style={{ fontSize: '1.5rem' }}>
+          <span className="tech-icon-fallback" aria-hidden="true" style={{ fontSize: '1.5rem' }}>
             💻
           </span>
         )}

@@ -102,7 +102,7 @@ export default function Header({ nav, contact }) {
               </li>
             ))}
           </ul>
-          <div className="site-nav-footer" aria-label="Atalhos rápidos">
+          <div className="site-nav-footer">
             {contact?.resume ? (
               <a
                 className="btn btn--primary btn--sm"
@@ -114,7 +114,7 @@ export default function Header({ nav, contact }) {
                 Baixar CV
               </a>
             ) : null}
-            <div className="site-nav-social" aria-label="Redes sociais">
+            <div className="site-nav-social">
               {contact?.linkedin ? (
                 <a
                   href={contact.linkedin}
