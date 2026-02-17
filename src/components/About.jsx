@@ -50,7 +50,6 @@ const journey = [
 ];
 
 export default function About({ about, snapshot, reduceMotion = false }) {
-  const profile = snapshot?.profile ?? {};
   const highlightsRef = useRef(null);
   const journeyRef = useRef(null);
   const isHighlightsInView = useInView(highlightsRef, { once: true, margin: '-100px' });
@@ -111,7 +110,7 @@ export default function About({ about, snapshot, reduceMotion = false }) {
 
               <div className="about-links">
                 <a
-                  href={profile.blog || 'https://github.com/devkassio'}
+                  href={'https://github.com/devkassio'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn--primary"
