@@ -358,10 +358,6 @@ button {
   padding-bottom: 6px;
 }
 
-.site-nav a:hover {
-  color: var(--color-text);
-}
-
 .site-nav a::after {
   content: "";
   position: absolute;
@@ -373,8 +369,14 @@ button {
   transition: width var(--transition-base);
 }
 
-.site-nav a:hover::after {
-  width: 100%;
+@media (hover: hover) {
+  .site-nav a:hover {
+    color: var(--color-text);
+  }
+
+  .site-nav a:hover::after {
+    width: 100%;
+  }
 }
 
 .header-actions {
@@ -652,9 +654,11 @@ button {
   background: transparent;
 }
 
-.btn--outline:hover {
-  border-color: var(--accent-light);
-  background: rgba(106, 210, 255, 0.1);
+@media (hover: hover) {
+  .btn--outline:hover {
+    border-color: var(--accent-light);
+    background: rgba(106, 210, 255, 0.1);
+  }
 }
 
 .hero-social {
@@ -889,8 +893,10 @@ button {
   transition: opacity var(--transition-base), transform var(--transition-base);
 }
 
-.tech-item:hover .tech-icon {
-  opacity: 1;
+@media (hover: hover) {
+  .tech-item:hover .tech-icon {
+    opacity: 1;
+  }
 }
 
 .tech-section .tech-name {
@@ -1595,8 +1601,10 @@ button {
   transition: color var(--transition-base);
 }
 
-.exp-meta-link:hover {
-  color: var(--color-text);
+@media (hover: hover) {
+  .exp-meta-link:hover {
+    color: var(--color-text);
+  }
 }
 
 .exp-summary {
@@ -2113,8 +2121,10 @@ button {
   letter-spacing: 0.15em;
 }
 
-.certificate-card:hover .certificate-view-btn {
-  opacity: 1;
+@media (hover: hover) {
+  .certificate-card:hover .certificate-view-btn {
+    opacity: 1;
+  }
 }
 
 .certificate-media {
@@ -2234,10 +2244,12 @@ button {
   font-size: 1.2rem;
 }
 
-.certificate-modal-close:hover {
-  border-color: var(--accent-light);
-  color: var(--accent-light);
-  background: rgba(106, 210, 255, 0.1);
+@media (hover: hover) {
+  .certificate-modal-close:hover {
+    border-color: var(--accent-light);
+    color: var(--accent-light);
+    background: rgba(106, 210, 255, 0.1);
+  }
 }
 
 .certificate-modal-content {
@@ -2325,10 +2337,12 @@ button {
     var(--transition-fast);
 }
 
-.pdf-toolbar-btn:hover:not(:disabled) {
-  border-color: var(--accent-light);
-  color: var(--accent-light);
-  background: rgba(106, 210, 255, 0.08);
+@media (hover: hover) {
+  .pdf-toolbar-btn:hover:not(:disabled) {
+    border-color: var(--accent-light);
+    color: var(--accent-light);
+    background: rgba(106, 210, 255, 0.08);
+  }
 }
 
 .pdf-toolbar-btn:disabled {
@@ -2804,8 +2818,10 @@ button {
   transition: color var(--transition-fast);
 }
 
-.footer-nav a:hover {
-  color: var(--accent-light);
+@media (hover: hover) {
+  .footer-nav a:hover {
+    color: var(--accent-light);
+  }
 }
 
 .footer-social {
@@ -2973,8 +2989,10 @@ button {
   transition: color var(--transition-fast);
 }
 
-.methodology-item:hover .methodology-name {
-  color: var(--accent-light);
+@media (hover: hover) {
+  .methodology-item:hover .methodology-name {
+    color: var(--accent-light);
+  }
 }
 
 /* =============================================
