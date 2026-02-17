@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import useSmartPolling from './useSmartPolling.js';
 
 /**
@@ -17,6 +18,14 @@ import useSmartPolling from './useSmartPolling.js';
 
 const API_BASE = 'https://ws.audioscrobbler.com/2.0/';
 const ITUNES_API = 'https://itunes.apple.com/search';
+
+/**
+ * Tempo máximo que uma faixa permanece como "now playing" antes de ser
+ * considerada pausada. A API do Last.fm não tem evento de pausa —
+ * o flag nowplaying persiste após o usuário pausar. 6 min cobre
+ * a maioria das faixas pop/rock (média ~3:30).
+ */
+const NOW_PLAYING_TIMEOUT = 6 * 60 * 1000;
 
 /**
  * Busca artwork no iTunes Search API quando Last.fm não retorna imagem.
@@ -57,6 +66,7 @@ function mapTrack(track) {
 
 export default function useLastFm({ apiKey, username, enabled = true }) {
   const hasConfig = !!(apiKey && username);
+  const npRef = useRef({ key: null, since: 0 });
 
   const { data, updatedAt, latency, error, isStale } = useSmartPolling({
     key: `live:lastfm:${username || 'none'}`,
@@ -84,8 +94,24 @@ export default function useLastFm({ apiKey, username, enabled = true }) {
     enabled: enabled && hasConfig,
   });
 
+  /* Heurística de pausa: se a mesma faixa está "now playing" por mais de
+     6 min, provavelmente o usuário pausou. Last.fm não envia evento de pausa,
+     então usamos timeout baseado na duração típica de uma faixa. */
+  let track = data;
+  if (data?.isNowPlaying) {
+    const trackKey = `${data.title}::${data.artist}`;
+    if (npRef.current.key !== trackKey) {
+      npRef.current = { key: trackKey, since: Date.now() };
+    }
+    if (Date.now() - npRef.current.since > NOW_PLAYING_TIMEOUT) {
+      track = { ...data, isNowPlaying: false };
+    }
+  } else {
+    npRef.current = { key: null, since: 0 };
+  }
+
   return {
-    track: data,
+    track,
     updatedAt,
     latency,
     error,
