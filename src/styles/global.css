@@ -3281,6 +3281,497 @@ button {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   LIVE SECTION
+   ═══════════════════════════════════════════════════════════ */
+
+.live-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+/* ── Card base ────────────────────────────────────────── */
+
+.live-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 200px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .live-card:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.live-card--active {
+  border-color: rgba(252, 60, 68, 0.25);
+}
+
+/* ── Card header ──────────────────────────────────────── */
+
+.live-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-card-icon {
+  font-size: 1.25rem;
+  color: var(--color-muted);
+  flex-shrink: 0;
+}
+
+.live-card-icon--music {
+  color: #fc3c44;
+}
+
+.live-card-icon--status {
+  color: #34d399;
+}
+
+.live-card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  flex: 1;
+}
+
+/* ── Badges ───────────────────────────────────────────── */
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 4px 10px;
+  line-height: 1;
+}
+
+.live-badge svg {
+  font-size: 0.6rem;
+}
+
+.live-badge--playing {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+}
+
+.live-badge--playing svg {
+  animation: pulse-live 1.5s ease-in-out infinite;
+}
+
+.live-badge--connected {
+  color: var(--accent-light);
+  background: rgba(106, 210, 255, 0.1);
+}
+
+.live-badge--online {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+}
+
+.live-badge--online svg {
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+.live-badge--stale {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+}
+
+@keyframes pulse-live {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.live-badge-text {
+  white-space: nowrap;
+}
+
+/* ── Card body ────────────────────────────────────────── */
+
+.live-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.live-card-body--empty {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.live-empty-icon {
+  font-size: 2rem;
+  color: var(--color-muted);
+  opacity: 0.4;
+}
+
+.live-empty-text {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  max-width: 200px;
+  line-height: 1.5;
+}
+
+/* ── Card error ───────────────────────────────────────── */
+
+.live-card-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.live-card-error svg {
+  color: #fbbf24;
+  flex-shrink: 0;
+}
+
+/* ── Skeleton ─────────────────────────────────────────── */
+
+.live-skeleton {
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-live 1.5s ease-in-out infinite;
+}
+
+.live-skeleton--artwork {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.live-skeleton--line {
+  height: 14px;
+  width: 100%;
+}
+
+.live-skeleton--short {
+  width: 60%;
+}
+
+@keyframes shimmer-live {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Apple Music — Connected ──────────────────────────── */
+
+.live-music-content {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.live-music-artwork {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--color-surface);
+}
+
+.live-music-artwork--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 1.5rem;
+}
+
+.live-music-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.live-music-track {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.live-music-artist {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.live-music-album {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  opacity: 0.7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* progress bar */
+
+.live-music-progress {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.live-music-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #fc3c44, #ff6b6b);
+  border-radius: 2px;
+  transition: width 0.3s linear;
+  will-change: width;
+}
+
+.live-music-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── GitHub Activity ──────────────────────────────────── */
+
+.live-github-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.live-github-event {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.live-github-icon {
+  font-size: 1.25rem;
+  color: var(--accent-light);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.live-github-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.live-github-message {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.live-github-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+.live-github-repo {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.live-github-time {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.live-github-time::before {
+  content: "·";
+  margin-right: 8px;
+}
+
+.live-github-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-muted);
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .live-github-link:hover {
+    color: var(--accent-light);
+    background: rgba(106, 210, 255, 0.1);
+  }
+}
+
+/* ── Status / Heartbeat ───────────────────────────────── */
+
+.live-status-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.live-status-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-status-icon {
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  flex-shrink: 0;
+}
+
+.live-status-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.live-status-label {
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.live-status-value {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .live-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .live-card--status {
+    grid-column: 1 / -1;
+  }
+
+  .live-card--status .live-status-grid {
+    flex-direction: row;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .live-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .live-card {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .live-card--status .live-status-grid {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .live-music-artwork {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  .live-card {
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    gap: 12px;
+  }
+
+  .live-card-title {
+    font-size: 0.95rem;
+  }
+
+  .live-music-content {
+    gap: 12px;
+  }
+
+  .live-music-artwork {
+    width: 56px;
+    height: 56px;
+  }
+
+  .live-music-track {
+    font-size: 0.85rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

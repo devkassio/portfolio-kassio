@@ -7,6 +7,7 @@ export const content = {
     { id: 'tecnologias', label: 'Stack' },
     { id: 'experiencia', label: 'Experiência' },
     { id: 'projetos', label: 'Projetos' },
+    { id: 'live', label: 'Live' },
     { id: 'contato', label: 'Contato' },
   ],
   github: {

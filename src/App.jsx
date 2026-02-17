@@ -1,5 +1,5 @@
 import { MotionConfig, useReducedMotion } from 'framer-motion';
-import { useMemo } from 'react';
+import { Suspense, lazy, useMemo } from 'react';
 import About from './components/About.jsx';
 import CertificatesCarousel from './components/CertificatesCarousel.jsx';
 import Contact from './components/Contact.jsx';
@@ -11,10 +11,14 @@ import ProjectsCarousel from './components/ProjectsCarousel.jsx';
 import Skills from './components/Skills.jsx';
 import TechStack from './components/TechStack.jsx';
 import { content } from './data/content.js';
+import useAppleMusic from './hooks/useAppleMusic.js';
 import useAssetWarmup from './hooks/useAssetWarmup.js';
+import useGithubActivity from './hooks/useGithubActivity.js';
 import useGithubSnapshot from './hooks/useGithubSnapshot.js';
 import useLowPowerMode from './hooks/useLowPowerMode.js';
 import useScrollReveal from './hooks/useScrollReveal.js';
+
+const LiveSection = lazy(() => import('./components/LiveSection.jsx'));
 
 export default function App() {
   const prefersReducedMotion = useReducedMotion();
@@ -59,6 +63,15 @@ export default function App() {
     enabled: !isLowPower,
   });
 
+  const githubActivity = useGithubActivity({
+    username: content.github.username,
+    enabled: !isLowPower,
+  });
+
+  const appleMusic = useAppleMusic({
+    developerToken: import.meta.env.VITE_APPLE_MUSIC_TOKEN || '',
+  });
+
   return (
     <MotionConfig reducedMotion={shouldReduceMotion ? 'always' : 'never'}>
       <a className="skip-link" href="#conteudo-principal">
@@ -85,6 +98,9 @@ export default function App() {
           certificates={content.certificates}
           reduceMotion={shouldReduceMotion}
         />
+        <Suspense fallback={null}>
+          <LiveSection githubActivity={githubActivity} appleMusic={appleMusic} />
+        </Suspense>
         <Contact contact={content.contact} />
       </main>
       <Footer contact={content.contact} />
