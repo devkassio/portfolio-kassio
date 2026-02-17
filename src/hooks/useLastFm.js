@@ -164,12 +164,11 @@ export default function useLastFm({ apiKey, username, enabled = true }) {
   /*
    * Lógica de estado da faixa:
    *
-   * 1. Se a faixa está "now playing" → cacheia e mostra normalmente.
+   * 1. Se a faixa está "now playing" → cacheia e mostra.
    *    Se >6 min com mesma faixa, trata como pausada (Last.fm não envia pause).
    *
-   * 2. Se NÃO está "now playing" → mostra a última faixa cacheada (que o
-   *    usuário realmente estava ouvindo), não o scrobble antigo que a API
-   *    retorna (pode ser de dias atrás).
+   * 2. Se NÃO está "now playing" → mostra o dado da API (último scrobble).
+   *    Só cai no cache se a API retornar null (sem scrobbles).
    */
   let track = data;
 
@@ -185,12 +184,18 @@ export default function useLastFm({ apiKey, username, enabled = true }) {
       track = { ...data, isNowPlaying: false };
     }
 
-    /* Cacheia a faixa atual para usar quando o status mudar */
+    /* Cacheia a faixa ativa — fallback se a API retornar null depois */
     lastNpTrackRef.current = track;
-  } else if (lastNpTrackRef.current) {
-    /* Não está tocando: mostra a última faixa real, não o scrobble antigo */
-    track = { ...lastNpTrackRef.current, isNowPlaying: false };
+  } else {
     npRef.current = { key: null, since: 0 };
+
+    if (data) {
+      /* API retornou o último scrobble — é a faixa mais recente */
+      track = data;
+    } else if (lastNpTrackRef.current) {
+      /* API não retornou nada — usa cache como fallback */
+      track = { ...lastNpTrackRef.current, isNowPlaying: false };
+    }
   }
 
   /*
