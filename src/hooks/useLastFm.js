@@ -67,6 +67,7 @@ function mapTrack(track) {
 export default function useLastFm({ apiKey, username, enabled = true }) {
   const hasConfig = !!(apiKey && username);
   const npRef = useRef({ key: null, since: 0 });
+  const lastNpTrackRef = useRef(null);
 
   const { data, updatedAt, latency, error, isStale } = useSmartPolling({
     key: `live:lastfm:${username || 'none'}`,
@@ -94,19 +95,35 @@ export default function useLastFm({ apiKey, username, enabled = true }) {
     enabled: enabled && hasConfig,
   });
 
-  /* Heurística de pausa: se a mesma faixa está "now playing" por mais de
-     6 min, provavelmente o usuário pausou. Last.fm não envia evento de pausa,
-     então usamos timeout baseado na duração típica de uma faixa. */
+  /*
+   * Lógica de estado da faixa:
+   *
+   * 1. Se a faixa está "now playing" → cacheia e mostra normalmente.
+   *    Se >6 min com mesma faixa, trata como pausada (Last.fm não envia pause).
+   *
+   * 2. Se NÃO está "now playing" → mostra a última faixa cacheada (que o
+   *    usuário realmente estava ouvindo), não o scrobble antigo que a API
+   *    retorna (pode ser de dias atrás).
+   */
   let track = data;
+
   if (data?.isNowPlaying) {
     const trackKey = `${data.title}::${data.artist}`;
+
     if (npRef.current.key !== trackKey) {
       npRef.current = { key: trackKey, since: Date.now() };
     }
+
+    /* Timeout: mesma faixa "tocando" por >6 min → provavelmente pausou */
     if (Date.now() - npRef.current.since > NOW_PLAYING_TIMEOUT) {
       track = { ...data, isNowPlaying: false };
     }
-  } else {
+
+    /* Cacheia a faixa atual para usar quando o status mudar */
+    lastNpTrackRef.current = track;
+  } else if (lastNpTrackRef.current) {
+    /* Não está tocando: mostra a última faixa real, não o scrobble antigo */
+    track = { ...lastNpTrackRef.current, isNowPlaying: false };
     npRef.current = { key: null, since: 0 };
   }
 
