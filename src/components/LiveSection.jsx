@@ -9,11 +9,11 @@ import {
   PiMusicNoteFill,
   PiPauseFill,
   PiPlayFill,
-  PiPlugBold,
   PiPulseBold,
   PiWarningBold,
 } from 'react-icons/pi';
-import { SiApplemusic, SiGithub } from 'react-icons/si';
+import { SiGithub, SiLastdotfm } from 'react-icons/si';
+import useLastFm from '../hooks/useLastFm.js';
 import SectionHeader from './SectionHeader.jsx';
 
 /* ── helpers ────────────────────────────────────────────── */
@@ -42,47 +42,34 @@ function timestampAgo(ts) {
   return `há ${hours}h`;
 }
 
-/* ── CARD A — Apple Music ───────────────────────────────── */
+/* ── CARD A — Last.fm / Now Playing ─────────────────────── */
 
-function AppleMusicCard({ apple }) {
-  const { status, nowPlaying, playbackState, progress, currentTime, connect, formatTime } = apple;
+function LastFmCard({ lastfm }) {
+  const { track, error, isStale, isConfigured } = lastfm;
 
-  if (status === 'idle' || status === 'unauthorized' || status === 'error') {
+  /* Não configurado — mostra placeholder */
+  if (!isConfigured) {
     return (
       <div className="live-card live-card--music">
         <div className="live-card-header">
-          <SiApplemusic className="live-card-icon live-card-icon--music" aria-hidden="true" />
-          <h3 className="live-card-title">Apple Music</h3>
+          <SiLastdotfm className="live-card-icon live-card-icon--music" aria-hidden="true" />
+          <h3 className="live-card-title">Now Playing</h3>
         </div>
         <div className="live-card-body live-card-body--empty">
           <PiMusicNoteFill className="live-empty-icon" aria-hidden="true" />
-          <p className="live-empty-text">
-            {status === 'error'
-              ? 'Apple Music indisponível no momento'
-              : status === 'unauthorized'
-                ? 'Autorização não concedida'
-                : 'Conecte para exibir seu Now Playing'}
-          </p>
-          <button
-            type="button"
-            className="btn btn--primary btn--sm"
-            onClick={connect}
-            aria-label="Conectar Apple Music"
-          >
-            <PiPlugBold aria-hidden="true" />
-            Conectar
-          </button>
+          <p className="live-empty-text">Scrobbling não configurado</p>
         </div>
       </div>
     );
   }
 
-  if (status === 'loading') {
+  /* Loading (sem dados ainda) */
+  if (!track && !error) {
     return (
       <div className="live-card live-card--music">
         <div className="live-card-header">
-          <SiApplemusic className="live-card-icon live-card-icon--music" aria-hidden="true" />
-          <h3 className="live-card-title">Apple Music</h3>
+          <SiLastdotfm className="live-card-icon live-card-icon--music" aria-hidden="true" />
+          <h3 className="live-card-title">Now Playing</h3>
         </div>
         <div className="live-card-body">
           <div className="live-skeleton live-skeleton--artwork" />
@@ -93,54 +80,49 @@ function AppleMusicCard({ apple }) {
     );
   }
 
-  /* authorized */
-  if (!nowPlaying) {
+  /* Erro sem fallback */
+  if (error && !track) {
     return (
       <div className="live-card live-card--music">
         <div className="live-card-header">
-          <SiApplemusic className="live-card-icon live-card-icon--music" aria-hidden="true" />
-          <h3 className="live-card-title">Apple Music</h3>
-          <span className="live-badge live-badge--connected">Conectado</span>
+          <SiLastdotfm className="live-card-icon live-card-icon--music" aria-hidden="true" />
+          <h3 className="live-card-title">Now Playing</h3>
         </div>
         <div className="live-card-body live-card-body--empty">
-          <PiMusicNoteFill className="live-empty-icon" aria-hidden="true" />
-          <p className="live-empty-text">Nenhuma faixa tocando</p>
+          <PiWarningBold className="live-empty-icon" aria-hidden="true" />
+          <p className="live-empty-text">Não foi possível carregar</p>
         </div>
       </div>
     );
   }
 
-  const duration = nowPlaying.duration || 0;
+  /* Dados disponíveis */
+  const isPlaying = track.isNowPlaying;
 
   return (
-    <div className="live-card live-card--music live-card--active">
+    <div className={`live-card live-card--music${isPlaying ? ' live-card--active' : ''}`}>
       <div className="live-card-header">
-        <SiApplemusic className="live-card-icon live-card-icon--music" aria-hidden="true" />
-        <h3 className="live-card-title">Tocando agora</h3>
+        <SiLastdotfm className="live-card-icon live-card-icon--music" aria-hidden="true" />
+        <h3 className="live-card-title">{isPlaying ? 'Ouvindo agora' : 'Última faixa'}</h3>
         <span
-          className="live-badge live-badge--playing"
-          aria-label={playbackState === 'playing' ? 'Tocando' : 'Pausado'}
+          className={`live-badge ${isPlaying ? 'live-badge--playing' : 'live-badge--connected'}${isStale ? ' live-badge--stale' : ''}`}
+          aria-label={isPlaying ? 'Tocando agora' : 'Recente'}
         >
-          {playbackState === 'playing' ? (
-            <PiPlayFill aria-hidden="true" />
-          ) : (
-            <PiPauseFill aria-hidden="true" />
-          )}
-          <span className="live-badge-text">
-            {playbackState === 'playing' ? 'Ao vivo' : 'Pausado'}
-          </span>
+          {isPlaying ? <PiPlayFill aria-hidden="true" /> : <PiPauseFill aria-hidden="true" />}
+          <span className="live-badge-text">{isPlaying ? 'Ao vivo' : 'Recente'}</span>
         </span>
       </div>
       <div className="live-card-body">
         <div className="live-music-content">
-          {nowPlaying.artworkUrl ? (
+          {track.artworkUrl ? (
             <img
               className="live-music-artwork"
-              src={nowPlaying.artworkUrl}
-              alt={`Capa do álbum ${nowPlaying.album}`}
+              src={track.artworkUrl}
+              alt={`Capa do álbum ${track.album}`}
               width="80"
               height="80"
               loading="lazy"
+              decoding="async"
             />
           ) : (
             <div className="live-music-artwork live-music-artwork--placeholder">
@@ -148,34 +130,31 @@ function AppleMusicCard({ apple }) {
             </div>
           )}
           <div className="live-music-info">
-            <span className="live-music-track" title={nowPlaying.title}>
-              {nowPlaying.title}
+            <span className="live-music-track" title={track.title}>
+              {track.title}
             </span>
-            <span className="live-music-artist" title={nowPlaying.artist}>
-              {nowPlaying.artist}
+            <span className="live-music-artist" title={track.artist}>
+              {track.artist}
             </span>
-            {nowPlaying.album ? (
-              <span className="live-music-album" title={nowPlaying.album}>
-                {nowPlaying.album}
+            {track.album ? (
+              <span className="live-music-album" title={track.album}>
+                {track.album}
               </span>
             ) : null}
           </div>
         </div>
-        <div
-          className="live-music-progress"
-          role="progressbar"
-          tabIndex="-1"
-          aria-valuenow={Math.round(progress * 100)}
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-label="Progresso da faixa"
-        >
-          <div className="live-music-progress-bar" style={{ width: `${progress * 100}%` }} />
-        </div>
-        <div className="live-music-times">
-          <span>{formatTime(currentTime)}</span>
-          <span>{formatTime(duration)}</span>
-        </div>
+        {track.url ? (
+          <a
+            className="live-lastfm-link"
+            href={track.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Ver ${track.title} no Last.fm`}
+          >
+            <PiArrowSquareOutBold aria-hidden="true" />
+            <span>Ver no Last.fm</span>
+          </a>
+        ) : null}
       </div>
     </div>
   );
@@ -245,7 +224,7 @@ function GithubActivityCard({ github }) {
 
 /* ── CARD C — Status / Heartbeat ───────────────────────── */
 
-function StatusCard({ github, apple }) {
+function StatusCard({ github, lastfm }) {
   const [_tick, setTick] = useState(Date.now());
 
   useEffect(() => {
@@ -253,7 +232,7 @@ function StatusCard({ github, apple }) {
     return () => clearInterval(id);
   }, []);
 
-  const hasPartialError = !!(github.error || apple.status === 'error');
+  const hasPartialError = !!(github.error || (lastfm.isConfigured && lastfm.error));
   const latencyMs = github.latency;
   const lastUpdate = github.updatedAt;
 
@@ -304,7 +283,12 @@ function StatusCard({ github, apple }) {
 
 /* ── LIVE SECTION ──────────────────────────────────────── */
 
-function LiveSection({ githubActivity, appleMusic }) {
+function LiveSection({ githubActivity }) {
+  const lastfm = useLastFm({
+    apiKey: import.meta.env.VITE_LASTFM_API_KEY || '',
+    username: import.meta.env.VITE_LASTFM_USER || '',
+  });
+
   return (
     <section id="live" className="section section--surface" aria-label="Dados ao vivo">
       <div className="container">
@@ -314,9 +298,9 @@ function LiveSection({ githubActivity, appleMusic }) {
           description="Painel ao vivo com dados do meu dev life — atualizado automaticamente."
         />
         <div className="live-grid">
-          <AppleMusicCard apple={appleMusic} />
+          <LastFmCard lastfm={lastfm} />
           <GithubActivityCard github={githubActivity} />
-          <StatusCard github={githubActivity} apple={appleMusic} />
+          <StatusCard github={githubActivity} lastfm={lastfm} />
         </div>
       </div>
     </section>

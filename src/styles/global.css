@@ -1273,6 +1273,7 @@ button {
   flex-direction: column;
   gap: 16px;
   margin-top: 8px;
+  max-width: 65ch;
 }
 
 .about-bio p {
@@ -2633,7 +2634,7 @@ button {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   padding: 32px;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2682,7 +2683,7 @@ button {
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--accent-light);
-  box-shadow: 0 0 0 3px rgba(106, 210, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(106, 210, 255, 0.25);
   outline: none;
 }
 
@@ -2949,7 +2950,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px;
+  gap: 16px;
   position: relative;
 }
 
@@ -3511,7 +3512,7 @@ button {
   }
 }
 
-/* ── Apple Music — Connected ──────────────────────────── */
+/* ── Last.fm / Now Playing ─────────────────────────────── */
 
 .live-music-content {
   display: flex;
@@ -3571,30 +3572,29 @@ button {
   white-space: nowrap;
 }
 
-/* progress bar */
+/* last.fm link */
 
-.live-music-progress {
-  height: 4px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 2px;
-  overflow: hidden;
+.live-lastfm-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-top: auto;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity var(--transition-base);
 }
 
-.live-music-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #fc3c44, #ff6b6b);
-  border-radius: 2px;
-  transition: width 0.3s linear;
-  will-change: width;
+@media (hover: hover) {
+  .live-lastfm-link:hover {
+    opacity: 1;
+  }
 }
 
-.live-music-times {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.72rem;
-  color: var(--color-muted);
-  font-variant-numeric: tabular-nums;
+.live-lastfm-link svg {
+  font-size: 0.9rem;
 }
 
 /* ── GitHub Activity ──────────────────────────────────── */

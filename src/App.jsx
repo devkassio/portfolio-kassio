@@ -11,7 +11,6 @@ import ProjectsCarousel from './components/ProjectsCarousel.jsx';
 import Skills from './components/Skills.jsx';
 import TechStack from './components/TechStack.jsx';
 import { content } from './data/content.js';
-import useAppleMusic from './hooks/useAppleMusic.js';
 import useAssetWarmup from './hooks/useAssetWarmup.js';
 import useGithubActivity from './hooks/useGithubActivity.js';
 import useGithubSnapshot from './hooks/useGithubSnapshot.js';
@@ -68,10 +67,6 @@ export default function App() {
     enabled: !isLowPower,
   });
 
-  const appleMusic = useAppleMusic({
-    developerToken: import.meta.env.VITE_APPLE_MUSIC_TOKEN || '',
-  });
-
   return (
     <MotionConfig reducedMotion={shouldReduceMotion ? 'always' : 'never'}>
       <a className="skip-link" href="#conteudo-principal">
@@ -99,7 +94,7 @@ export default function App() {
           reduceMotion={shouldReduceMotion}
         />
         <Suspense fallback={null}>
-          <LiveSection githubActivity={githubActivity} appleMusic={appleMusic} />
+          <LiveSection githubActivity={githubActivity} />
         </Suspense>
         <Contact contact={content.contact} />
       </main>
