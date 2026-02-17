@@ -27,22 +27,63 @@ const ITUNES_API = 'https://itunes.apple.com/search';
  */
 const NOW_PLAYING_TIMEOUT = 6 * 60 * 1000;
 
+/** Timeout dedicado para busca de artwork (ms). */
+const ARTWORK_FETCH_TIMEOUT = 5_000;
+
 /**
- * Busca artwork no iTunes Search API quando Last.fm não retorna imagem.
- * Gratuita, sem API key, retorna capa em alta qualidade.
+ * Cache de artwork em memória — evita re-fetch a cada ciclo de poll (15s).
+ * Persiste enquanto a aba estiver aberta. Chave: "artist::title".
  */
-async function fetchItunesArtwork(artist, title, signal) {
+const artworkCache = new Map();
+
+/**
+ * Busca uma query no iTunes Search e retorna URL da capa em 600x600.
+ * Usa AbortController próprio com timeout de 5s — desacoplado do polling.
+ */
+async function queryItunes(searchTerm) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ARTWORK_FETCH_TIMEOUT);
   try {
-    const query = encodeURIComponent(`${artist} ${title}`);
-    const res = await fetch(`${ITUNES_API}?term=${query}&media=music&limit=1`, { signal });
+    const q = encodeURIComponent(searchTerm);
+    const res = await fetch(`${ITUNES_API}?term=${q}&media=music&limit=1`, {
+      signal: controller.signal,
+    });
     if (!res.ok) return null;
     const json = await res.json();
-    const result = json?.results?.[0];
-    if (!result?.artworkUrl100) return null;
-    return result.artworkUrl100.replace('100x100bb', '300x300bb');
+    const hit = json?.results?.[0];
+    if (!hit?.artworkUrl100) return null;
+    /* 600x600 → nítido em retina 3x (imagem renderizada a 80×80 CSS) */
+    return hit.artworkUrl100.replace('100x100bb', '600x600bb');
   } catch {
     return null;
+  } finally {
+    clearTimeout(timer);
   }
+}
+
+/**
+ * Busca artwork com cache + múltiplas estratégias de busca.
+ *
+ * 1. Retorna do cache instantaneamente se já buscou antes.
+ * 2. Tenta "artist title" (mais específico).
+ * 3. Se falhar e houver álbum, tenta "artist album" (funciona melhor
+ *    para faixas com nomes genéricos).
+ *
+ * O null também é cacheado para evitar re-tentativas infinitas em faixas
+ * sem resultado no iTunes.
+ */
+async function fetchArtwork(artist, title, album) {
+  const cacheKey = `${artist}::${title}`;
+  if (artworkCache.has(cacheKey)) return artworkCache.get(cacheKey);
+
+  let url = await queryItunes(`${artist} ${title}`);
+
+  if (!url && album) {
+    url = await queryItunes(`${artist} ${album}`);
+  }
+
+  artworkCache.set(cacheKey, url);
+  return url;
 }
 
 function mapTrack(track) {
@@ -83,9 +124,9 @@ export default function useLastFm({ apiKey, username, enabled = true }) {
       const track = Array.isArray(tracks) ? tracks[0] : tracks;
       const mapped = mapTrack(track);
 
-      /* Fallback: se Last.fm não retornou artwork, busca no iTunes */
+      /* Fallback: Last.fm removeu imagens da API — busca no iTunes com cache */
       if (mapped && !mapped.artworkUrl) {
-        mapped.artworkUrl = await fetchItunesArtwork(mapped.artist, mapped.title, signal);
+        mapped.artworkUrl = await fetchArtwork(mapped.artist, mapped.title, mapped.album);
       }
 
       return mapped;
