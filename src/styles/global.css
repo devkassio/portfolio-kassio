@@ -149,8 +149,6 @@ button {
   z-index: 0;
   scroll-margin-top: calc(120px + var(--safe-area-top));
   overflow: clip;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
 }
 
 .section--surface::before,

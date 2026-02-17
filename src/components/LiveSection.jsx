@@ -253,7 +253,6 @@ function StatusCard({ github, apple }) {
     return () => clearInterval(id);
   }, []);
 
-  const _isOnline = true; /* always — client-side */
   const hasPartialError = !!(github.error || apple.status === 'error');
   const latencyMs = github.latency;
   const lastUpdate = github.updatedAt;
