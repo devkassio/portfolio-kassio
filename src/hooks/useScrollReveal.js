@@ -8,39 +8,69 @@ export default function useScrollReveal(enabled = true) {
       return undefined;
     }
 
-    const elements = document.querySelectorAll('[data-reveal]');
-    if (!elements.length) {
-      return undefined;
-    }
+    const reduced = prefersReducedMotion();
 
-    if (prefersReducedMotion()) {
-      for (const element of elements) {
-        element.classList.add('is-visible');
-      }
-      return undefined;
+    if (reduced) {
+      const show = () => {
+        for (const el of document.querySelectorAll('[data-reveal]')) {
+          el.classList.add('is-visible');
+        }
+      };
+      show();
+
+      /* Observa novos [data-reveal] adicionados depois do mount (lazy) */
+      const mo = new MutationObserver((mutations) => {
+        for (const m of mutations) {
+          for (const node of m.addedNodes) {
+            if (node.nodeType !== 1) continue;
+            if (node.hasAttribute('data-reveal')) node.classList.add('is-visible');
+            for (const child of node.querySelectorAll('[data-reveal]')) {
+              child.classList.add('is-visible');
+            }
+          }
+        }
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+      return () => mo.disconnect();
     }
 
     document.body.classList.add('reveal-ready');
 
-    const observer = new IntersectionObserver(
+    const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            io.unobserve(entry.target);
           }
         }
       },
       { threshold: 0.1, rootMargin: '180px 0px' }
     );
 
-    for (const element of elements) {
-      observer.observe(element);
+    /* Observa elementos já presentes */
+    for (const el of document.querySelectorAll('[data-reveal]')) {
+      io.observe(el);
     }
+
+    /* Observa novos [data-reveal] adicionados depois do mount (lazy-loaded) */
+    const mo = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        for (const node of m.addedNodes) {
+          if (node.nodeType !== 1) continue;
+          if (node.hasAttribute('data-reveal')) io.observe(node);
+          for (const child of node.querySelectorAll('[data-reveal]')) {
+            io.observe(child);
+          }
+        }
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       document.body.classList.remove('reveal-ready');
-      observer.disconnect();
+      io.disconnect();
+      mo.disconnect();
     };
   }, [enabled]);
 }
