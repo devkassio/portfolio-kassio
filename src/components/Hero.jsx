@@ -8,6 +8,7 @@ import {
 } from 'react-icons/pi';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { TypeAnimation } from 'react-type-animation';
+import { buildSrcSet } from '../utils/imageSrcset.js';
 
 export default function Hero({ hero, contact, reduceMotion = false }) {
   const particles = useMemo(() => {
@@ -20,13 +21,6 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
       delay: `${Math.random() * 5}s`,
     }));
   }, [reduceMotion]);
-
-  const scrollToNext = () => {
-    const nextSection = document.querySelector('#sobre');
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="inicio" className="hero">
@@ -150,24 +144,35 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
           <div className="hero-image-wrapper">
             <div className="hero-image-glow" aria-hidden="true" />
             <div className="hero-image-frame">
-              <img
-                src={hero.image}
-                alt={hero.imageAlt}
-                width="500"
-                height="600"
-                decoding="async"
-                loading="eager"
-                fetchPriority="high"
-              />
+              <picture>
+                <source
+                  type="image/avif"
+                  srcSet={buildSrcSet(hero.image, [320, 640, 960], 'avif')}
+                  sizes="(min-width: 900px) 500px, 85vw"
+                />
+                <source
+                  type="image/webp"
+                  srcSet={buildSrcSet(hero.image, [320, 640, 960], 'webp')}
+                  sizes="(min-width: 900px) 500px, 85vw"
+                />
+                <img
+                  src={hero.image}
+                  alt={hero.imageAlt}
+                  width="500"
+                  height="600"
+                  decoding="async"
+                  loading="eager"
+                  fetchPriority="high"
+                />
+              </picture>
             </div>
           </div>
         </motion.div>
       </div>
 
-      <motion.button
-        type="button"
+      <motion.a
+        href="#sobre"
         className="hero-scroll"
-        onClick={scrollToNext}
         aria-label="Rolar para a próxima seção"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -184,7 +189,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
           </motion.span>
         </div>
         <span className="scroll-text">Scroll</span>
-      </motion.button>
+      </motion.a>
     </section>
   );
 }

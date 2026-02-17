@@ -12,15 +12,14 @@ const isLowPowerConnection = () => {
     return true;
   }
   const effectiveType = connection.effectiveType || '';
-  return effectiveType.includes('2g');
+  return effectiveType.includes('2g') || effectiveType.includes('slow-2g');
 };
 
 const getInitialLowPower = () => {
   if (typeof window === 'undefined') {
     return false;
   }
-  const media = window.matchMedia('(max-width: 700px)');
-  return media.matches || isLowPowerConnection();
+  return isLowPowerConnection();
 };
 
 export default function useLowPowerMode() {
@@ -31,33 +30,19 @@ export default function useLowPowerMode() {
       return undefined;
     }
 
-    const media = window.matchMedia('(max-width: 700px)');
     const connection = getConnection();
 
     const update = () => {
-      const nextValue = media.matches || isLowPowerConnection();
-      setIsLowPower(Boolean(nextValue));
+      setIsLowPower(isLowPowerConnection());
     };
 
     update();
-
-    if (media.addEventListener) {
-      media.addEventListener('change', update);
-    } else {
-      media.addListener(update);
-    }
 
     if (connection?.addEventListener) {
       connection.addEventListener('change', update);
     }
 
     return () => {
-      if (media.removeEventListener) {
-        media.removeEventListener('change', update);
-      } else {
-        media.removeListener(update);
-      }
-
       if (connection?.removeEventListener) {
         connection.removeEventListener('change', update);
       }

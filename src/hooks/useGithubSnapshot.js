@@ -29,6 +29,7 @@ const mapProfile = (data, fallback) => {
     location: data.location || fallback.location,
     company: data.company || fallback.company,
     blog: normalizeUrl(data.blog) || fallback.blog,
+    htmlUrl: data.html_url || fallback.htmlUrl,
     publicRepos: data.public_repos ?? fallback.publicRepos,
     followers: data.followers ?? fallback.followers,
     following: data.following ?? fallback.following,
@@ -76,7 +77,7 @@ const readCache = (key, ttl) => {
       return null;
     }
     return parsed.data;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 };
@@ -88,12 +89,17 @@ const writeCache = (key, data) => {
 
   try {
     window.sessionStorage.setItem(key, JSON.stringify({ timestamp: Date.now(), data }));
-  } catch (error) {
+  } catch (_error) {
     // Ignore cache write errors.
   }
 };
 
-export default function useGithubSnapshot({ username, fallback, ttl = DEFAULT_TTL, enabled = true }) {
+export default function useGithubSnapshot({
+  username,
+  fallback,
+  ttl = DEFAULT_TTL,
+  enabled = true,
+}) {
   const [snapshot, setSnapshot] = useState(fallback);
 
   useEffect(() => {
@@ -133,7 +139,7 @@ export default function useGithubSnapshot({ username, fallback, ttl = DEFAULT_TT
 
         setSnapshot(nextSnapshot);
         writeCache(cacheKey, nextSnapshot);
-      } catch (error) {
+      } catch (_error) {
         setSnapshot(fallback);
       }
     };

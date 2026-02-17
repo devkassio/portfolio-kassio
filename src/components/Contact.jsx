@@ -2,7 +2,13 @@ import emailjs from '@emailjs/browser';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BsEnvelope, BsGeoAlt, BsGithub, BsLinkedin, BsSend, BsTelephone } from 'react-icons/bs';
+import {
+  PiEnvelopeSimpleBold,
+  PiMapPinBold,
+  PiPaperPlaneRightBold,
+  PiPhoneBold,
+} from 'react-icons/pi';
+import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { z } from 'zod';
 import SectionHeader from './SectionHeader.jsx';
 
@@ -15,9 +21,9 @@ const schema = z.object({
 });
 
 const emailConfig = {
-  serviceId: 'service_jbsyv7l',
-  templateId: 'template_ahonab8',
-  publicKey: 'IcSov-EgznR__YE5f',
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_jbsyv7l',
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ahonab8',
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'IcSov-EgznR__YE5f',
 };
 
 export default function Contact({ contact }) {
@@ -63,7 +69,7 @@ export default function Contact({ contact }) {
 
       setStatus({ type: 'success', message: 'Mensagem enviada com sucesso!' });
       reset();
-    } catch (error) {
+    } catch (_error) {
       setStatus({
         type: 'error',
         message: 'Não foi possível enviar agora. Tente novamente em instantes.',
@@ -85,7 +91,7 @@ export default function Contact({ contact }) {
           <div className="contact-info-grid">
             <a href={`mailto:${contact.email}`} className="contact-card">
               <div className="contact-card-icon">
-                <BsEnvelope aria-hidden="true" />
+                <PiEnvelopeSimpleBold aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">E-mail</span>
@@ -95,7 +101,7 @@ export default function Contact({ contact }) {
 
             <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="contact-card">
               <div className="contact-card-icon">
-                <BsTelephone aria-hidden="true" />
+                <PiPhoneBold aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">Telefone</span>
@@ -105,7 +111,7 @@ export default function Contact({ contact }) {
 
             <div className="contact-card">
               <div className="contact-card-icon">
-                <BsGeoAlt aria-hidden="true" />
+                <PiMapPinBold aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">Localização</span>
@@ -120,7 +126,7 @@ export default function Contact({ contact }) {
               className="contact-card"
             >
               <div className="contact-card-icon">
-                <BsLinkedin aria-hidden="true" />
+                <SiLinkedin aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">LinkedIn</span>
@@ -135,7 +141,7 @@ export default function Contact({ contact }) {
               className="contact-card"
             >
               <div className="contact-card-icon">
-                <BsGithub aria-hidden="true" />
+                <SiGithub aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">GitHub</span>
@@ -199,7 +205,7 @@ export default function Contact({ contact }) {
             </div>
 
             <button className="btn btn--primary btn--lg" type="submit" disabled={isSubmitting}>
-              <BsSend aria-hidden="true" />
+              <PiPaperPlaneRightBold aria-hidden="true" />
               {isSubmitting ? 'Enviando...' : 'Enviar mensagem'}
             </button>
 

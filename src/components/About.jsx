@@ -1,7 +1,14 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { PiCodeBold, PiLightningBold, PiTargetBold, PiTrendUpBold, PiTrophyBold } from 'react-icons/pi';
+import {
+  PiCodeBold,
+  PiLightningBold,
+  PiTargetBold,
+  PiTrendUpBold,
+  PiTrophyBold,
+} from 'react-icons/pi';
 import { SiGithub } from 'react-icons/si';
+import { buildSrcSet } from '../utils/imageSrcset.js';
 import SectionHeader from './SectionHeader.jsx';
 
 const highlights = [
@@ -74,15 +81,26 @@ export default function About({ about, snapshot, reduceMotion = false }) {
             <div className="about-image-wrapper">
               <div className="about-image-glow" aria-hidden="true" />
               <div className="about-image-frame">
-                <img
-                  src={about.image}
-                  alt={about.imageAlt}
-                  width="400"
-                  height="480"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                />
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcSet={buildSrcSet(about.image, [320, 640, 960], 'avif')}
+                    sizes="(min-width: 900px) 400px, 85vw"
+                  />
+                  <source
+                    type="image/webp"
+                    srcSet={buildSrcSet(about.image, [320, 640, 960], 'webp')}
+                    sizes="(min-width: 900px) 400px, 85vw"
+                  />
+                  <img
+                    src={about.image}
+                    alt={about.imageAlt}
+                    width="400"
+                    height="480"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
               </div>
               <div className="about-image-badge">
                 <PiTrophyBold aria-hidden="true" />
@@ -111,7 +129,7 @@ export default function About({ about, snapshot, reduceMotion = false }) {
 
               <div className="about-links">
                 <a
-                  href={'https://github.com/devkassio'}
+                  href={snapshot?.profile?.htmlUrl || 'https://github.com/devkassio'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn--primary"

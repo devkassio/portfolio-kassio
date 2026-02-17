@@ -1,4 +1,5 @@
-import { BsEnvelope, BsGithub, BsLinkedin } from 'react-icons/bs';
+import { PiEnvelopeSimpleBold } from 'react-icons/pi';
+import { SiGithub, SiLinkedin } from 'react-icons/si';
 
 export default function Footer({ contact }) {
   const currentYear = new Date().getFullYear();
@@ -39,7 +40,7 @@ export default function Footer({ contact }) {
               aria-label="LinkedIn"
               className="footer-social-link"
             >
-              <BsLinkedin />
+              <SiLinkedin aria-hidden="true" />
             </a>
             <a
               href={contact?.github || 'https://github.com/devkassio'}
@@ -48,14 +49,14 @@ export default function Footer({ contact }) {
               aria-label="GitHub"
               className="footer-social-link"
             >
-              <BsGithub />
+              <SiGithub aria-hidden="true" />
             </a>
             <a
               href={`mailto:${contact?.email || 'contato@kassiobarros.com'}`}
               aria-label="Email"
               className="footer-social-link"
             >
-              <BsEnvelope />
+              <PiEnvelopeSimpleBold aria-hidden="true" />
             </a>
           </div>
         </div>

@@ -162,7 +162,11 @@ export default function Header({ nav, contact }) {
             aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
             aria-expanded={isOpen}
           >
-            {isOpen ? <PiXBold aria-hidden="true" /> : <PiListBold aria-hidden="true" />}
+            {isOpen ? (
+              <PiXBold className="nav-toggle-icon" aria-hidden="true" />
+            ) : (
+              <PiListBold className="nav-toggle-icon" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>

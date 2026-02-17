@@ -1,8 +1,10 @@
 import { useKeenSlider } from 'keen-slider/react';
 import { useMemo } from 'react';
-import { BsArrowLeft, BsArrowRight, BsBoxArrowUpRight, BsGithub } from 'react-icons/bs';
+import { PiArrowLeftBold, PiArrowRightBold, PiArrowSquareOutBold } from 'react-icons/pi';
+import { SiGithub } from 'react-icons/si';
 import { buildSrcSet } from '../utils/imageSrcset.js';
 import { createAutoplay } from '../utils/keenAutoplay.js';
+import { getTechIconData } from '../utils/techIcons.js';
 import SectionHeader from './SectionHeader.jsx';
 
 const PROJECT_IMAGE_WIDTHS = [360, 720, 1080];
@@ -87,20 +89,32 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
                       </div>
                       <p>{project.description}</p>
                       <div className="project-tags">
-                        {project.tags.map((tag) => (
-                          <span key={tag} className="tag">
-                            {tag}
-                          </span>
-                        ))}
+                        {project.tags.map((tag) => {
+                          const iconData = getTechIconData(tag);
+                          const Icon = iconData?.icon;
+
+                          return (
+                            <span key={tag} className="tag">
+                              {Icon ? (
+                                <Icon
+                                  className="project-tag-icon"
+                                  aria-hidden="true"
+                                  style={{ color: iconData.color }}
+                                />
+                              ) : null}
+                              {tag}
+                            </span>
+                          );
+                        })}
                       </div>
                       <div className="project-links">
                         <a href={project.links.github} target="_blank" rel="noreferrer">
-                          <BsGithub aria-hidden="true" />
+                          <SiGithub aria-hidden="true" />
                           GitHub
                         </a>
                         {project.links.demo ? (
                           <a href={project.links.demo} target="_blank" rel="noreferrer">
-                            <BsBoxArrowUpRight aria-hidden="true" />
+                            <PiArrowSquareOutBold aria-hidden="true" />
                             Demo
                           </a>
                         ) : null}
@@ -119,14 +133,14 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
                 onClick={() => instanceRef.current?.prev()}
                 aria-label="Projeto anterior"
               >
-                <BsArrowLeft aria-hidden="true" />
+                <PiArrowLeftBold aria-hidden="true" />
               </button>
               <button
                 type="button"
                 onClick={() => instanceRef.current?.next()}
                 aria-label="Próximo projeto"
               >
-                <BsArrowRight aria-hidden="true" />
+                <PiArrowRightBold aria-hidden="true" />
               </button>
             </div>
 
@@ -136,7 +150,7 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
               target="_blank"
               rel="noopener noreferrer"
             >
-              <BsGithub aria-hidden="true" />
+              <SiGithub aria-hidden="true" />
               Repositórios
             </a>
           </div>

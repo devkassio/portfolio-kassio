@@ -1,118 +1,69 @@
-import {
-  SiDocker,
-  SiExpress,
-  SiFigma,
-  SiGit,
-  SiJavascript,
-  SiMongodb,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiOpenjdk,
-  SiPostgresql,
-  SiPrisma,
-  SiReact,
-  SiTailwindcss,
-  SiTypescript,
-  SiVite,
-} from 'react-icons/si';
-import { TbBrandVscode } from 'react-icons/tb';
+import { getTechIconData } from '../utils/techIcons.js';
 import SectionHeader from './SectionHeader.jsx';
 
 const technologies = [
   {
     name: 'JavaScript',
-    icon: SiJavascript,
-    iconClass: 'tech-icon--javascript',
     category: 'core',
   },
   {
     name: 'TypeScript',
-    icon: SiTypescript,
-    iconClass: 'tech-icon--typescript',
     category: 'core',
   },
   {
     name: 'React',
-    icon: SiReact,
-    iconClass: 'tech-icon--react',
     category: 'core',
   },
   {
     name: 'Next.js',
-    icon: SiNextdotjs,
-    iconClass: 'tech-icon--next',
     category: 'core',
   },
   {
     name: 'Node.js',
-    icon: SiNodedotjs,
-    iconClass: 'tech-icon--node',
     category: 'core',
   },
   {
     name: 'Express',
-    icon: SiExpress,
-    iconClass: 'tech-icon--express',
     category: 'backend',
   },
   {
     name: 'MongoDB',
-    icon: SiMongodb,
-    iconClass: 'tech-icon--mongodb',
     category: 'database',
   },
   {
     name: 'PostgreSQL',
-    icon: SiPostgresql,
-    iconClass: 'tech-icon--postgres',
     category: 'database',
   },
   {
     name: 'Docker',
-    icon: SiDocker,
-    iconClass: 'tech-icon--docker',
     category: 'devops',
   },
   {
     name: 'Git',
-    icon: SiGit,
-    iconClass: 'tech-icon--git',
     category: 'devops',
   },
   {
     name: 'Tailwind',
-    icon: SiTailwindcss,
-    iconClass: 'tech-icon--tailwind',
     category: 'styling',
   },
   {
     name: 'Figma',
-    icon: SiFigma,
-    iconClass: 'tech-icon--figma',
     category: 'design',
   },
   {
     name: 'Vite',
-    icon: SiVite,
-    iconClass: 'tech-icon--vite',
     category: 'tools',
   },
   {
     name: 'Prisma',
-    icon: SiPrisma,
-    iconClass: 'tech-icon--prisma',
     category: 'database',
   },
   {
     name: 'VS Code',
-    icon: TbBrandVscode,
-    iconClass: 'tech-icon--vscode',
     category: 'tools',
   },
   {
     name: 'Java',
-    icon: SiOpenjdk,
-    iconClass: 'tech-icon--java',
     category: 'backend',
   },
 ];
@@ -130,13 +81,24 @@ export default function TechStack() {
 
         <div className="tech-grid">
           {technologies.map((tech) => {
-            const Icon = tech.icon;
+            const iconData = getTechIconData(tech.name);
+            const Icon = iconData?.icon;
             return (
               <div
                 key={tech.name}
                 className={`tech-item ${tech.category === 'core' ? 'tech-item--core' : ''}`}
               >
-                <Icon className={`tech-icon ${tech.iconClass}`} aria-hidden="true" />
+                {Icon ? (
+                  <Icon
+                    className="tech-icon"
+                    aria-hidden="true"
+                    style={{ color: iconData.color }}
+                  />
+                ) : (
+                  <span className="tech-icon" aria-hidden="true">
+                    {tech.name.slice(0, 1)}
+                  </span>
+                )}
                 <span className="tech-name">{tech.name}</span>
               </div>
             );

@@ -1,17 +1,25 @@
 import { useKeenSlider } from 'keen-slider/react';
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
-  BsArrowLeft,
-  BsArrowRight,
-  BsAward,
-  BsBoxArrowUpRight,
-  BsDownload,
-  BsEye,
-  BsFileEarmarkText,
-  BsXLg,
-} from 'react-icons/bs';
+  PiArrowLeftBold,
+  PiArrowRightBold,
+  PiArrowSquareOutBold,
+  PiCertificateBold,
+  PiDownloadSimpleBold,
+  PiEyeBold,
+  PiFileTextBold,
+  PiXBold,
+} from 'react-icons/pi';
 import { createAutoplay } from '../utils/keenAutoplay.js';
 import SectionHeader from './SectionHeader.jsx';
+
+const lockBodyScroll = () => {
+  document.body.style.overflow = 'hidden';
+};
+
+const unlockBodyScroll = () => {
+  document.body.style.overflow = '';
+};
 
 function CertificateModal({ certificate, onClose }) {
   const dialogRef = useRef(null);
@@ -76,7 +84,7 @@ function CertificateModal({ certificate, onClose }) {
       <div className="certificate-modal">
         <div className="certificate-modal-header">
           <div className="certificate-modal-title">
-            <BsAward aria-hidden="true" />
+            <PiCertificateBold aria-hidden="true" />
             <div>
               <h3 id={titleId}>{certificate.title}</h3>
               <span>
@@ -92,7 +100,7 @@ function CertificateModal({ certificate, onClose }) {
                   onClick={openPdfInNewTab}
                   className="btn btn--primary btn--sm"
                 >
-                  <BsBoxArrowUpRight aria-hidden="true" />
+                  <PiArrowSquareOutBold aria-hidden="true" />
                   Abrir PDF
                 </button>
                 <a
@@ -101,7 +109,7 @@ function CertificateModal({ certificate, onClose }) {
                   className="btn btn--outline btn--sm"
                   aria-label="Baixar certificado"
                 >
-                  <BsDownload aria-hidden="true" />
+                  <PiDownloadSimpleBold aria-hidden="true" />
                   Baixar
                 </a>
               </>
@@ -112,7 +120,7 @@ function CertificateModal({ certificate, onClose }) {
                 className="btn btn--outline btn--sm"
                 aria-label="Baixar certificado"
               >
-                <BsDownload aria-hidden="true" />
+                <PiDownloadSimpleBold aria-hidden="true" />
                 Baixar
               </a>
             )}
@@ -122,7 +130,7 @@ function CertificateModal({ certificate, onClose }) {
               className="certificate-modal-close"
               aria-label="Fechar modal"
             >
-              <BsXLg />
+              <PiXBold />
             </button>
           </div>
         </div>
@@ -188,13 +196,17 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
 
   const openCertificate = (certificate) => {
     setSelectedCertificate(certificate);
-    document.body.style.overflow = 'hidden';
+    lockBodyScroll();
   };
 
-  const closeCertificate = () => {
+  const closeCertificate = useCallback(() => {
     setSelectedCertificate(null);
-    document.body.style.overflow = '';
-  };
+    unlockBodyScroll();
+  }, []);
+
+  useEffect(() => {
+    return () => unlockBodyScroll();
+  }, []);
 
   return (
     <>
@@ -222,7 +234,7 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
                     <div className="certificate-media">
                       {certificate.isPdf ? (
                         <div className="certificate-pdf-preview">
-                          <BsFileEarmarkText className="certificate-pdf-icon" aria-hidden="true" />
+                          <PiFileTextBold className="certificate-pdf-icon" aria-hidden="true" />
                           <span>PDF</span>
                         </div>
                       ) : (
@@ -241,13 +253,13 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
                         onClick={() => openCertificate(certificate)}
                         aria-label={`Visualizar certificado ${certificate.title}`}
                       >
-                        <BsEye aria-hidden="true" />
+                        <PiEyeBold aria-hidden="true" />
                         <span>Visualizar</span>
                       </button>
                     </div>
                     <div className="certificate-body">
                       <div className="certificate-title">
-                        <BsAward aria-hidden="true" />
+                        <PiCertificateBold aria-hidden="true" />
                         <h3>{certificate.title}</h3>
                       </div>
                       <p>{certificate.issuer}</p>
@@ -264,14 +276,14 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
                 onClick={() => instanceRef.current?.prev()}
                 aria-label="Certificado anterior"
               >
-                <BsArrowLeft aria-hidden="true" />
+                <PiArrowLeftBold aria-hidden="true" />
               </button>
               <button
                 type="button"
                 onClick={() => instanceRef.current?.next()}
                 aria-label="Próximo certificado"
               >
-                <BsArrowRight aria-hidden="true" />
+                <PiArrowRightBold aria-hidden="true" />
               </button>
             </div>
           </div>

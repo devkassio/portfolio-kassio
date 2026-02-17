@@ -1,63 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import {
-  SiCss3,
-  SiDocker,
-  SiEslint,
-  SiExpress,
-  SiFastify,
-  SiFirebase,
-  SiGit,
-  SiGithub,
-  SiHtml5,
-  SiJavascript,
-  SiMongodb,
-  SiMysql,
-  SiNestjs,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiOpenjdk,
-  SiOracle,
-  SiPostgresql,
-  SiPrisma,
-  SiReact,
-  SiTailwindcss,
-  SiTypescript,
-  SiVercel,
-  SiVite,
-} from 'react-icons/si';
-import { TbBrandVscode } from 'react-icons/tb';
+import { getTechIconData } from '../utils/techIcons.js';
 import SectionHeader from './SectionHeader.jsx';
-
-// Mapeamento de ícones para cada tecnologia
-const techIcons = {
-  JavaScript: { icon: SiJavascript, color: '#F7DF1E' },
-  TypeScript: { icon: SiTypescript, color: '#3178C6' },
-  'React.js': { icon: SiReact, color: '#61DAFB' },
-  'Next.js': { icon: SiNextdotjs, color: '#ffffff' },
-  HTML5: { icon: SiHtml5, color: '#E34F26' },
-  'CSS3 / Tailwind': { icon: SiTailwindcss, color: '#06B6D4' },
-  CSS3: { icon: SiCss3, color: '#1572B6' },
-  Java: { icon: SiOpenjdk, color: '#ED8B00' },
-  'Node.js': { icon: SiNodedotjs, color: '#339933' },
-  Express: { icon: SiExpress, color: '#ffffff' },
-  Fastify: { icon: SiFastify, color: '#ffffff' },
-  NestJS: { icon: SiNestjs, color: '#E0234E' },
-  Prisma: { icon: SiPrisma, color: '#2D3748' },
-  'REST APIs': { icon: SiNodedotjs, color: '#68A063' },
-  MongoDB: { icon: SiMongodb, color: '#47A248' },
-  PostgreSQL: { icon: SiPostgresql, color: '#4169E1' },
-  MySQL: { icon: SiMysql, color: '#4479A1' },
-  Firebase: { icon: SiFirebase, color: '#FFCA28' },
-  'SQL / PL/SQL': { icon: SiOracle, color: '#F80000' },
-  Oracle: { icon: SiOracle, color: '#F80000' },
-  'Git / GitHub': { icon: SiGithub, color: '#ffffff' },
-  Docker: { icon: SiDocker, color: '#2496ED' },
-  Vercel: { icon: SiVercel, color: '#ffffff' },
-  Vite: { icon: SiVite, color: '#646CFF' },
-  'ESLint / Biome': { icon: SiEslint, color: '#4B32C3' },
-  'VS Code': { icon: TbBrandVscode, color: '#007ACC' },
-};
 
 function TechCard({ tech, index, categoryIndex, reduceMotion }) {
   const ref = useRef(null);
@@ -66,7 +10,7 @@ function TechCard({ tech, index, categoryIndex, reduceMotion }) {
   const isVisible = shouldAnimate ? isInView : true;
   const [isHovered, setIsHovered] = useState(false);
 
-  const techData = techIcons[tech.name] || { icon: null, color: '#61DAFB' };
+  const techData = getTechIconData(tech.name) || { icon: null, color: '#61DAFB' };
   const IconComponent = techData.icon;
 
   return (

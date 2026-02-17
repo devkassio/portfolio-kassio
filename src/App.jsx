@@ -1,3 +1,5 @@
+import { MotionConfig, useReducedMotion } from 'framer-motion';
+import { useMemo } from 'react';
 import About from './components/About.jsx';
 import CertificatesCarousel from './components/CertificatesCarousel.jsx';
 import Contact from './components/Contact.jsx';
@@ -9,8 +11,6 @@ import ProjectsCarousel from './components/ProjectsCarousel.jsx';
 import Skills from './components/Skills.jsx';
 import TechStack from './components/TechStack.jsx';
 import { content } from './data/content.js';
-import { MotionConfig, useReducedMotion } from 'framer-motion';
-import { useMemo } from 'react';
 import useAssetWarmup from './hooks/useAssetWarmup.js';
 import useGithubSnapshot from './hooks/useGithubSnapshot.js';
 import useLowPowerMode from './hooks/useLowPowerMode.js';
@@ -61,11 +61,11 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion={shouldReduceMotion ? 'always' : 'never'}>
-      <a className="skip-link" href="#inicio">
+      <a className="skip-link" href="#conteudo-principal">
         Pular para o conteúdo
       </a>
       <Header nav={content.nav} contact={content.contact} />
-      <main>
+      <main id="conteudo-principal">
         <Hero hero={content.hero} contact={content.contact} reduceMotion={shouldReduceMotion} />
         <About
           about={content.about}

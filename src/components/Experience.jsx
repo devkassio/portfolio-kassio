@@ -1,4 +1,10 @@
-import { BsBoxArrowUpRight, BsBriefcase, BsCalendar3, BsGeoAlt } from 'react-icons/bs';
+import {
+  PiArrowSquareOutBold,
+  PiBriefcaseBold,
+  PiCalendarBold,
+  PiMapPinBold,
+} from 'react-icons/pi';
+import { getTechIconData } from '../utils/techIcons.js';
 import SectionHeader from './SectionHeader.jsx';
 
 function ExperienceCard({ experience, index }) {
@@ -22,7 +28,7 @@ function ExperienceCard({ experience, index }) {
             />
           ) : (
             <div className="exp-logo-placeholder">
-              <BsBriefcase aria-hidden="true" />
+              <PiBriefcaseBold aria-hidden="true" />
             </div>
           )}
           <div>
@@ -39,11 +45,11 @@ function ExperienceCard({ experience, index }) {
 
       <div className="exp-meta">
         <span className="exp-meta-item">
-          <BsCalendar3 aria-hidden="true" />
+          <PiCalendarBold aria-hidden="true" />
           {experience.period}
         </span>
         <span className="exp-meta-item">
-          <BsGeoAlt aria-hidden="true" />
+          <PiMapPinBold aria-hidden="true" />
           {experience.location}
         </span>
         {experience.website && (
@@ -53,7 +59,7 @@ function ExperienceCard({ experience, index }) {
             rel="noopener noreferrer"
             className="exp-meta-item exp-meta-link"
           >
-            <BsBoxArrowUpRight aria-hidden="true" />
+            <PiArrowSquareOutBold aria-hidden="true" />
             Website
           </a>
         )}
@@ -73,11 +79,23 @@ function ExperienceCard({ experience, index }) {
       <div className="exp-stack">
         <h4>Tech Stack</h4>
         <div className="exp-tags">
-          {experience.stack.map((tech) => (
-            <span key={tech} className="exp-tag">
-              {tech}
-            </span>
-          ))}
+          {experience.stack.map((tech) => {
+            const iconData = getTechIconData(tech);
+            const Icon = iconData?.icon;
+
+            return (
+              <span key={tech} className="exp-tag">
+                {Icon ? (
+                  <Icon
+                    className="exp-tag-icon"
+                    aria-hidden="true"
+                    style={{ color: iconData.color }}
+                  />
+                ) : null}
+                {tech}
+              </span>
+            );
+          })}
         </div>
       </div>
 

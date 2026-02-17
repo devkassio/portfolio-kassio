@@ -3,8 +3,7 @@ import { buildResponsiveSrc } from '../utils/imageSrcset.js';
 
 const AVIF_TEST =
   'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAG1pZjFhdmlmAAACAGF2MDEAAAAAAAEAAQACAAAAAA==';
-const WEBP_TEST =
-  'data:image/webp;base64,UklGRiIAAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
+const WEBP_TEST = 'data:image/webp;base64,UklGRiIAAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
 
 const hasConnection = () => {
   if (typeof navigator === 'undefined') {

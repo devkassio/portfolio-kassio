@@ -18,6 +18,7 @@ export const content = {
       location: 'Ribeirão Preto, SP',
       company: 'davinTI — Ribeirão Preto, SP',
       blog: 'https://kassiobarros.com',
+      htmlUrl: 'https://github.com/devkassio',
       publicRepos: 58,
       followers: 10,
       following: 10,
