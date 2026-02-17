@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion';
 import { useMemo } from 'react';
-import { FiArrowRight, FiDownload, FiGithub, FiLinkedin } from 'react-icons/fi';
+import {
+  PiArrowRightBold,
+  PiCaretDownBold,
+  PiDownloadSimpleBold,
+  PiMouseSimpleBold,
+} from 'react-icons/pi';
+import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { TypeAnimation } from 'react-type-animation';
 
 export default function Hero({ hero, contact, reduceMotion = false }) {
@@ -96,7 +102,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
           <div className="hero-cta">
             <a href="#projetos" className="btn btn--primary btn--lg">
               Ver meu trabalho
-              <FiArrowRight aria-hidden="true" />
+              <PiArrowRightBold aria-hidden="true" />
             </a>
             <a href="#contato" className="btn btn--outline btn--lg">
               Falar comigo
@@ -111,7 +117,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
               className="hero-social-link"
               aria-label="GitHub"
             >
-              <FiGithub />
+              <SiGithub />
             </a>
             <a
               href={contact?.linkedin || 'https://linkedin.com/in/kassiobarros'}
@@ -120,7 +126,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
               className="hero-social-link"
               aria-label="LinkedIn"
             >
-              <FiLinkedin />
+              <SiLinkedin />
             </a>
             {contact?.resume && (
               <a
@@ -129,7 +135,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
                 className="hero-social-link"
                 aria-label="Download CV"
               >
-                <FiDownload />
+                <PiDownloadSimpleBold />
               </a>
             )}
           </div>
@@ -166,15 +172,16 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
       >
-        <div className="scroll-mouse">
+        <div className="scroll-icon-stack">
+          <PiMouseSimpleBold className="scroll-mouse-icon" aria-hidden="true" />
           <motion.span
-            className="scroll-mouse-wheel"
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-          />
+            className="scroll-mouse-arrow"
+            animate={{ y: [0, 5, 0], opacity: [0.45, 1, 0.45] }}
+            transition={{ duration: 1.4, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+          >
+            <PiCaretDownBold aria-hidden="true" />
+          </motion.span>
         </div>
         <span className="scroll-text">Scroll</span>
       </motion.button>

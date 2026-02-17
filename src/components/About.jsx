@@ -1,26 +1,27 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FiAward, FiCode, FiGithub, FiTarget, FiTrendingUp, FiZap } from 'react-icons/fi';
+import { PiCodeBold, PiLightningBold, PiTargetBold, PiTrendUpBold, PiTrophyBold } from 'react-icons/pi';
+import { SiGithub } from 'react-icons/si';
 import SectionHeader from './SectionHeader.jsx';
 
 const highlights = [
   {
-    icon: FiCode,
+    icon: PiCodeBold,
     title: 'Clean Code',
     description: 'Código limpo, legível e manutenível como prioridade absoluta',
   },
   {
-    icon: FiZap,
+    icon: PiLightningBold,
     title: 'Performance First',
     description: 'Core Web Vitals otimizados, LCP < 2.5s, zero compromisso',
   },
   {
-    icon: FiTarget,
+    icon: PiTargetBold,
     title: 'Problem Solver',
     description: 'Soluções criativas para problemas complexos de negócio',
   },
   {
-    icon: FiTrendingUp,
+    icon: PiTrendUpBold,
     title: 'Evolução Contínua',
     description: 'Estudo diário para expandir repertório técnico',
   },
@@ -84,7 +85,7 @@ export default function About({ about, snapshot, reduceMotion = false }) {
                 />
               </div>
               <div className="about-image-badge">
-                <FiAward aria-hidden="true" />
+                <PiTrophyBold aria-hidden="true" />
                 <span>Full Stack Dev</span>
               </div>
             </div>
@@ -115,7 +116,7 @@ export default function About({ about, snapshot, reduceMotion = false }) {
                   rel="noopener noreferrer"
                   className="btn btn--primary"
                 >
-                  <FiGithub aria-hidden="true" />
+                  <SiGithub aria-hidden="true" />
                   Ver GitHub
                 </a>
               </div>

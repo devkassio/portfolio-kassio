@@ -1,4 +1,3 @@
-import { FaJava } from 'react-icons/fa';
 import {
   SiDocker,
   SiExpress,
@@ -8,6 +7,7 @@ import {
   SiMongodb,
   SiNextdotjs,
   SiNodedotjs,
+  SiOpenjdk,
   SiPostgresql,
   SiPrisma,
   SiReact,
@@ -15,7 +15,7 @@ import {
   SiTypescript,
   SiVite,
 } from 'react-icons/si';
-import { VscVscode } from 'react-icons/vsc';
+import { TbBrandVscode } from 'react-icons/tb';
 import SectionHeader from './SectionHeader.jsx';
 
 const technologies = [
@@ -105,13 +105,13 @@ const technologies = [
   },
   {
     name: 'VS Code',
-    icon: VscVscode,
+    icon: TbBrandVscode,
     iconClass: 'tech-icon--vscode',
     category: 'tools',
   },
   {
     name: 'Java',
-    icon: FaJava,
+    icon: SiOpenjdk,
     iconClass: 'tech-icon--java',
     category: 'backend',
   },

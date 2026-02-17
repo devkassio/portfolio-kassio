@@ -2,7 +2,7 @@ import emailjs from '@emailjs/browser';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiPhone, FiSend } from 'react-icons/fi';
+import { BsEnvelope, BsGeoAlt, BsGithub, BsLinkedin, BsSend, BsTelephone } from 'react-icons/bs';
 import { z } from 'zod';
 import SectionHeader from './SectionHeader.jsx';
 
@@ -85,7 +85,7 @@ export default function Contact({ contact }) {
           <div className="contact-info-grid">
             <a href={`mailto:${contact.email}`} className="contact-card">
               <div className="contact-card-icon">
-                <FiMail aria-hidden="true" />
+                <BsEnvelope aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">E-mail</span>
@@ -95,7 +95,7 @@ export default function Contact({ contact }) {
 
             <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="contact-card">
               <div className="contact-card-icon">
-                <FiPhone aria-hidden="true" />
+                <BsTelephone aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">Telefone</span>
@@ -105,7 +105,7 @@ export default function Contact({ contact }) {
 
             <div className="contact-card">
               <div className="contact-card-icon">
-                <FiMapPin aria-hidden="true" />
+                <BsGeoAlt aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">Localização</span>
@@ -120,7 +120,7 @@ export default function Contact({ contact }) {
               className="contact-card"
             >
               <div className="contact-card-icon">
-                <FiLinkedin aria-hidden="true" />
+                <BsLinkedin aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">LinkedIn</span>
@@ -135,7 +135,7 @@ export default function Contact({ contact }) {
               className="contact-card"
             >
               <div className="contact-card-icon">
-                <FiGithub aria-hidden="true" />
+                <BsGithub aria-hidden="true" />
               </div>
               <div className="contact-card-content">
                 <span className="contact-card-label">GitHub</span>
@@ -199,7 +199,7 @@ export default function Contact({ contact }) {
             </div>
 
             <button className="btn btn--primary btn--lg" type="submit" disabled={isSubmitting}>
-              <FiSend aria-hidden="true" />
+              <BsSend aria-hidden="true" />
               {isSubmitting ? 'Enviando...' : 'Enviar mensagem'}
             </button>
 

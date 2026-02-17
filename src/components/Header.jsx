@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { FiDownload, FiGithub, FiLinkedin, FiMenu, FiX } from 'react-icons/fi';
+import { PiDownloadSimpleBold, PiListBold, PiXBold } from 'react-icons/pi';
+import { SiGithub, SiLinkedin } from 'react-icons/si';
 
 export default function Header({ nav, contact }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,6 +66,13 @@ export default function Header({ nav, contact }) {
     }
   };
 
+  const handleNavKeyDown = (event) => {
+    if ((event.key === 'Enter' || event.key === ' ') && event.target === event.currentTarget) {
+      event.preventDefault();
+      closeMenu();
+    }
+  };
+
   return (
     <header className="site-header">
       <div className="container header-inner">
@@ -83,6 +91,7 @@ export default function Header({ nav, contact }) {
           className={`site-nav ${isOpen ? 'is-open' : ''}`}
           aria-label="Navegação principal"
           onClick={handleNavBackdrop}
+          onKeyDown={handleNavKeyDown}
         >
           <ul>
             {nav.map((item, index) => (
@@ -93,19 +102,56 @@ export default function Header({ nav, contact }) {
               </li>
             ))}
           </ul>
+          <div className="site-nav-footer" aria-label="Atalhos rápidos">
+            {contact?.resume ? (
+              <a
+                className="btn btn--primary btn--sm"
+                href={contact.resume}
+                download
+                onClick={closeMenu}
+              >
+                <PiDownloadSimpleBold aria-hidden="true" />
+                Baixar CV
+              </a>
+            ) : null}
+            <div className="site-nav-social" aria-label="Redes sociais">
+              {contact?.linkedin ? (
+                <a
+                  href={contact.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                  onClick={closeMenu}
+                >
+                  <SiLinkedin aria-hidden="true" />
+                </a>
+              ) : null}
+              {contact?.github ? (
+                <a
+                  href={contact.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                  onClick={closeMenu}
+                >
+                  <SiGithub aria-hidden="true" />
+                </a>
+              ) : null}
+            </div>
+          </div>
         </nav>
 
         <div className="header-actions">
           <a className="btn btn--ghost" href={contact.resume} download>
-            <FiDownload aria-hidden="true" />
+            <PiDownloadSimpleBold aria-hidden="true" />
             Baixar CV
           </a>
           <div className="header-social">
             <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <FiLinkedin aria-hidden="true" />
+              <SiLinkedin aria-hidden="true" />
             </a>
             <a href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub">
-              <FiGithub aria-hidden="true" />
+              <SiGithub aria-hidden="true" />
             </a>
           </div>
           <button
@@ -116,7 +162,7 @@ export default function Header({ nav, contact }) {
             aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
             aria-expanded={isOpen}
           >
-            {isOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+            {isOpen ? <PiXBold aria-hidden="true" /> : <PiListBold aria-hidden="true" />}
           </button>
         </div>
       </div>

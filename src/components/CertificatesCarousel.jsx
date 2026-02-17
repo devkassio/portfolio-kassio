@@ -1,15 +1,15 @@
 import { useKeenSlider } from 'keen-slider/react';
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
-  FiArrowLeft,
-  FiArrowRight,
-  FiAward,
-  FiDownload,
-  FiExternalLink,
-  FiEye,
-  FiFileText,
-  FiX,
-} from 'react-icons/fi';
+  BsArrowLeft,
+  BsArrowRight,
+  BsAward,
+  BsBoxArrowUpRight,
+  BsDownload,
+  BsEye,
+  BsFileEarmarkText,
+  BsXLg,
+} from 'react-icons/bs';
 import { createAutoplay } from '../utils/keenAutoplay.js';
 import SectionHeader from './SectionHeader.jsx';
 
@@ -76,7 +76,7 @@ function CertificateModal({ certificate, onClose }) {
       <div className="certificate-modal">
         <div className="certificate-modal-header">
           <div className="certificate-modal-title">
-            <FiAward aria-hidden="true" />
+            <BsAward aria-hidden="true" />
             <div>
               <h3 id={titleId}>{certificate.title}</h3>
               <span>
@@ -92,7 +92,7 @@ function CertificateModal({ certificate, onClose }) {
                   onClick={openPdfInNewTab}
                   className="btn btn--primary btn--sm"
                 >
-                  <FiExternalLink aria-hidden="true" />
+                  <BsBoxArrowUpRight aria-hidden="true" />
                   Abrir PDF
                 </button>
                 <a
@@ -101,7 +101,7 @@ function CertificateModal({ certificate, onClose }) {
                   className="btn btn--outline btn--sm"
                   aria-label="Baixar certificado"
                 >
-                  <FiDownload aria-hidden="true" />
+                  <BsDownload aria-hidden="true" />
                   Baixar
                 </a>
               </>
@@ -112,7 +112,7 @@ function CertificateModal({ certificate, onClose }) {
                 className="btn btn--outline btn--sm"
                 aria-label="Baixar certificado"
               >
-                <FiDownload aria-hidden="true" />
+                <BsDownload aria-hidden="true" />
                 Baixar
               </a>
             )}
@@ -122,7 +122,7 @@ function CertificateModal({ certificate, onClose }) {
               className="certificate-modal-close"
               aria-label="Fechar modal"
             >
-              <FiX />
+              <BsXLg />
             </button>
           </div>
         </div>
@@ -222,7 +222,7 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
                     <div className="certificate-media">
                       {certificate.isPdf ? (
                         <div className="certificate-pdf-preview">
-                          <FiFileText className="certificate-pdf-icon" aria-hidden="true" />
+                          <BsFileEarmarkText className="certificate-pdf-icon" aria-hidden="true" />
                           <span>PDF</span>
                         </div>
                       ) : (
@@ -241,13 +241,13 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
                         onClick={() => openCertificate(certificate)}
                         aria-label={`Visualizar certificado ${certificate.title}`}
                       >
-                        <FiEye aria-hidden="true" />
+                        <BsEye aria-hidden="true" />
                         <span>Visualizar</span>
                       </button>
                     </div>
                     <div className="certificate-body">
                       <div className="certificate-title">
-                        <FiAward aria-hidden="true" />
+                        <BsAward aria-hidden="true" />
                         <h3>{certificate.title}</h3>
                       </div>
                       <p>{certificate.issuer}</p>
@@ -264,14 +264,14 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
                 onClick={() => instanceRef.current?.prev()}
                 aria-label="Certificado anterior"
               >
-                <FiArrowLeft aria-hidden="true" />
+                <BsArrowLeft aria-hidden="true" />
               </button>
               <button
                 type="button"
                 onClick={() => instanceRef.current?.next()}
                 aria-label="Próximo certificado"
               >
-                <FiArrowRight aria-hidden="true" />
+                <BsArrowRight aria-hidden="true" />
               </button>
             </div>
           </div>

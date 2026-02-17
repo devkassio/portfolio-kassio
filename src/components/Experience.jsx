@@ -1,4 +1,4 @@
-import { FiBriefcase, FiCalendar, FiExternalLink, FiMapPin } from 'react-icons/fi';
+import { BsBoxArrowUpRight, BsBriefcase, BsCalendar3, BsGeoAlt } from 'react-icons/bs';
 import SectionHeader from './SectionHeader.jsx';
 
 function ExperienceCard({ experience, index }) {
@@ -22,7 +22,7 @@ function ExperienceCard({ experience, index }) {
             />
           ) : (
             <div className="exp-logo-placeholder">
-              <FiBriefcase aria-hidden="true" />
+              <BsBriefcase aria-hidden="true" />
             </div>
           )}
           <div>
@@ -39,11 +39,11 @@ function ExperienceCard({ experience, index }) {
 
       <div className="exp-meta">
         <span className="exp-meta-item">
-          <FiCalendar aria-hidden="true" />
+          <BsCalendar3 aria-hidden="true" />
           {experience.period}
         </span>
         <span className="exp-meta-item">
-          <FiMapPin aria-hidden="true" />
+          <BsGeoAlt aria-hidden="true" />
           {experience.location}
         </span>
         {experience.website && (
@@ -53,7 +53,7 @@ function ExperienceCard({ experience, index }) {
             rel="noopener noreferrer"
             className="exp-meta-item exp-meta-link"
           >
-            <FiExternalLink aria-hidden="true" />
+            <BsBoxArrowUpRight aria-hidden="true" />
             Website
           </a>
         )}

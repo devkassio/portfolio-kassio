@@ -1,4 +1,4 @@
-import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import { BsEnvelope, BsGithub, BsLinkedin } from 'react-icons/bs';
 
 export default function Footer({ contact }) {
   const currentYear = new Date().getFullYear();
@@ -39,7 +39,7 @@ export default function Footer({ contact }) {
               aria-label="LinkedIn"
               className="footer-social-link"
             >
-              <FiLinkedin />
+              <BsLinkedin />
             </a>
             <a
               href={contact?.github || 'https://github.com/devkassio'}
@@ -48,14 +48,14 @@ export default function Footer({ contact }) {
               aria-label="GitHub"
               className="footer-social-link"
             >
-              <FiGithub />
+              <BsGithub />
             </a>
             <a
               href={`mailto:${contact?.email || 'contato@kassiobarros.com'}`}
               aria-label="Email"
               className="footer-social-link"
             >
-              <FiMail />
+              <BsEnvelope />
             </a>
           </div>
         </div>

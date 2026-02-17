@@ -1,8 +1,8 @@
 import { useKeenSlider } from 'keen-slider/react';
 import { useMemo } from 'react';
-import { FiArrowLeft, FiArrowRight, FiExternalLink, FiGithub } from 'react-icons/fi';
-import { createAutoplay } from '../utils/keenAutoplay.js';
+import { BsArrowLeft, BsArrowRight, BsBoxArrowUpRight, BsGithub } from 'react-icons/bs';
 import { buildSrcSet } from '../utils/imageSrcset.js';
+import { createAutoplay } from '../utils/keenAutoplay.js';
 import SectionHeader from './SectionHeader.jsx';
 
 const PROJECT_IMAGE_WIDTHS = [360, 720, 1080];
@@ -95,12 +95,12 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
                       </div>
                       <div className="project-links">
                         <a href={project.links.github} target="_blank" rel="noreferrer">
-                          <FiGithub aria-hidden="true" />
+                          <BsGithub aria-hidden="true" />
                           GitHub
                         </a>
                         {project.links.demo ? (
                           <a href={project.links.demo} target="_blank" rel="noreferrer">
-                            <FiExternalLink aria-hidden="true" />
+                            <BsBoxArrowUpRight aria-hidden="true" />
                             Demo
                           </a>
                         ) : null}
@@ -119,14 +119,14 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
                 onClick={() => instanceRef.current?.prev()}
                 aria-label="Projeto anterior"
               >
-                <FiArrowLeft aria-hidden="true" />
+                <BsArrowLeft aria-hidden="true" />
               </button>
               <button
                 type="button"
                 onClick={() => instanceRef.current?.next()}
                 aria-label="Próximo projeto"
               >
-                <FiArrowRight aria-hidden="true" />
+                <BsArrowRight aria-hidden="true" />
               </button>
             </div>
 
@@ -136,7 +136,7 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FiGithub aria-hidden="true" />
+              <BsGithub aria-hidden="true" />
               Repositórios
             </a>
           </div>

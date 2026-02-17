@@ -1,6 +1,5 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { FaJava } from 'react-icons/fa';
 import {
   SiCss3,
   SiDocker,
@@ -17,6 +16,7 @@ import {
   SiNestjs,
   SiNextdotjs,
   SiNodedotjs,
+  SiOpenjdk,
   SiOracle,
   SiPostgresql,
   SiPrisma,
@@ -26,7 +26,7 @@ import {
   SiVercel,
   SiVite,
 } from 'react-icons/si';
-import { VscVscode } from 'react-icons/vsc';
+import { TbBrandVscode } from 'react-icons/tb';
 import SectionHeader from './SectionHeader.jsx';
 
 // Mapeamento de ícones para cada tecnologia
@@ -38,7 +38,7 @@ const techIcons = {
   HTML5: { icon: SiHtml5, color: '#E34F26' },
   'CSS3 / Tailwind': { icon: SiTailwindcss, color: '#06B6D4' },
   CSS3: { icon: SiCss3, color: '#1572B6' },
-  Java: { icon: FaJava, color: '#ED8B00' },
+  Java: { icon: SiOpenjdk, color: '#ED8B00' },
   'Node.js': { icon: SiNodedotjs, color: '#339933' },
   Express: { icon: SiExpress, color: '#ffffff' },
   Fastify: { icon: SiFastify, color: '#ffffff' },
@@ -56,7 +56,7 @@ const techIcons = {
   Vercel: { icon: SiVercel, color: '#ffffff' },
   Vite: { icon: SiVite, color: '#646CFF' },
   'ESLint / Biome': { icon: SiEslint, color: '#4B32C3' },
-  'VS Code': { icon: VscVscode, color: '#007ACC' },
+  'VS Code': { icon: TbBrandVscode, color: '#007ACC' },
 };
 
 function TechCard({ tech, index, categoryIndex, reduceMotion }) {
