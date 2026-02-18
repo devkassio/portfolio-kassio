@@ -13,39 +13,41 @@ import {
   PiWarningBold,
 } from 'react-icons/pi';
 import { SiGithub, SiLastdotfm } from 'react-icons/si';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
 import useLastFm from '../hooks/useLastFm.js';
 import SectionHeader from './SectionHeader.jsx';
 
 /* ── helpers ────────────────────────────────────────────── */
 
-function timeAgo(dateStr) {
+function timeAgo(dateStr, lang) {
   if (!dateStr) return '';
   const diff = Date.now() - new Date(dateStr).getTime();
   const secs = Math.floor(diff / 1000);
-  if (secs < 60) return 'agora';
+  if (secs < 60) return lang === 'en' ? 'now' : 'agora';
   const mins = Math.floor(secs / 60);
-  if (mins < 60) return `há ${mins} min`;
+  if (mins < 60) return lang === 'en' ? `${mins} min ago` : `há ${mins} min`;
   const hours = Math.floor(mins / 60);
-  if (hours < 24) return `há ${hours}h`;
+  if (hours < 24) return lang === 'en' ? `${hours}h ago` : `há ${hours}h`;
   const days = Math.floor(hours / 24);
-  return `há ${days}d`;
+  return lang === 'en' ? `${days}d ago` : `há ${days}d`;
 }
 
-function timestampAgo(ts) {
+function timestampAgo(ts, lang) {
   if (!ts) return '';
   const diff = Date.now() - ts;
   const secs = Math.floor(diff / 1000);
-  if (secs < 60) return 'agora';
+  if (secs < 60) return lang === 'en' ? 'now' : 'agora';
   const mins = Math.floor(secs / 60);
-  if (mins < 60) return `há ${mins} min`;
+  if (mins < 60) return lang === 'en' ? `${mins} min ago` : `há ${mins} min`;
   const hours = Math.floor(mins / 60);
-  return `há ${hours}h`;
+  return lang === 'en' ? `${hours}h ago` : `há ${hours}h`;
 }
 
 /* ── CARD A — Last.fm / Now Playing ─────────────────────── */
 
 function LastFmCard({ lastfm }) {
   const { track, error, isStale, isConfigured } = lastfm;
+  const { t } = useLanguage();
 
   /* Não configurado — mostra placeholder */
   if (!isConfigured) {
@@ -53,11 +55,11 @@ function LastFmCard({ lastfm }) {
       <div className="live-card live-card--music">
         <div className="live-card-header">
           <SiLastdotfm className="live-card-icon live-card-icon--music" aria-hidden="true" />
-          <h3 className="live-card-title">Now Playing</h3>
+          <h3 className="live-card-title">{t('Now Playing')}</h3>
         </div>
         <div className="live-card-body live-card-body--empty">
           <PiMusicNoteFill className="live-empty-icon" aria-hidden="true" />
-          <p className="live-empty-text">Scrobbling não configurado</p>
+          <p className="live-empty-text">{t('Scrobbling não configurado')}</p>
         </div>
       </div>
     );
@@ -69,7 +71,7 @@ function LastFmCard({ lastfm }) {
       <div className="live-card live-card--music">
         <div className="live-card-header">
           <SiLastdotfm className="live-card-icon live-card-icon--music" aria-hidden="true" />
-          <h3 className="live-card-title">Now Playing</h3>
+          <h3 className="live-card-title">{t('Now Playing')}</h3>
         </div>
         <div className="live-card-body">
           <div className="live-skeleton live-skeleton--artwork" />
@@ -86,11 +88,11 @@ function LastFmCard({ lastfm }) {
       <div className="live-card live-card--music">
         <div className="live-card-header">
           <SiLastdotfm className="live-card-icon live-card-icon--music" aria-hidden="true" />
-          <h3 className="live-card-title">Now Playing</h3>
+          <h3 className="live-card-title">{t('Now Playing')}</h3>
         </div>
         <div className="live-card-body live-card-body--empty">
           <PiWarningBold className="live-empty-icon" aria-hidden="true" />
-          <p className="live-empty-text">Não foi possível carregar</p>
+          <p className="live-empty-text">{t('Não foi possível carregar')}</p>
         </div>
       </div>
     );
@@ -103,13 +105,13 @@ function LastFmCard({ lastfm }) {
     <div className={`live-card live-card--music${isPlaying ? ' live-card--active' : ''}`}>
       <div className="live-card-header">
         <SiLastdotfm className="live-card-icon live-card-icon--music" aria-hidden="true" />
-        <h3 className="live-card-title">{isPlaying ? 'Ouvindo agora' : 'Última faixa'}</h3>
+        <h3 className="live-card-title">{isPlaying ? t('Ouvindo agora') : t('Última faixa')}</h3>
         <span
           className={`live-badge ${isPlaying ? 'live-badge--playing' : 'live-badge--connected'}${isStale ? ' live-badge--stale' : ''}`}
-          aria-label={isPlaying ? 'Tocando agora' : 'Recente'}
+          aria-label={isPlaying ? t('Tocando agora') : t('Recente')}
         >
           {isPlaying ? <PiPlayFill aria-hidden="true" /> : <PiPauseFill aria-hidden="true" />}
-          <span className="live-badge-text">{isPlaying ? 'Ao vivo' : 'Recente'}</span>
+          <span className="live-badge-text">{isPlaying ? t('Ao vivo') : t('Recente')}</span>
         </span>
       </div>
       <div className="live-card-body">
@@ -118,10 +120,11 @@ function LastFmCard({ lastfm }) {
             <img
               className="live-music-artwork"
               src={track.artworkUrl}
-              alt={`Capa do álbum ${track.album}`}
+              alt={`${t('Capa do álbum ')}${track.album}`}
               width="80"
               height="80"
-              fetchpriority="high"
+              loading="lazy"
+              decoding="async"
             />
           ) : (
             <div className="live-music-artwork live-music-artwork--placeholder">
@@ -151,7 +154,7 @@ function LastFmCard({ lastfm }) {
             aria-label={`Ver ${track.title} no Last.fm`}
           >
             <PiArrowSquareOutBold aria-hidden="true" />
-            <span>Ver no Last.fm</span>
+            <span>{t('Ver no Last.fm')}</span>
           </a>
         ) : null}
       </div>
@@ -163,16 +166,17 @@ function LastFmCard({ lastfm }) {
 
 function GithubActivityCard({ github }) {
   const { data, updatedAt, error, isStale } = github;
+  const { t, lang } = useLanguage();
 
   return (
     <div className="live-card live-card--github">
       <div className="live-card-header">
         <SiGithub className="live-card-icon" aria-hidden="true" />
-        <h3 className="live-card-title">Atividade Dev</h3>
+        <h3 className="live-card-title">{t('Atividade Dev')}</h3>
         {updatedAt ? (
           <span className={`live-badge${isStale ? ' live-badge--stale' : ''}`}>
             <PiClockBold aria-hidden="true" />
-            <span className="live-badge-text">{timestampAgo(updatedAt)}</span>
+            <span className="live-badge-text">{timestampAgo(updatedAt, lang)}</span>
           </span>
         ) : null}
       </div>
@@ -185,7 +189,7 @@ function GithubActivityCard({ github }) {
         ) : error && !data ? (
           <div className="live-card-error">
             <PiWarningBold aria-hidden="true" />
-            <p>Não foi possível carregar a atividade</p>
+            <p>{t('Não foi possível carregar a atividade')}</p>
           </div>
         ) : data ? (
           <div className="live-github-content">
@@ -198,7 +202,7 @@ function GithubActivityCard({ github }) {
                 <span className="live-github-meta">
                   <span className="live-github-repo">{data.repo}</span>
                   {data.createdAt ? (
-                    <span className="live-github-time">{timeAgo(data.createdAt)}</span>
+                    <span className="live-github-time">{timeAgo(data.createdAt, lang)}</span>
                   ) : null}
                 </span>
               </div>
@@ -224,6 +228,7 @@ function GithubActivityCard({ github }) {
 /* ── CARD C — Status / Heartbeat ───────────────────────── */
 
 function StatusCard({ github, lastfm }) {
+  const { t, lang } = useLanguage();
   const [_tick, setTick] = useState(Date.now());
 
   useEffect(() => {
@@ -239,10 +244,10 @@ function StatusCard({ github, lastfm }) {
     <div className="live-card live-card--status">
       <div className="live-card-header">
         <PiHeartbeatBold className="live-card-icon live-card-icon--status" aria-hidden="true" />
-        <h3 className="live-card-title">Status</h3>
-        <span className={'live-badge live-badge--online'} aria-label="Status online">
+        <h3 className="live-card-title">{t('Status')}</h3>
+        <span className={'live-badge live-badge--online'} aria-label={`${t('Status')} online`}>
           <PiCircleFill aria-hidden="true" />
-          <span className="live-badge-text">Online</span>
+          <span className="live-badge-text">{t('Online')}</span>
         </span>
       </div>
       <div className="live-card-body">
@@ -250,7 +255,7 @@ function StatusCard({ github, lastfm }) {
           <div className="live-status-item">
             <PiPulseBold className="live-status-icon" aria-hidden="true" />
             <div className="live-status-info">
-              <span className="live-status-label">Resposta</span>
+              <span className="live-status-label">{t('Resposta')}</span>
               <span className="live-status-value">
                 {latencyMs !== null ? `~${latencyMs} ms` : '—'}
               </span>
@@ -259,18 +264,18 @@ function StatusCard({ github, lastfm }) {
           <div className="live-status-item">
             <PiClockBold className="live-status-icon" aria-hidden="true" />
             <div className="live-status-info">
-              <span className="live-status-label">Última atualização</span>
+              <span className="live-status-label">{t('Última atualização')}</span>
               <span className="live-status-value">
-                {lastUpdate ? timestampAgo(lastUpdate) : '—'}
+                {lastUpdate ? timestampAgo(lastUpdate, lang) : '—'}
               </span>
             </div>
           </div>
           <div className="live-status-item">
             <PiLinkBold className="live-status-icon" aria-hidden="true" />
             <div className="live-status-info">
-              <span className="live-status-label">Conexões</span>
+              <span className="live-status-label">{t('Conexões')}</span>
               <span className="live-status-value">
-                {hasPartialError ? 'Parcialmente indisponível' : 'Todos os serviços OK'}
+                {hasPartialError ? t('Parcialmente indisponível') : t('Todos os serviços OK')}
               </span>
             </div>
           </div>
@@ -283,13 +288,14 @@ function StatusCard({ github, lastfm }) {
 /* ── LIVE SECTION ──────────────────────────────────────── */
 
 function LiveSection({ githubActivity }) {
+  const { t } = useLanguage();
   const lastfm = useLastFm({
     apiKey: import.meta.env.VITE_LASTFM_API_KEY || '',
     username: import.meta.env.VITE_LASTFM_USER || '',
   });
 
   return (
-    <section id="live" className="section section--surface" aria-label="Dados ao vivo">
+    <section id="live" className="section section--surface" aria-label={t('Dados ao vivo')}>
       <div className="container">
         <SectionHeader
           eyebrow="Em tempo real"

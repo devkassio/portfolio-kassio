@@ -8,9 +8,11 @@ import {
 } from 'react-icons/pi';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { TypeAnimation } from 'react-type-animation';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
 import { buildSrcSet } from '../utils/imageSrcset.js';
 
 export default function Hero({ hero, contact, reduceMotion = false }) {
+  const { t, lang } = useLanguage();
   const particles = useMemo(() => {
     const count = reduceMotion ? 0 : 20;
     return Array.from({ length: count }, (_, index) => ({
@@ -55,11 +57,11 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
         >
           <div className="hero-badge">
             <span className="hero-badge-dot" aria-hidden="true" />
-            <span>Disponível para projetos</span>
+            <span>{t('Disponível para projetos')}</span>
           </div>
 
           <h1 className="hero-title">
-            <span className="hero-greeting">Olá, eu sou</span>
+            <span className="hero-greeting">{t('Olá, eu sou')}</span>
             <span className="hero-name">{hero.title}</span>
             <span className="hero-role">
               {reduceMotion ? (
@@ -69,11 +71,11 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
                   sequence={[
                     'Full Stack Developer',
                     2000,
-                    'React Specialist',
+                    'React Developer',
                     2000,
                     'Node.js Developer',
                     2000,
-                    'TypeScript Expert',
+                    'TypeScript Developer',
                     2000,
                     'Problem Solver',
                     2000,
@@ -88,18 +90,28 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
           </h1>
 
           <p className="hero-description">
-            Desenvolvedor apaixonado por criar <strong>experiências digitais excepcionais</strong>.
-            Transformo ideias complexas em aplicações web{' '}
-            <strong>elegantes, performáticas e escaláveis</strong>.
+            {lang === 'pt' ? (
+              <>
+                Desenvolvedor apaixonado por criar{' '}
+                <strong>experiências digitais excepcionais</strong>. Transformo ideias complexas em
+                aplicações web <strong>elegantes, performáticas e escaláveis</strong>.
+              </>
+            ) : (
+              <>
+                Passionate developer creating <strong>exceptional digital experiences</strong>. I
+                transform complex ideas into <strong>elegant, performant and scalable</strong> web
+                applications.
+              </>
+            )}
           </p>
 
           <div className="hero-cta">
             <a href="#projetos" className="btn btn--primary btn--lg">
-              Ver meu trabalho
+              {t('Ver meu trabalho')}
               <PiArrowRightBold aria-hidden="true" />
             </a>
             <a href="#contato" className="btn btn--outline btn--lg">
-              Falar comigo
+              {t('Falar comigo')}
             </a>
           </div>
 
@@ -162,7 +174,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
                   height="600"
                   decoding="async"
                   loading="eager"
-                  fetchPriority="high"
+                  fetchpriority="high"
                 />
               </picture>
             </div>
@@ -173,7 +185,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
       <motion.a
         href="#sobre"
         className="hero-scroll"
-        aria-label="Rolar para a próxima seção"
+        aria-label={t('Rolar para a próxima seção')}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
@@ -188,7 +200,7 @@ export default function Hero({ hero, contact, reduceMotion = false }) {
             <PiCaretDownBold aria-hidden="true" />
           </motion.span>
         </div>
-        <span className="scroll-text">Scroll</span>
+        <span className="scroll-text">{t('Scroll')}</span>
       </motion.a>
     </section>
   );

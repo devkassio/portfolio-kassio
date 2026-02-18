@@ -10,7 +10,9 @@ import Hero from './components/Hero.jsx';
 import ProjectsCarousel from './components/ProjectsCarousel.jsx';
 import Skills from './components/Skills.jsx';
 import TechStack from './components/TechStack.jsx';
+import { LanguageProvider } from './contexts/LanguageContext.jsx';
 import { content } from './data/content.js';
+import translations from './data/translations.js';
 import useAssetWarmup from './hooks/useAssetWarmup.js';
 import useGithubActivity from './hooks/useGithubActivity.js';
 import useGithubSnapshot from './hooks/useGithubSnapshot.js';
@@ -68,37 +70,39 @@ export default function App() {
   });
 
   return (
-    <MotionConfig reducedMotion={shouldReduceMotion ? 'always' : 'never'}>
-      <a className="skip-link" href="#conteudo-principal">
-        Pular para o conteúdo
-      </a>
-      <Header nav={content.nav} contact={content.contact} />
-      <main id="conteudo-principal">
-        <Hero hero={content.hero} contact={content.contact} reduceMotion={shouldReduceMotion} />
-        <About
-          about={content.about}
-          values={content.values}
-          snapshot={githubSnapshot}
-          reduceMotion={shouldReduceMotion}
-        />
-        <TechStack />
-        <Experience experiences={content.experiences} />
-        <Skills skills={content.skills} reduceMotion={shouldReduceMotion} />
-        <ProjectsCarousel
-          projects={content.projects}
-          githubUrl={content.contact.github}
-          reduceMotion={shouldReduceMotion}
-        />
-        <CertificatesCarousel
-          certificates={content.certificates}
-          reduceMotion={shouldReduceMotion}
-        />
-        <Suspense fallback={null}>
-          <LiveSection githubActivity={githubActivity} />
-        </Suspense>
-        <Contact contact={content.contact} />
-      </main>
-      <Footer contact={content.contact} />
-    </MotionConfig>
+    <LanguageProvider translations={translations}>
+      <MotionConfig reducedMotion={shouldReduceMotion ? 'always' : 'never'}>
+        <a className="skip-link" href="#conteudo-principal">
+          Pular para o conteúdo
+        </a>
+        <Header nav={content.nav} contact={content.contact} />
+        <main id="conteudo-principal">
+          <Hero hero={content.hero} contact={content.contact} reduceMotion={shouldReduceMotion} />
+          <About
+            about={content.about}
+            values={content.values}
+            snapshot={githubSnapshot}
+            reduceMotion={shouldReduceMotion}
+          />
+          <TechStack snapshot={githubSnapshot} />
+          <Experience experiences={content.experiences} />
+          <Skills skills={content.skills} reduceMotion={shouldReduceMotion} />
+          <ProjectsCarousel
+            projects={content.projects}
+            githubUrl={content.contact.github}
+            reduceMotion={shouldReduceMotion}
+          />
+          <CertificatesCarousel
+            certificates={content.certificates}
+            reduceMotion={shouldReduceMotion}
+          />
+          <Suspense fallback={null}>
+            <LiveSection githubActivity={githubActivity} />
+          </Suspense>
+          <Contact contact={content.contact} />
+        </main>
+        <Footer contact={content.contact} />
+      </MotionConfig>
+    </LanguageProvider>
   );
 }

@@ -10,6 +10,7 @@ import {
   PiFileTextBold,
   PiXBold,
 } from 'react-icons/pi';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
 import { createAutoplay } from '../utils/keenAutoplay.js';
 import SectionHeader from './SectionHeader.jsx';
 
@@ -28,6 +29,7 @@ const unlockBodyScroll = () => {
 /* ── Certificate Modal ── */
 
 function CertificateModal({ certificate, onClose }) {
+  const { t } = useLanguage();
   const dialogRef = useRef(null);
   const previousFocusRef = useRef(null);
   const titleId = useId();
@@ -93,7 +95,7 @@ function CertificateModal({ certificate, onClose }) {
           <div className="certificate-modal-title">
             <PiCertificateBold aria-hidden="true" />
             <div>
-              <h3 id={titleId}>{certificate.title}</h3>
+              <h3 id={titleId}>{t(certificate.title)}</h3>
               <span>
                 {certificate.issuer} · {certificate.year}
               </span>
@@ -106,26 +108,26 @@ function CertificateModal({ certificate, onClose }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--ghost btn--sm"
-                aria-label="Abrir PDF em nova aba"
+                aria-label={t('Abrir PDF em nova aba')}
               >
                 <PiArrowSquareOutBold aria-hidden="true" />
-                <span className="btn-label-desktop">Nova aba</span>
+                <span className="btn-label-desktop">{t('Nova aba')}</span>
               </a>
             )}
             <a
               href={certificate.image}
               download
               className="btn btn--ghost btn--sm"
-              aria-label={`Baixar certificado ${certificate.title}`}
+              aria-label={`${t('Baixar')} ${t(certificate.title)}`}
             >
               <PiDownloadSimpleBold aria-hidden="true" />
-              <span className="btn-label-desktop">Baixar</span>
+              <span className="btn-label-desktop">{t('Baixar')}</span>
             </a>
             <button
               type="button"
               onClick={onClose}
               className="certificate-modal-close"
-              aria-label="Fechar visualização"
+              aria-label={t('Fechar visualização')}
             >
               <PiXBold aria-hidden="true" />
             </button>
@@ -139,7 +141,7 @@ function CertificateModal({ certificate, onClose }) {
               fallback={
                 <div className="certificate-loading">
                   <div className="certificate-loading-spinner" />
-                  <span>Carregando visualizador…</span>
+                  <span>{t('Carregando visualizador…')}</span>
                 </div>
               }
             >
@@ -148,7 +150,7 @@ function CertificateModal({ certificate, onClose }) {
           ) : (
             <img
               src={certificate.image}
-              alt={`Certificado ${certificate.title}`}
+              alt={`${t('Certificados')} ${t(certificate.title)}`}
               className="certificate-modal-image"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
@@ -164,6 +166,8 @@ function CertificateModal({ certificate, onClose }) {
 /* ── Certificate Card ── */
 
 function CertificateCard({ certificate, onView }) {
+  const { t } = useLanguage();
+
   return (
     <article className="keen-slider__slide">
       <div className="certificate-card">
@@ -176,7 +180,7 @@ function CertificateCard({ certificate, onView }) {
           ) : (
             <img
               src={certificate.image}
-              alt={`Certificado ${certificate.title}`}
+              alt={`${t('Certificados')} ${t(certificate.title)}`}
               loading="lazy"
               decoding="async"
               width="520"
@@ -187,16 +191,16 @@ function CertificateCard({ certificate, onView }) {
             type="button"
             className="certificate-view-btn"
             onClick={() => onView(certificate)}
-            aria-label={`Visualizar certificado ${certificate.title}`}
+            aria-label={`${t('Visualizar')} ${t(certificate.title)}`}
           >
             <PiEyeBold aria-hidden="true" />
-            <span>Visualizar</span>
+            <span>{t('Visualizar')}</span>
           </button>
         </div>
         <div className="certificate-body">
           <div className="certificate-title">
             <PiCertificateBold aria-hidden="true" />
-            <h3>{certificate.title}</h3>
+            <h3>{t(certificate.title)}</h3>
           </div>
           <p>{certificate.issuer}</p>
           <span className="certificate-year">{certificate.year}</span>
@@ -209,6 +213,7 @@ function CertificateCard({ certificate, onView }) {
 /* ── Main Component ── */
 
 export default function CertificatesCarousel({ certificates, reduceMotion = false }) {
+  const { t } = useLanguage();
   const [selectedCertificate, setSelectedCertificate] = useState(null);
 
   const autoplayPlugin = useMemo(() => {
@@ -275,14 +280,14 @@ export default function CertificatesCarousel({ certificates, reduceMotion = fals
               <button
                 type="button"
                 onClick={() => instanceRef.current?.prev()}
-                aria-label="Certificado anterior"
+                aria-label={t('Certificado anterior')}
               >
                 <PiArrowLeftBold aria-hidden="true" />
               </button>
               <button
                 type="button"
                 onClick={() => instanceRef.current?.next()}
-                aria-label="Próximo certificado"
+                aria-label={t('Próximo certificado')}
               >
                 <PiArrowRightBold aria-hidden="true" />
               </button>

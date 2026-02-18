@@ -1,20 +1,28 @@
-import { PiEnvelopeSimpleBold } from 'react-icons/pi';
+import { useCallback } from 'react';
+import { PiArrowUpBold, PiEnvelopeSimpleBold } from 'react-icons/pi';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
 
 export default function Footer({ contact }) {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
+
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <footer className="site-footer">
       <div className="footer-glow" aria-hidden="true" />
+      <div className="footer-gradient-border" aria-hidden="true" />
 
       <div className="container">
         <div className="footer-main">
           <div className="footer-brand">
             <img
               src="assets/favIconK.png"
-              alt="Logo Kássio Barros"
-              className="footer-logo-image"
+              alt={t('Logo Kássio Barros')}
+              className="footer-logo-image footer-logo-pulse"
               width="48"
               height="48"
             />
@@ -24,12 +32,12 @@ export default function Footer({ contact }) {
             </div>
           </div>
 
-          <nav className="footer-nav" aria-label="Links do rodapé">
-            <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#tecnologias">Stack</a>
-            <a href="#projetos">Projetos</a>
-            <a href="#contato">Contato</a>
+          <nav className="footer-nav" aria-label={t('Links do rodapé')}>
+            <a href="#inicio">{t('Início')}</a>
+            <a href="#sobre">{t('Sobre')}</a>
+            <a href="#tecnologias">{t('Stack')}</a>
+            <a href="#projetos">{t('Projetos')}</a>
+            <a href="#contato">{t('Contato')}</a>
           </nav>
 
           <div className="footer-social">
@@ -38,7 +46,7 @@ export default function Footer({ contact }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="footer-social-link"
+              className="footer-social-link footer-social-link--linkedin"
             >
               <SiLinkedin aria-hidden="true" />
             </a>
@@ -47,14 +55,14 @@ export default function Footer({ contact }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="footer-social-link"
+              className="footer-social-link footer-social-link--github"
             >
               <SiGithub aria-hidden="true" />
             </a>
             <a
               href={`mailto:${contact?.email || 'contato@kassiobarros.com'}`}
               aria-label="Email"
-              className="footer-social-link"
+              className="footer-social-link footer-social-link--email"
             >
               <PiEnvelopeSimpleBold aria-hidden="true" />
             </a>
@@ -65,8 +73,17 @@ export default function Footer({ contact }) {
 
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {currentYear} Kássio Barros. Todos os direitos reservados.
+            © {currentYear} Kássio Barros. {t('Todos os direitos reservados.')}
           </p>
+
+          <button
+            type="button"
+            className="footer-back-top"
+            onClick={scrollToTop}
+            aria-label={t('Voltar ao topo')}
+          >
+            <PiArrowUpBold aria-hidden="true" />
+          </button>
         </div>
       </div>
     </footer>

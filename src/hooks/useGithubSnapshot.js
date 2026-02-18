@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const DEFAULT_TTL = 1000 * 60 * 60 * 12;
+const CACHE_VERSION = 2;
 
 const normalizeUrl = (value) => {
   if (!value) {
@@ -59,6 +60,28 @@ const summarizeLanguages = (repos, fallback) => {
     .slice(0, 4);
 };
 
+/**
+ * Aggregates total stars and count of non-fork repos with code
+ * from the repos array.
+ */
+const summarizeRepoStats = (repos) => {
+  if (!repos?.length) {
+    return { totalStars: 0, projectCount: 0 };
+  }
+
+  let totalStars = 0;
+  let projectCount = 0;
+
+  for (const repo of repos) {
+    totalStars += repo.stargazers_count || 0;
+    if (!repo.fork && repo.size > 0) {
+      projectCount += 1;
+    }
+  }
+
+  return { totalStars, projectCount };
+};
+
 const readCache = (key, ttl) => {
   if (typeof window === 'undefined') {
     return null;
@@ -107,7 +130,7 @@ export default function useGithubSnapshot({
       return undefined;
     }
 
-    const cacheKey = `github-snapshot:${username}`;
+    const cacheKey = `github-snapshot:v${CACHE_VERSION}:${username}`;
     const cached = readCache(cacheKey, ttl);
     if (cached) {
       setSnapshot(cached);
@@ -132,9 +155,13 @@ export default function useGithubSnapshot({
         const profileData = await profileResponse.json();
         const reposData = repoResponse.ok ? await repoResponse.json() : [];
 
+        const repoStats = summarizeRepoStats(reposData);
+
         const nextSnapshot = {
           profile: mapProfile(profileData, fallback.profile),
           languages: summarizeLanguages(reposData, fallback.languages),
+          totalStars: repoStats.totalStars,
+          projectCount: repoStats.projectCount,
         };
 
         setSnapshot(nextSnapshot);

@@ -1,13 +1,10 @@
-import {
-  PiArrowSquareOutBold,
-  PiBriefcaseBold,
-  PiCalendarBold,
-  PiMapPinBold,
-} from 'react-icons/pi';
+import { PiArrowSquareOutBold, PiCalendarBold, PiCodeBold, PiMapPinBold } from 'react-icons/pi';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
 import { getTechIconData } from '../utils/techIcons.js';
 import SectionHeader from './SectionHeader.jsx';
 
 function ExperienceCard({ experience, index }) {
+  const { t } = useLanguage();
   const isCurrentJob = experience.period === 'Atual' || experience.period.includes('Atual');
 
   return (
@@ -28,18 +25,18 @@ function ExperienceCard({ experience, index }) {
             />
           ) : (
             <div className="exp-logo-placeholder">
-              <PiBriefcaseBold aria-hidden="true" />
+              <PiCodeBold aria-hidden="true" />
             </div>
           )}
           <div>
-            <h3 className="exp-company">{experience.company}</h3>
-            <span className="exp-role">{experience.role}</span>
+            <h3 className="exp-company">{t(experience.company)}</h3>
+            <span className="exp-role">{t(experience.role)}</span>
           </div>
         </div>
 
         <div className="exp-badges">
-          {isCurrentJob && <span className="exp-badge exp-badge--current">Atual</span>}
-          <span className="exp-badge">{experience.type}</span>
+          {isCurrentJob && <span className="exp-badge exp-badge--current">{t('Atual')}</span>}
+          <span className="exp-badge">{t(experience.type)}</span>
         </div>
       </div>
 
@@ -50,7 +47,7 @@ function ExperienceCard({ experience, index }) {
         </span>
         <span className="exp-meta-item">
           <PiMapPinBold aria-hidden="true" />
-          {experience.location}
+          {t(experience.location)}
         </span>
         {experience.website && (
           <a
@@ -65,19 +62,19 @@ function ExperienceCard({ experience, index }) {
         )}
       </div>
 
-      <p className="exp-summary">{experience.summary}</p>
+      <p className="exp-summary">{t(experience.summary)}</p>
 
       <div className="exp-highlights">
-        <h4>Principais Contribuições</h4>
+        <h4>{t('Principais Contribuições')}</h4>
         <ul>
           {experience.highlights.map((item) => (
-            <li key={item}>{item}</li>
+            <li key={item}>{t(item)}</li>
           ))}
         </ul>
       </div>
 
       <div className="exp-stack">
-        <h4>Tech Stack</h4>
+        <h4>{t('Tech Stack')}</h4>
         <div className="exp-tags">
           {experience.stack.map((tech) => {
             const iconData = getTechIconData(tech);
@@ -104,7 +101,7 @@ function ExperienceCard({ experience, index }) {
           {experience.achievements.map((achievement) => (
             <div key={achievement.metric} className="exp-achievement">
               <span className="exp-achievement-value">{achievement.value}</span>
-              <span className="exp-achievement-label">{achievement.metric}</span>
+              <span className="exp-achievement-label">{t(achievement.metric)}</span>
             </div>
           ))}
         </div>

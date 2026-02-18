@@ -2,6 +2,7 @@ import { useKeenSlider } from 'keen-slider/react';
 import { useMemo } from 'react';
 import { PiArrowLeftBold, PiArrowRightBold, PiArrowSquareOutBold } from 'react-icons/pi';
 import { SiGithub } from 'react-icons/si';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
 import { buildSrcSet } from '../utils/imageSrcset.js';
 import { createAutoplay } from '../utils/keenAutoplay.js';
 import { getTechIconData } from '../utils/techIcons.js';
@@ -11,6 +12,7 @@ const PROJECT_IMAGE_WIDTHS = [360, 720, 1080];
 const PROJECT_IMAGE_SIZES = '(min-width: 1100px) 360px, (min-width: 700px) 45vw, 90vw';
 
 export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = false }) {
+  const { t } = useLanguage();
   const autoplayPlugin = useMemo(() => {
     if (reduceMotion) {
       return null;
@@ -73,21 +75,21 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
                         />
                         <img
                           src={project.image}
-                          alt={`Imagem do projeto ${project.title}`}
+                          alt={`${t('Imagem do projeto ')}${project.title}`}
                           loading="lazy"
                           decoding="async"
                           width="520"
                           height="320"
                         />
                       </picture>
-                      <span className="project-category">{project.category}</span>
+                      <span className="project-category">{t(project.category)}</span>
                     </div>
                     <div className="project-body">
                       <div className="project-header">
                         <h3>{project.title}</h3>
                         <span className="project-year">{project.year}</span>
                       </div>
-                      <p>{project.description}</p>
+                      <p>{t(project.description)}</p>
                       <div className="project-tags">
                         {project.tags.map((tag) => {
                           const iconData = getTechIconData(tag);
@@ -131,14 +133,14 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
               <button
                 type="button"
                 onClick={() => instanceRef.current?.prev()}
-                aria-label="Projeto anterior"
+                aria-label={t('Projeto anterior')}
               >
                 <PiArrowLeftBold aria-hidden="true" />
               </button>
               <button
                 type="button"
                 onClick={() => instanceRef.current?.next()}
-                aria-label="Próximo projeto"
+                aria-label={t('Próximo projeto')}
               >
                 <PiArrowRightBold aria-hidden="true" />
               </button>
@@ -151,7 +153,7 @@ export default function ProjectsCarousel({ projects, githubUrl, reduceMotion = f
               rel="noopener noreferrer"
             >
               <SiGithub aria-hidden="true" />
-              Repositórios
+              {t('Repositórios')}
             </a>
           </div>
         </section>

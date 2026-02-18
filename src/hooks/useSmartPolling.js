@@ -83,7 +83,7 @@ export default function useSmartPolling({
     } catch (err) {
       if (err.name === 'AbortError' || !mountedRef.current) return;
       setError(err);
-      backoffRef.current = Math.min(backoffRef.current * 2, 4);
+      backoffRef.current = Math.min(backoffRef.current * 2, 8);
     }
   }, [key, fetcher]);
 

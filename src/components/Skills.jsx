@@ -1,9 +1,44 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
+import {
+  PiArrowsClockwiseBold,
+  PiBracketsAngleBold,
+  PiCodeBold,
+  PiFlaskBold,
+  PiGitBranchBold,
+  PiStackBold,
+} from 'react-icons/pi';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
 import { getTechIconData } from '../utils/techIcons.js';
 import SectionHeader from './SectionHeader.jsx';
 
+const METHODOLOGY_MAP = {
+  'clean-code': {
+    Icon: PiCodeBold,
+    color: '#6ee7b7',
+    bg: 'linear-gradient(135deg, #059669, #10b981)',
+  },
+  solid: { Icon: PiStackBold, color: '#818cf8', bg: 'linear-gradient(135deg, #4f46e5, #6366f1)' },
+  agile: {
+    Icon: PiArrowsClockwiseBold,
+    color: '#38bdf8',
+    bg: 'linear-gradient(135deg, #0284c7, #0ea5e9)',
+  },
+  'git-flow': {
+    Icon: PiGitBranchBold,
+    color: '#f472b6',
+    bg: 'linear-gradient(135deg, #db2777, #ec4899)',
+  },
+  'code-review': {
+    Icon: PiBracketsAngleBold,
+    color: '#fbbf24',
+    bg: 'linear-gradient(135deg, #d97706, #f59e0b)',
+  },
+  tdd: { Icon: PiFlaskBold, color: '#a78bfa', bg: 'linear-gradient(135deg, #7c3aed, #8b5cf6)' },
+};
+
 function TechCard({ tech, index, categoryIndex, reduceMotion }) {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-30px' });
   const shouldAnimate = !reduceMotion;
@@ -64,12 +99,13 @@ function TechCard({ tech, index, categoryIndex, reduceMotion }) {
         )}
       </motion.div>
       <span className="tech-name">{tech.name}</span>
-      {tech.highlight && <span className="tech-badge">Destaque</span>}
+      {tech.highlight && <span className="tech-badge">{t('Destaque')}</span>}
     </motion.div>
   );
 }
 
 function SkillCategory({ category, categoryIndex, reduceMotion }) {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   const shouldAnimate = !reduceMotion;
@@ -97,8 +133,8 @@ function SkillCategory({ category, categoryIndex, reduceMotion }) {
           {category.icon}
         </motion.span>
         <div className="skill-category-info">
-          <h3>{category.title}</h3>
-          {category.description && <p>{category.description}</p>}
+          <h3>{t(category.title)}</h3>
+          {category.description && <p>{t(category.description)}</p>}
         </div>
       </div>
 
@@ -123,6 +159,9 @@ function MethodologyItem({ method, index, reduceMotion }) {
   const shouldAnimate = !reduceMotion;
   const isVisible = shouldAnimate ? isInView : true;
 
+  const mapping = METHODOLOGY_MAP[method.icon] || {};
+  const IconComp = mapping.Icon;
+
   return (
     <motion.div
       ref={ref}
@@ -138,27 +177,25 @@ function MethodologyItem({ method, index, reduceMotion }) {
       whileHover={
         shouldAnimate
           ? {
-              scale: 1.08,
-              y: -4,
+              scale: 1.05,
+              y: -6,
               transition: { duration: 0.2 },
             }
           : undefined
       }
     >
-      <motion.span
-        className="methodology-icon"
-        aria-hidden="true"
-        whileHover={shouldAnimate ? { rotate: 360 } : undefined}
-        transition={{ duration: shouldAnimate ? 0.5 : 0 }}
-      >
-        {method.icon}
-      </motion.span>
+      {IconComp && (
+        <div className="methodology-icon-wrapper" style={{ background: mapping.bg }}>
+          <IconComp aria-hidden="true" />
+        </div>
+      )}
       <span className="methodology-name">{method.name}</span>
     </motion.div>
   );
 }
 
 export default function Skills({ skills, reduceMotion = false }) {
+  const { t } = useLanguage();
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true });
   const shouldAnimate = !reduceMotion;
@@ -200,8 +237,11 @@ export default function Skills({ skills, reduceMotion = false }) {
               viewport={shouldAnimate ? { once: true } : undefined}
               transition={{ delay: shouldAnimate ? 0.2 : 0 }}
             >
-              Metodologias & Boas Práticas
+              {t('Metodologias & Boas Práticas')}
             </motion.h3>
+            <p className="methodologies-description">
+              {t('Princípios que guiam cada linha de código.')}
+            </p>
             <div className="methodologies-grid">
               {skills.methodologies.map((method, index) => (
                 <MethodologyItem

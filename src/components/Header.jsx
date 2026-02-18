@@ -1,12 +1,20 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { PiDownloadSimpleBold, PiListBold, PiXBold } from 'react-icons/pi';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
+import { useLanguage } from '../contexts/LanguageContext.jsx';
+import useHeaderScroll from '../hooks/useHeaderScroll.js';
+import LanguageToggle from './LanguageToggle.jsx';
 
 export default function Header({ nav, contact }) {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const navId = useId();
+  const headerRef = useRef(null);
+  const toggleRef = useRef(null);
   const firstLinkRef = useRef(null);
   const scrollLockRef = useRef(0);
+
+  useHeaderScroll(headerRef, { menuOpen: isOpen });
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
@@ -44,6 +52,7 @@ export default function Header({ nav, contact }) {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
         setIsOpen(false);
+        requestAnimationFrame(() => toggleRef.current?.focus());
       }
     };
 
@@ -62,24 +71,26 @@ export default function Header({ nav, contact }) {
 
   const handleNavBackdrop = (event) => {
     if (event.target === event.currentTarget) {
-      closeMenu();
+      setIsOpen(false);
+      requestAnimationFrame(() => toggleRef.current?.focus());
     }
   };
 
   const handleNavKeyDown = (event) => {
     if ((event.key === 'Enter' || event.key === ' ') && event.target === event.currentTarget) {
       event.preventDefault();
-      closeMenu();
+      setIsOpen(false);
+      requestAnimationFrame(() => toggleRef.current?.focus());
     }
   };
 
   return (
-    <header className="site-header">
+    <header ref={headerRef} className="site-header">
       <div className="container header-inner">
-        <a className="logo" href="#inicio" aria-label="Ir para o início">
+        <a className="logo" href="#inicio" aria-label={t('Ir para o início')}>
           <img
             src="assets/favIconK.png"
-            alt="Logo Kássio Barros"
+            alt={t('Logo Kássio Barros')}
             className="logo-image"
             width="44"
             height="44"
@@ -89,7 +100,7 @@ export default function Header({ nav, contact }) {
         <nav
           id={navId}
           className={`site-nav ${isOpen ? 'is-open' : ''}`}
-          aria-label="Navegação principal"
+          aria-label={t('Navegação principal')}
           onClick={handleNavBackdrop}
           onKeyDown={handleNavKeyDown}
         >
@@ -97,7 +108,7 @@ export default function Header({ nav, contact }) {
             {nav.map((item, index) => (
               <li key={item.id}>
                 <a href={`#${item.id}`} onClick={closeMenu} ref={index === 0 ? firstLinkRef : null}>
-                  {item.label}
+                  {t(item.label)}
                 </a>
               </li>
             ))}
@@ -111,7 +122,7 @@ export default function Header({ nav, contact }) {
                 onClick={closeMenu}
               >
                 <PiDownloadSimpleBold aria-hidden="true" />
-                Baixar CV
+                {t('Baixar CV')}
               </a>
             ) : null}
             <div className="site-nav-social">
@@ -138,13 +149,14 @@ export default function Header({ nav, contact }) {
                 </a>
               ) : null}
             </div>
+            <LanguageToggle />
           </div>
         </nav>
 
         <div className="header-actions">
           <a className="btn btn--ghost" href={contact.resume} download>
             <PiDownloadSimpleBold aria-hidden="true" />
-            Baixar CV
+            {t('Baixar CV')}
           </a>
           <div className="header-social">
             <a href={contact.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -154,18 +166,20 @@ export default function Header({ nav, contact }) {
               <SiGithub aria-hidden="true" />
             </a>
           </div>
+          <LanguageToggle />
           <button
+            ref={toggleRef}
             className="nav-toggle"
             type="button"
             onClick={toggleMenu}
             aria-controls={navId}
-            aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-label={isOpen ? t('Fechar menu') : t('Abrir menu')}
             aria-expanded={isOpen}
           >
             {isOpen ? (
-              <PiXBold className="nav-toggle-icon" aria-hidden="true" />
+              <PiXBold key="close" className="nav-toggle-icon" aria-hidden="true" />
             ) : (
-              <PiListBold className="nav-toggle-icon" aria-hidden="true" />
+              <PiListBold key="open" className="nav-toggle-icon" aria-hidden="true" />
             )}
           </button>
         </div>
